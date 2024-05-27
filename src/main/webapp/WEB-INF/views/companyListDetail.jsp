@@ -489,8 +489,9 @@ function reviewEdit(r_no){
 			<br>
 				<form class="reviewUpForm" name="reviewUpForm"
 					style="display: inline-block; vertical-align: top;">
-				
+					<c:if test="${sessionScope.member=='person'}">
 				    <input type="hidden" name="p_no" value=" ${sessionScope.p_no}">	
+				    </c:if>
 					<input type="hidden" name="c_no" value="${boardDTO.c_no}">	
 					<input type="hidden" name="r_no" value=0>
 					<input type="hidden" name="star"> 

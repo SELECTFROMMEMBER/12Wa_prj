@@ -46,8 +46,12 @@
                 <if test="tradetype != null and tradetype != ''">
                     and trade_type = #{tradetype}
                 </if>
-		 	
-		 	order  by reg_date desc
+                <if test="sort==null">
+		 			order  by reg_date desc
+                </if>
+			 	<if test="sort!=null and sort.length()>0">
+                    order by ${sort}   
+         	    </if>    
 		 	<![CDATA[
 			)zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo}
 		]]>

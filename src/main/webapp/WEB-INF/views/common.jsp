@@ -271,6 +271,7 @@ function downCount(comment_no){
 					);
 				}
 				,error: function(){
+					alert(1123)
 					alert("검색 실패! 관리자에게 문의 바람");
 				}
 			}		

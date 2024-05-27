@@ -509,8 +509,8 @@ function searchWithMultiSort(){
                               <input type="hidden" value="	${requestScope.boardMap.begin_serialNo_desc - status.index}">
                         	  &nbsp;&nbsp;&nbsp;&lt기업명&gt	&nbsp;${board.name}<br>
                               &nbsp;&nbsp;&nbsp; &lt업종&gt &nbsp;&nbsp;&nbsp;${board.indus}<br>
-                              &nbsp;&nbsp;&nbsp; &lt매출&gt &nbsp;&nbsp;&nbsp;${board.sales}<br>
-                              &nbsp;&nbsp;&nbsp; &lt연봉&gt &nbsp;&nbsp;&nbsp;${board.sal_avg}<br>
+                              &nbsp;&nbsp;&nbsp; &lt매출&gt &nbsp;&nbsp;&nbsp;${board.sales} 천만원<br>
+                              &nbsp;&nbsp;&nbsp; &lt연봉&gt &nbsp;&nbsp;&nbsp;${board.sal_avg} 만원<br>
                               &nbsp;&nbsp;&nbsp; &lt주소&gt &nbsp;&nbsp;&nbsp;${board.addr}<br>
                            </div>
                           </td>

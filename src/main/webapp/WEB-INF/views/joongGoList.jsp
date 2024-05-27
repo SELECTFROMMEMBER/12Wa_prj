@@ -39,6 +39,12 @@ function handleCheckboxClick(event) {
 	     document.noticeDetailForm.submit();
 	 
 	}
+		
+		function searchWithSort(sort){
+		      $("[name='boardSearchForm']").find("[name='sort']").val(sort);
+		       $(".searchBtn").click();
+
+		   }
 
   
 </script>
@@ -53,8 +59,9 @@ function handleCheckboxClick(event) {
 <%@ include file="boardSideCategori.jsp" %>
 
 
-
-    <div id="wrap" class="container"  >
+    <div id="wrap" >
+    
+    
       <h1 style="text-align: center;">중고 게시판</h1>   
       
      <form name="boardSearchForm">
@@ -67,6 +74,7 @@ function handleCheckboxClick(event) {
 			<input type="radio" value="" name="tradetype" onclick="search('joongGo')">전체
        		<input type="radio" value="buy" name="tradetype"   onclick="search('joongGo')">구매 
     		<input type="radio" value="sell" name="tradetype"  onclick="search('joongGo')">판매	
+    		<input type="hidden" name="sort" class="sort" value="">
         </div>
      </form>
       
@@ -77,17 +85,27 @@ function handleCheckboxClick(event) {
 					style="border: 1px solid black; margin-left: auto; margin-right: auto;">
 
 					<tr>
-						<th>번호</th>
-						<th>거래종류</th>
-						<th>닉네임</th>
-						<th>제목</th>
-						<th>작성일</th>
-						<th>조회수</th>
-						<th>가격</th>
+							<th>번호</th>
+							<th>제목</th>
+							<th>닉네임</th>
+							<th>작성일</th>
+							<c:if test="${sessionScope.member!='admin'}">
+								<th>조회수</th>
+							</c:if>
+							<!--                   <th>추천수</th> -->
 							<c:if test="${sessionScope.member == 'admin' }">
+								<c:if test="${param.sort!='read_count asc' and param.sort!='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count desc')">조회수</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count asc')">조회수▼</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count asc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('')">조회수▲</th>
+								</c:if>
 								<th>글 선택</th>
 							</c:if>
-					</tr>
+						</tr>
 <%-- 			<c:if test='${requestScope.boardMap.selectPageNo==1}'> --%>
 <%-- 							<c:forEach var="board" items="${requestScope.noticeList}" --%>
 <%-- 								varStatus="status"> --%>
@@ -183,69 +201,71 @@ function handleCheckboxClick(event) {
 
 					</c:forEach>
 					</c:if>
-					
-												<c:if test="${sessionScope.member == 'person' || sessionScope.member == 'company'}">
-					
-					              <c:if test ='${requestScope.boardMap.selectPageNo==1}'>
-     		    	<c:forEach var="board" items="${requestScope.noticeList}" varStatus="status">
-						<c:if test="${board.category eq 'board'}">
-              			<tr onClick="gonoticeDetailForm(${board.n_no})">
-              			<td bgcolor='pink' colspan='2'>※</td>
-                        <td bgcolor='pink'>관리자</td>
-                        <td bgcolor='pink'>${board.subject}</td>
-                        <td bgcolor='pink'>${board.reg_date}</td>
-                        <td bgcolor='pink'>${board.read_count}</td>
-                        <td bgcolor='pink'>※</td>  
-                            </tr>
-                            	</c:if>
-                            	</c:forEach>
- 								</c:if>
-                        <c:if test ='${requestScope.boardMap.selectPageNo==1}'>
-     		    	<c:forEach var="board" items="${requestScope.noticeList}" varStatus="status">
-						<c:if test="${board.category eq 'trade'}">
-              			<tr onClick="gonoticeDetailForm(${board.n_no})">
-              			<td bgcolor='lightblue' colspan='2'>※</td>
-                        <td bgcolor='lightblue'>관리자</td>
-                        <td bgcolor='lightblue'>${board.subject}</td>
-                        <td bgcolor='lightblue'>${board.reg_date}</td>
-                        <td bgcolor='lightblue'>${board.read_count}</td>
-                        
-                        <td bgcolor='lightblue'>※</td>  
-                            </tr>
-                            	</c:if>
-                     </c:forEach>
-	           </c:if>
 
-					<c:forEach var="board" items="${requestScope.joongGoList }"
-						varStatus="status">
-						
-							<tr style="cursor: pointer"
-								onCLick="goBoardDetailForm(${board.b_no},'joongGo', 'tradeboard', 'trade','');">
-								<td align="center"> ${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
-								<td align="center">
-										<c:choose>
-										    <c:when test="${board.trade_type == 'buy'}">
+						<c:if
+							test="${sessionScope.member == 'person' || sessionScope.member == 'company' || sessionScope.member==null}">
+
+							<c:if test='${requestScope.boardMap.selectPageNo==1}'>
+								<c:forEach var="board" items="${requestScope.noticeList}"
+									varStatus="status">
+									<c:if test="${board.category eq 'board'}">
+										<tr onClick="gonoticeDetailForm(${board.n_no})">
+											<td bgcolor='pink' colspan='2'>※</td>
+											<td bgcolor='pink'>관리자</td>
+											<td bgcolor='pink'>${board.subject}</td>
+											<td bgcolor='pink'>${board.reg_date}</td>
+											<td bgcolor='pink'>${board.read_count}</td>
+											<td bgcolor='pink'>※</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</c:if>
+							<c:if test='${requestScope.boardMap.selectPageNo==1}'>
+								<c:forEach var="board" items="${requestScope.noticeList}"
+									varStatus="status">
+									<c:if test="${board.category eq 'trade'}">
+										<tr onClick="gonoticeDetailForm(${board.n_no})">
+											<td bgcolor='lightblue' colspan='2'>※</td>
+											<td bgcolor='lightblue'>관리자</td>
+											<td bgcolor='lightblue'>${board.subject}</td>
+											<td bgcolor='lightblue'>${board.reg_date}</td>
+											<td bgcolor='lightblue'>${board.read_count}</td>
+
+											<td bgcolor='lightblue'>※</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</c:if>
+
+							<c:forEach var="board" items="${requestScope.joongGoList }"
+								varStatus="status">
+
+								<tr style="cursor: pointer"
+									onCLick="goBoardDetailForm(${board.b_no},'joongGo', 'tradeboard', 'trade','');">
+									<td align="center">
+										${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
+									<td align="center"><c:choose>
+											<c:when test="${board.trade_type == 'buy'}">
 										        구매
 										    </c:when>
-										    <c:otherwise>
+											<c:otherwise>
 										        판매
 										    </c:otherwise>
-										</c:choose>
-									</td>
-								<td align="center">${board.nickname }</td>
-								<td align="center">${board.subject }</td>
-								<td align="center">${board.reg_date }</td>
-								<td align="center">${board.read_count }</td>
-								<td align="center">${board.price}원</td>
-																<c:if test="${sessionScope.member == 'admin' }">
-									<td><input type="checkbox" value="${board.b_no }"
-										onclick="handleCheckboxClick(event)"></td>
-								</c:if>
-							</tr>
+										</c:choose></td>
+									<td align="center">${board.nickname }</td>
+									<td align="center">${board.subject }</td>
+									<td align="center">${board.reg_date }</td>
+									<td align="center">${board.read_count }</td>
+									<td align="center">${board.price}원</td>
+									<c:if test="${sessionScope.member == 'admin' }">
+										<td><input type="checkbox" value="${board.b_no }"
+											onclick="handleCheckboxClick(event)"></td>
+									</c:if>
+								</tr>
 
-					</c:forEach>
-					</c:if>
-				</table>
+							</c:forEach>
+						</c:if>
+					</table>
 			</div>
               
             <center>
@@ -303,6 +323,7 @@ function handleCheckboxClick(event) {
 					</c:if>
 			</form>
 
+  </div>
   </div>
                <form name="trade_type" action="joongGoList.do"
 						method="post">

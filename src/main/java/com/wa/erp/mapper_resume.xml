@@ -66,7 +66,7 @@ select
             AND e.education = #{education}
         </if>
         <if test="education == '4년제 졸업,전문대 졸업'">
-            AND e.education != '고등학교 졸업'
+            AND (e.education = '4년제 졸업' OR e.education = '전문대 졸업')
         </if>
         <if test="hope_salary == '2000'">
             AND r.hope_salary BETWEEN #{hope_salary} AND 2499
@@ -234,6 +234,7 @@ select
          )zxcvb) where RNUM >= #{begin_rowNo} and RNUM <=  #{end_rowNo}
       ]]>
       
+      
 </select>
 
 
@@ -307,7 +308,7 @@ select
          and education=#{education}
       </if>
       <if test="education=='4년제 졸업,전문대 졸업' " >
-         and education!='고등학교 졸업'
+            AND (e.education = '4년제 졸업' OR e.education = '전문대 졸업')
       </if>
       <if test="hope_salary=='2000'">
          and hope_salary between #{hope_salary} and 2499
@@ -598,7 +599,7 @@ WHERE
          ,#{c_no}
          ,#{p_no}
       )
-   a
+   
    </insert>
 
 

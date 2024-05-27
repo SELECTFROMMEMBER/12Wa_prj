@@ -36,6 +36,11 @@ input[type="checkbox"] {
 	     document.noticeDetailForm.submit();
 	 
 	}
+	function searchWithSort(sort){
+	      $("[name='boardSearchForm']").find("[name='sort']").val(sort);
+	       $(".searchBtn").click();
+
+	   }
 //	게시판 검색하는 함수 search() 선언.
 //	[검색] 버튼 클릭 시 호출되는 함수이다.
 // 	function search(){
@@ -101,6 +106,7 @@ input[type="checkbox"] {
             <input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 			<input type="hidden" name="boardname" class="boardname" value="interviewboard">
+			<input type="hidden" name="sort" class="sort" value="">
         </div>
      </form>
       
@@ -114,8 +120,20 @@ input[type="checkbox"] {
 							<th>제목</th>
 							<th>닉네임</th>
 							<th>작성일</th>
-							<th>조회수</th>
+							<c:if test="${sessionScope.member!='admin'}">
+								<th>조회수</th>
+							</c:if>
+							<!--                   <th>추천수</th> -->
 							<c:if test="${sessionScope.member == 'admin' }">
+								<c:if test="${param.sort!='read_count asc' and param.sort!='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count desc')">조회수</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count asc')">조회수▼</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count asc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('')">조회수▲</th>
+								</c:if>
 								<th>글 선택</th>
 							</c:if>
 						</tr>
@@ -170,9 +188,7 @@ input[type="checkbox"] {
 
 							</c:forEach>
 						</c:if>
-						<c:if
-							test="${sessionScope.member == 'person' || sessionScope.member == 'company'}">
-
+						<c:if test="${sessionScope.member == 'person' || sessionScope.member == 'company' || sessionScope.member==null}">
 							<c:if test='${requestScope.boardMap.selectPageNo==1}'>
 								<c:forEach var="board" items="${requestScope.noticeList}"
 									varStatus="status">

@@ -23,7 +23,7 @@
 		 ,ceo_phone
 		 ,name
 		 ,email
-
+		 ,reg_date
 		) values (
 			#{mem_c_no}
 			,#{cid}
@@ -34,6 +34,7 @@
 			,#{ceo_phone}
 			,#{name}
 			,#{email}||#{email2}
+			,sysdate
 			)
 	</insert>
 
@@ -118,6 +119,7 @@
 	    ,addr
 	    ,sex
 	    ,jumin_num
+	    ,reg_date
       )
        values (
          (select nvl(max(p_no),0)+1 from person_mem)
@@ -132,6 +134,7 @@
          ,#{addr1} ||' '|| #{addr2} ||' '||#{addr3}
          ,#{sex}
          ,#{jumin_num1} ||''|| #{jumin_num2}
+         ,sysdate
          )
 
    </insert>
