@@ -1,5 +1,6 @@
 package com.wa.erp;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -498,5 +499,110 @@ public int updatebuup(BuupDTO buupDTO)  {
 		//--------------------------------------
 		return PrivacyDelCnt;
 		}
+	
+	
+	
+	//=====================================
+	//(이력서 수정,삭제)
+	//=====================================
+         	//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+			// 수정/삭제 화면에서 필요한 
+			// [이력서]을 검색 해 리턴하는 메소드 선언.
+			// 매개변수로 검색할 이력서의 고유 번호가 들어온다.
+			//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+			public BoardDTO  getResumeForUpDel(int resume_no){
+				//------------------------------------------
+				// [BoardDAOImpl 객체]의  getResume 메소드를 호출하여
+				// 이력서 정보를 얻는다
+				//------------------------------------------
+				BoardDTO boardDTO  = this.regUpDelDAO.getResume(resume_no);
+				//------------------------------------------
+				// [1개 게시판 글]이 저장된 BoardDTO 객체 리턴하기
+				//------------------------------------------
+				return boardDTO;
+				}	
+
+			//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+			// [1개 이력서] 수정 실행하고 수정 적용행의 개수를 리턴하는 메소드 선언
+			//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+			public int updateResume(BoardDTO boardDTO){
+				//--------------------------------------
+				// 수정할 이력서의 존재 개수 얻기
+				// 만약 수정할 이력서의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
+				//--------------------------------------
+		     	int ResumeCnt = this.regUpDelDAO.getResumeCnt( boardDTO.getResume_no( )  );
+				if( ResumeCnt==0 ){ return ResumeCnt; }
+				//--------------------------------------
+				// 암호의 존재 개수 얻기
+				// 만약 암호의 존재 개수가 0개면(=암호가 틀렸으면) -1리턴하기
+				//--------------------------------------
+				//int ResumePwdCnt = this.regUpDelDAO.getResumePwdCnt (boardDTO );
+			    //if( ResumePwdCnt==0 ) { return -1; }
+				//--------------------------------------
+				// 수정 실행하고 수정 적용행의 개수 얻기
+				//--------------------------------------
+				int ResumeUpCnt = this.regUpDelDAO.updateResume( boardDTO );
+				
+				ResumeUpCnt = this.regUpDelDAO.updateAwards(boardDTO);
+				ResumeUpCnt = this.regUpDelDAO.updateEducation(boardDTO);
+				ResumeUpCnt = this.regUpDelDAO.updateCareer(boardDTO);
+				if (ResumeUpCnt>0) {ResumeUpCnt=1;  }
+				
+				ResumeUpCnt = this.regUpDelDAO.updatePerson_license(boardDTO);
+				if (ResumeUpCnt>0) {ResumeUpCnt=1;  }
+				
+			    ResumeUpCnt = this.regUpDelDAO.deletePersonSkill(boardDTO);
+			    if (ResumeUpCnt>0) {ResumeUpCnt=1;  }
+			   
+                ResumeUpCnt = this.regUpDelDAO.insertSkill_Code1(boardDTO);
+                if (ResumeUpCnt>0) {ResumeUpCnt=1;  }
+				//--------------------------------------
+				// 수정 적용행의 개수 리턴하기
+				//--------------------------------------
+				return ResumeUpCnt;
+				}
+			
+	
+			
+		
+			
+		//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+		// [1개 이력서] 삭제 후 삭제 적용행의 개수를 리턴하는 메소드 선언
+		//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+		public int deleteResume(BoardDTO boardDTO) {
+			//--------------------------------------
+			// 삭제할 게시판의 존재 개수 얻기
+			// 만약 삭제할 게시판의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
+			//--------------------------------------
+			int ResumeCnt = this.regUpDelDAO.getResumeCnt( boardDTO.getResume_no() );
+			if( ResumeCnt==0 ) { return ResumeCnt; }
+			//------------------------------------------------------
+			// 삭제 실행하고 삭제 적용행의 개수 얻기
+			//------------------------------------------------------
+			int ResumeDelCnt = this.regUpDelDAO.deleteResume( boardDTO );
+			
+			ResumeDelCnt = this.regUpDelDAO.deleteEducation(boardDTO);
+			ResumeDelCnt = this.regUpDelDAO.deleteAwards(boardDTO);
+			ResumeDelCnt = this.regUpDelDAO.deleteCareer(boardDTO);
+			if (ResumeDelCnt>0) {ResumeDelCnt=1;  }
+			
+			ResumeDelCnt = this.regUpDelDAO.deletePersonSkill(boardDTO);
+			if (ResumeDelCnt>0) {ResumeDelCnt=1;  }
+			
+			ResumeDelCnt = this.regUpDelDAO.deletePerson_license(boardDTO);	
+			if (ResumeDelCnt>0) {ResumeDelCnt=1;  }
+			
+			//--------------------------------------
+			// 삭제 적용행의 개수 리턴하기
+			//--------------------------------------
+			return ResumeDelCnt;
+			}
+		
+		@Override
+		public List<BoardDTO> getSkillList(int resume_no) {
+			List<BoardDTO> skillList = this.regUpDelDAO.getSkillList(resume_no);
+			return skillList;
+		}
+
 	
 }

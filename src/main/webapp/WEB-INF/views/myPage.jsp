@@ -47,11 +47,7 @@
     	$("[name='MywriteDetail']").find("[name='Detail_b_no']").val(Detail_b_no);
     	  document.MywriteDetail.submit();
     	}
-    
-    
-    
 
-    
 </script>
 
 
@@ -168,7 +164,7 @@
 		    <tr>
 		        <th colspan="3">이력서 관리
 		            <input type="button" class="button-right" value="더보기"> 
-		            <input type="button" class="button-right" value="이력서 등록" onclick="document.resumRegForm.submit();">   
+		       
 		        </th>                                                                    
 		    </tr>
 
@@ -245,10 +241,13 @@
                     <td align="center">${ScoutcompanyList.addr}</td>
                 </tr>         
             </c:forEach>
+            
+            <c:if test="${empty requestScope.ScoutcompanyList}">
+                <td colspan="4" align="center"><b>스카우트 제안한 기업이 없습니다.</b></td>    
+              </c:if>    
+            
 
-        <c:if test="${empty requestScope.ScoutcompanyList}">
-            <center><b>스카우트 제안한 기업이 없습니다.</b></center>
-        </c:if>
+       
   </table>
   
         <br><br>
@@ -296,8 +295,8 @@
     </form>
     
     <form name="ResumDetail" action="/resumeListDetail.do" method="post">
-     <input type="hidden" name="p_no" value="${sessionScope.p_no}">  
-	     <input type="hidden" name="resume_no" class="resume_no">
+         <input type="hidden" name="p_no" value="${sessionScope.p_no}">  
+	     <input type="hidden" name="resume_no"   value="${requestScope.boardDTO.resume_no}">
     </form>
 
     <form name="ApplyCompanyDetail" action="/gongGoLocationListDetail.do" method="post">

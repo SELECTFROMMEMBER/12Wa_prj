@@ -238,10 +238,10 @@ function checkbuupDelForm(){
 		     <tr>
 			    <td>암호</td>
 			    <td><input type="password" name="pwd" class="pwd"  size="4"  maxlength="4"> </td> 
-			</tr> 
+			</tr>  
 			
-				<input type="hidden" name="b_no" value="${requestScope.buupDTO.b_no}">
-				  <input type="hidden" name="p_no" value="${sessionScope.p_no}">   
+			    	<input type="hidden" name="b_no" value="${requestScope.buupDTO.b_no}">
+				   <input type="hidden" name="p_no" value="${sessionScope.p_no}">   
         </table>
 
 	              <center>
