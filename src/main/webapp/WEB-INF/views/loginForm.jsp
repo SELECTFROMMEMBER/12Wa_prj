@@ -59,7 +59,7 @@
 
         <div class="container">
             <h1>로그인</h1>
-            <table>
+            <table style="margin: auto;">
                 <tr>
                     <th>
                         <input type="radio"  id="tab1" name="tab" checked>
@@ -84,7 +84,7 @@
                 <label for="pwd">비밀번호</label>
                 <input type="password" id="pwd" name="pwd" required><br>
                 <input type="submit" value="로그인">
-                <input type="button" value="회원가입" onclick="location.replace('/memberRegForm.do')">
+                <input type="button" value="회원가입" onclick="location.replace('/personalRegForm.do')">
                 <section class="login-join">
                     <a href="/findUsername" target="_new">아이디 찾기</a> |
                     <a href="/findPassword" target="_new">비밀번호 찾기</a>

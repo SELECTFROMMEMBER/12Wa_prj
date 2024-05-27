@@ -58,7 +58,7 @@
  <div class="container">
  		<br>
         <h1 style="text-align: center; font-size:2em;">기업 마이페이지</h1>
-        <table>
+        <table style="margin: auto;">
             <thead>
             <div class="right-align">
    </div>
@@ -89,7 +89,7 @@
 
 <br>
 
-        <table>
+        <table style="margin: auto;">
         	<div class="right-align">
 		   </div>
             <thead>
@@ -120,7 +120,7 @@
 
 <br>
 
-        <table>
+        <table style="margin: auto;">
         	<div class="right-align">
 		   </div>
             <thead>
@@ -157,7 +157,7 @@
 <br>
 
 
-        <table>
+        <table style="margin: auto;">
 		     <div class="right-align">
 		   </div>
             <thead>

@@ -40,6 +40,29 @@ ul {
 #container {
   margin:0 auto;  /* 화면 중앙에 배치 */
   width:1200px;    /* 너비 */
+  position : relative;
+}
+
+#likecompany {
+  position: absolute; /*절대 위치*/
+  top: 130px; /* 위에서 130px 아래 */
+  right: 230px; /* 오른쪽에서 280px 왼쪽 */
+  z-index: 1000; /* 최상단에 배치 */
+  background-color: #ff69b4; /* 핑크 계열 배경색 */
+  color: #fff; /* 버튼 글자색 */
+  width: 180px; /* 버튼 너비 */
+  height: 40px; /* 버튼 높이 */
+  border-radius: 5px; /* 둥근 모서리 */
+  text-decoration: none; /* 밑줄 제거 */
+  font-weight: 600; /* 글자 굵기 */
+  transition: background-color 0.3s; /* 배경색 전환 애니메이션 */
+  font-size: 18px; /* 글자 크기 */
+  display: flex; /* flexbox 레이아웃 사용 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+}
+#likecompany:hover {
+  background-color: #ff1493; /* 마우스를 올렸을 때 배경색 */
 }
 
 /*********************************/

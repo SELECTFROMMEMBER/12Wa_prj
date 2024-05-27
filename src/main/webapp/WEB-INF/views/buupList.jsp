@@ -294,13 +294,15 @@ $(function(){
 		<option value="15">15
 		<option value="20">20
 	</select>행보기 &nbsp;&nbsp;&nbsp;
-		</center> 
-			      
-              <center>
-                 <input type="button" value="등록" onCLick= "location.replace('/buupListRegForm.do')">
-     	     </center>
-     
-      </form>
+		</center>
+		<c:if test="${sessionScope.member=='person'}">
+			<center>
+				<input type="button" value="등록"
+					onCLick="location.replace('/buupListRegForm.do')">
+			</center>
+		</c:if>
+
+		</form>
       
       
 		<form name="buupListDetailForm" action="/buupListDetailForm.do" method="post">

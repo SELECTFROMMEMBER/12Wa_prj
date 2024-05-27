@@ -147,8 +147,9 @@
  </table>
           
            <span style= cursor:pointer  onClick="location.replace('/buupList.do')">[목록으로]</span>
+            <c:if test="${sessionScope.p_no==buupDTO.p_no}">
            <input type="button" value="수정/삭제" onclick="document.buupListUpDelForm.submit();">
-          
+          	</c:if>
            <form name="buupListDetailForm" action="/buupListDetailForm.do" method="post">
 				<input type="hidden" name="b_no" value="${requestScope.buupDTO.b_no}">
 		   </form>

@@ -70,30 +70,52 @@
 
  <select id="getApplycompanyList"   parameterType="int" resultType="com.wa.erp.MypageDTO">   
 
-  select                                                                                                                                                        
+<!-- <<<<<<< HEAD -->
+ 	select       
+      	 pc.p_no
+      	 ,pc.c_no
+      	 ,pc.g_no
+      	 ,cm.name
+      	 ,ci.addr
+      	 ,ci.BUSINESS_INDUSTRY
+	from
+   		 pertocom pc, company_info ci, company_mem cm , gonggo g
+<!-- ======= -->
+<!--   select                                                                                                                                                         -->
  
     
-	 unique
-	    pc.p_no
-	    ,pc.c_no
-	    ,pc.g_no
+<!-- 	 unique -->
+<!-- 	    pc.p_no -->
+<!-- 	    ,pc.c_no -->
+<!-- 	    ,pc.g_no -->
 	
-	    ,cm.name
-	    ,ci.addr
-	    ,ci.BUSINESS_INDUSTRY
-from
-    pertocom pc, company_info ci, company_mem cm , gonggo g
+<!-- 	    ,cm.name -->
+<!-- 	    ,ci.addr -->
+<!-- 	    ,ci.BUSINESS_INDUSTRY -->
+<!-- from -->
+<!--     pertocom pc, company_info ci, company_mem cm , gonggo g -->
+<!-- >>>>>>> refs/heads/develop -->
    where
+<!-- <<<<<<< HEAD -->
+   		pc.p_no=#{p_no}
+   		and 
+     	 pc.g_no=g.g_no
+   		and
+    	pc.c_no=ci.c_no
+    	and
+    	pc.c_no=cm.c_no
+<!-- ======= -->
  
-     pc.p_no=#{p_no}
-   and 
-      pc.g_no=g.g_no
-   and
-    pc.c_no=ci.c_no
-    and
-    pc.c_no=cm.c_no
+<!--      pc.p_no=#{p_no} -->
+<!--    and  -->
+<!--       pc.g_no=g.g_no -->
+<!--    and -->
+<!--     pc.c_no=ci.c_no -->
+<!--     and -->
+<!--     pc.c_no=cm.c_no -->
     
     
+<!-- >>>>>>> refs/heads/develop -->
 		
 	</select>    
 

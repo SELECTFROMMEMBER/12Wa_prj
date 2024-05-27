@@ -290,16 +290,19 @@ function handleCheckboxClick(event) {
 					</select>행보기 &nbsp;&nbsp;&nbsp;
 				</center>
 
-          
-           <center>
-     	       <input type="button" value="등록" style="font-size: 20px; margin-top: 10px;" 
-     	           onClick="location.replace('/joongGoRegForm.do')">
+				<c:if test="${sessionScope.member=='person'}">
+					<center>
+						<input type="button" value="등록"
+							style="font-size: 20px; margin-top: 10px;"
+							onClick="location.replace('/joongGoRegForm.do')">
+					</center>
+				</c:if>
      	           <c:if test="${sessionScope.member == 'admin' }">
-						<td><input type="button" value="선택 게시글 삭제"
-							onclick="deleteSelectedPosts('tradeboard')"></td>
+						<center><input type="button" value="선택 게시글 삭제"
+							onclick="deleteSelectedPosts('tradeboard')"></center>
 					</c:if>
-           </center>  
-      </form>
+			</form>
+
   </div>
                <form name="trade_type" action="joongGoList.do"
 						method="post">

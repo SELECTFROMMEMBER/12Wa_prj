@@ -67,7 +67,6 @@ function gonoticeDetailForm(n_no){
 							<th>닉네임</th>
 							<th>작성일</th>
 							<th>조회수</th>
-							<th>추천수</th>
 							<c:if test="${sessionScope.member == 'admin' }">
 								<th>글 선택</th>
 							</c:if>
@@ -85,7 +84,6 @@ function gonoticeDetailForm(n_no){
 										<td bgcolor='pink'>관리자</td>
 										<td bgcolor='pink'>${board.reg_date}</td>
 										<td bgcolor='pink'>${board.read_count}</td>
-										<td bgcolor='pink'></td>
 										<td bgcolor='pink'>※</td>
 									</tr>
 								</c:if>
@@ -102,8 +100,6 @@ function gonoticeDetailForm(n_no){
 										<td bgcolor='lightblue'>관리자</td>
 										<td bgcolor='lightblue'>${board.reg_date}</td>
 										<td bgcolor='lightblue'>${board.read_count}</td>
-
-										<td bgcolor='lightblue'></td>
 										<td bgcolor='lightblue'>※</td>
 									</tr>
 								</c:if>
@@ -124,7 +120,6 @@ function gonoticeDetailForm(n_no){
 								<td align="center">${board.nickname }</td>
 								<td align="center">${board.reg_date }</td>
 								<td align="center">${board.read_count }</td>
-								<td align="center">${board.rec_count }</td>
 								<c:if test="${sessionScope.member == 'admin' }">
 									<td><input type="checkbox" value="${board.b_no }"
 										onclick="handleCheckboxClick(event)"></td>
@@ -147,7 +142,7 @@ function gonoticeDetailForm(n_no){
 										<td bgcolor='pink'>관리자</td>
 										<td bgcolor='pink'>${board.reg_date}</td>
 										<td bgcolor='pink'>${board.read_count}</td>
-										<td bgcolor='pink'>※</td>
+<!-- 										<td bgcolor='pink'>※</td> -->
 									</tr>
 								</c:if>
 							</c:forEach>
@@ -163,7 +158,7 @@ function gonoticeDetailForm(n_no){
 										<td bgcolor='lightblue'>관리자</td>
 										<td bgcolor='lightblue'>${board.reg_date}</td>
 										<td bgcolor='lightblue'>${board.read_count}</td>
-										<td bgcolor='lightblue'>※</td>
+<!-- 										<td bgcolor='lightblue'>※</td> -->
 									</tr>
 								</c:if>
 							</c:forEach>
@@ -183,7 +178,6 @@ function gonoticeDetailForm(n_no){
 								<td align="center">${board.nickname }</td>
 								<td align="center">${board.reg_date }</td>
 								<td align="center">${board.read_count }</td>
-								<td align="center">${board.rec_count }</td>
 								<c:if test="${sessionScope.member == 'admin' }">
 									<td><input type="checkbox" value="${board.b_no }"
 										onclick="handleCheckboxClick(event)"></td>
@@ -236,14 +230,17 @@ function gonoticeDetailForm(n_no){
 						<option value="20">20
 					</select>행보기 &nbsp;&nbsp;&nbsp;
 				</center>
-				<center>
-          <input type="button" value="등록" onCLick= "location.replace('/qnaRegForm.do')">
+				<c:if test="${sessionScope.member=='person'}">
+					<center>
+						<input type="button" value="등록"
+							onCLick="location.replace('/qnaRegForm.do')">
+					</center>
+				</c:if>
           					<c:if test="${sessionScope.member == 'admin' }">
-						<td><input type="button" value="선택 게시글 삭제"
-							onclick="deleteSelectedPosts('qnaboard')"></td>
+						<center><input type="button" value="선택 게시글 삭제"
+							onclick="deleteSelectedPosts('qnaboard')"></center>
 					</c:if>
-     </center>
-      </form>
+			</form>
   </div>
   		
    </div>

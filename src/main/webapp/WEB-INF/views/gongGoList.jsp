@@ -290,9 +290,9 @@
                         
                 </c:if>
  	  
- 	
+ 		<c:if test="${sessionScope.member=='company'}">
  		<input type="button" value="등록" onClick="location.replace('/gongGoRegForm.do')">
- 						
+ 		</c:if>
  		<form name="gonggoDetailForm" action="/gonggoDetailForm.do" method="post">
  			<input type="hidden" name="g_no" class="g_no">
  		</form>

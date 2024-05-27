@@ -375,7 +375,9 @@
   	
   	</table>
   	<c:if test="${sessionScope.member=='person'}">
+  	<center>
   		<input type="button" value="입사지원하기" onClick="gonggoSupportForm();"> 
+  	</center>
   	</c:if>
   	<c:if test="${sessionScope.c_no == GonggoDTO.c_no}">
   		<input type="button" value="수정/삭제"

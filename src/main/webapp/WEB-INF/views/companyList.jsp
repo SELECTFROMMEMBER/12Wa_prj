@@ -95,8 +95,22 @@ searchWithMultiSort()  ;
     .star-container .star-grade {
       font-weight: 700;
     }
-</style>
-<style>
+
+	        .container {
+            text-align: center;
+        }
+        .welfare-options {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+            columns: 4; /* 두 개의 열로 나누어 정렬 */
+            column-gap: 20px; /* 열 간격 */
+        }
+        .welfare-options label {
+            display: block;
+            margin: 5px 0;
+        }
+
   #firstSelect {
     text-align: center; /* 텍스트를 수평 가운데 정렬합니다. */
   }
@@ -368,25 +382,27 @@ function searchWithMultiSort(){
                </select>
             </p>
             <br>
-              <p align="center">            
-                <b>사내 복지</b><br>
-                   <label><input type="checkbox" name="welfare" value="4대보험가입" id="1"> 4대보험가입</label>
-                   <label><input type="checkbox" name="welfare" value="연금가입" id="2"> 연금가입</label>
-                   <label><input type="checkbox" name="welfare" value="보너스 및 인센티브" id="3"> 보너스 및 인센티브</label>
-                   <label><input type="checkbox" name="welfare" value="수당제도" id="4"> 수당제도</label> <br>
-                   <label><input type="checkbox" name="welfare" value="사내동호회 운영" id="5"> 사내동호회 운영</label>
-                   <label><input type="checkbox" name="welfare" value="경조사 지원" id="6"> 경조사 지원</label>
-                   <label><input type="checkbox" name="welfare" value="출산/육아 지원제도" id="7"> 출산/육아 지원제도</label>
-                   <label><input type="checkbox" name="welfare" value="사무용품 지원" id="8"> 사무용품 지원</label><br>
-                   <label><input type="checkbox" name="welfare" value="자유복장" id="9"> 자유복장</label>
-                   <label><input type="checkbox" name="welfare" value="식대제공" id="10"> 식대제공</label>
-                   <label><input type="checkbox" name="welfare" value="기숙사 및 사택 제공" id="11"> 기숙사 및 사택 제공</label>
-                   <label><input type="checkbox" name="welfare" value="차량유류비 지급" id="12"> 차량유류비 지급</label><br>
-                   <label><input type="checkbox" name="welfare" value="통근버스 운행" id="13"> 통근버스 운행</label>
-                   <label><input type="checkbox" name="welfare" value="교통비 지급" id="14"> 교통비 지급</label>
-                   <label><input type="checkbox" name="welfare" value="유연근무제" id="15"> 유연근무제</label>           
-					<label><input type="checkbox" name="welfare" value="각종 행사" id="16"> 각종 행사</label>
-            </p>
+            <div class="container">
+		        <b>사내 복지</b><br>
+		        <div class="welfare-options">
+		            <label><input type="checkbox" name="welfare" value="4대보험가입" id="1"> 4대보험가입</label>
+		            <label><input type="checkbox" name="welfare" value="연금가입" id="2"> 연금가입</label>
+		            <label><input type="checkbox" name="welfare" value="보너스 및 인센티브" id="3"> 보너스 및 인센티브</label>
+		            <label><input type="checkbox" name="welfare" value="수당제도" id="4"> 수당제도</label>
+		            <label><input type="checkbox" name="welfare" value="사내동호회 운영" id="5"> 사내동호회 운영</label>
+		            <label><input type="checkbox" name="welfare" value="경조사 지원" id="6"> 경조사 지원</label>
+		            <label><input type="checkbox" name="welfare" value="출산/육아 지원제도" id="7"> 출산/육아 지원제도</label>
+		            <label><input type="checkbox" name="welfare" value="사무용품 지원" id="8"> 사무용품 지원</label>
+		            <label><input type="checkbox" name="welfare" value="자유복장" id="9"> 자유복장</label>
+		            <label><input type="checkbox" name="welfare" value="식대제공" id="10"> 식대제공</label>
+		            <label><input type="checkbox" name="welfare" value="기숙사 및 사택 제공" id="11"> 기숙사 및 사택 제공</label>
+		            <label><input type="checkbox" name="welfare" value="차량유류비 지급" id="12"> 차량유류비 지급</label>
+		            <label><input type="checkbox" name="welfare" value="통근버스 운행" id="13"> 통근버스 운행</label>
+		            <label><input type="checkbox" name="welfare" value="교통비 지급" id="14"> 교통비 지급</label>
+		            <label><input type="checkbox" name="welfare" value="유연근무제" id="15"> 유연근무제</label>
+		            <label><input type="checkbox" name="welfare" value="각종 행사" id="16"> 각종 행사</label>
+		        </div>
+		    </div>
              <div>
              <br>
              
@@ -491,7 +507,7 @@ function searchWithMultiSort(){
                            <div style="display: flex; align-items: center;">
                               <img width="80" src="images/photo-1.jpg" style="margin-right: 10px;">
                               <input type="hidden" value="	${requestScope.boardMap.begin_serialNo_desc - status.index}">
-                        
+                        	  &nbsp;&nbsp;&nbsp;&lt기업명&gt	&nbsp;${board.name}<br>
                               &nbsp;&nbsp;&nbsp; &lt업종&gt &nbsp;&nbsp;&nbsp;${board.indus}<br>
                               &nbsp;&nbsp;&nbsp; &lt매출&gt &nbsp;&nbsp;&nbsp;${board.sales}<br>
                               &nbsp;&nbsp;&nbsp; &lt연봉&gt &nbsp;&nbsp;&nbsp;${board.sal_avg}<br>
@@ -501,7 +517,7 @@ function searchWithMultiSort(){
                           <td align="center">
 	                          <div class="star-container">
 								<p class="star">★★★★★</p><br>
-								<span class="star-grade" >${board.star_avg}</span>
+								<span class="star-grade" ><b>${board.star_avg}</b></span>
 							 </div>
                           </td>
                           <td>
