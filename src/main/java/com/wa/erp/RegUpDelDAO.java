@@ -122,4 +122,32 @@ public interface RegUpDelDAO {
 		int updateReview(BoardDTO boardDTO);
 
 		int checkLike(BoardDTO boardDTO);
+		
+		
+		
+		//이력서 수정, 삭제
+		int  updateResume (BoardDTO boardDTO);
+		int  deleteResume (BoardDTO boardDTO);
+	
+		int  getResumePwdCnt(MypageDTO mypageDTO );
+		int  getResumeCnt(int resume_no);	
+       
+		BoardDTO getResume(int resume_no);		
+		BoardDTO getResumeForUpDel(int resume_no);	
+		List<BoardDTO> getSkillList(int resume_no);
+			
+		int  updateAwards (BoardDTO boardDTO);
+		int  updateEducation (BoardDTO boardDTO);
+		int  updateCareer (BoardDTO boardDTO);
+		int  updatePerson_license (BoardDTO boardDTO);
+		int  deletePersonSkill (BoardDTO boardDTO);
+	    int  insertSkill_Code1 (BoardDTO boardDTO);
+
+	    int  deleteCareer (BoardDTO boardDTO);
+	    int  deleteEducation (BoardDTO boardDTO);
+	    int  deleteAwards (BoardDTO boardDTO);
+	    int  deletePerson_license (BoardDTO boardDTO);
+	    
+
+		
 	}
