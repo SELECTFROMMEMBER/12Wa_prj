@@ -151,7 +151,6 @@ public class LoginController {
 					session.setAttribute("p_no", getMem.getP_no());
 					session.setAttribute("nickname", getMem.getNickname());
 					session.setAttribute("is_block", getMem.getIs_block());
-
 					int is_resume = this.loginService.getIs_resume(map);
 					if(is_resume == 1) {return 3;}
 				}

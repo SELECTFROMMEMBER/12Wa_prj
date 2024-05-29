@@ -184,11 +184,8 @@ function searchWithSort(sort){
         </select>
                  
         	<input type="text" name="keyword" class="keyword"  placeholder="검색어를 입력해주세요.">
-<<<<<<< HEAD
-        	<input type="button" value="검색"  class="searchBtn" onclick="search1();" >	    
-=======
+
         	<input type="button" value="검색"  class="searchBtn" onclick="search();"  style="padding: 5px 5px;">	    
->>>>>>> refs/heads/develop
 			<input type="hidden" name="sort"  class="sort" >
 			<input type="hidden" name="selectPageNo"  class="selectPageNo"  value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">

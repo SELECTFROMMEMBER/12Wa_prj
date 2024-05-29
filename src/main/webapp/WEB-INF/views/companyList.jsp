@@ -27,13 +27,13 @@ $(document).ready(function() {
             // 두 번째 셀렉트 박스의 옵션 변경
             $('#multisort2 option[value!=""]').remove();
             if (value !== 'sal_avg desc') {
-                $('#multisort2').append('<option value=",sal_avg desc">평균 연봉</option>');
+                $('#multisort2').append('<option value=",sal_avg desc">평균 연봉▼</option>');
             }
             if (value !== 'sales desc') {
-                $('#multisort2').append('<option value=",sales desc">매출</option>');
+                $('#multisort2').append('<option value=",sales desc">매출▼</option>');
             }
             if (value !== '7 desc') {
-                $('#multisort2').append('<option value=",7 desc">별점</option>');
+                $('#multisort2').append('<option value=",7 desc">별점▼</option>');
             }
         } else {
             // 선택되지 않으면 나머지 셀렉트 박스를 비활성화하고 초기화
@@ -53,45 +53,13 @@ $(document).ready(function() {
             // 세 번째 셀렉트 박스의 옵션 변경
             $('#multisort3 option[value!=""]').remove();
             if (value !== ',sal_avg desc' && $('#multisort1').val()!=='sal_avg desc') {
-                $('#multisort3').append('<option value=",sal_avg desc">평균 연봉</option>');
+                $('#multisort3').append('<option value=",sal_avg desc">평균 연봉▼/option>');
             }
             if (value !== ',sales desc' && $('#multisort1').val()!=='sales desc') {
-                $('#multisort3').append('<option value=",sales desc">매출</option>');
+                $('#multisort3').append('<option value=",sales desc">매출▼</option>');
             }
             if (value !== ',7 desc' && $('#multisort1').val()!=='7 desc') {
-                $('#multisort3').append('<option value=",7 desc">별점</option>');
-            }
-        } else {
-            // 선택되지 않으면 세 번째 셀렉트 박스를 비활성화하고 초기화
-            $('#multisort3').prop('disabled', true).val('');
-        }
-        // 호출할 search 함수
-        searchWithMultiSort();
-    });
-
-    // 세 번째 셀렉트 박스의 값이 변경될 때
-    $('#multisort3').on('change', function() {
-        // 호출할 search 함수
-searchWithMultiSort()  ;
-        });
-});
-
-    // 두 번째 셀렉트 박스의 값이 변경될 때
-    $('#multisort2').on('change', function() {
-        var value = $(this).val();
-        if (value) {
-            // 두 번째 셀렉트 박스가 선택되면 세 번째 셀렉트 박스를 활성화
-            $('#multisort3').prop('disabled', false);
-            // 세 번째 셀렉트 박스의 옵션 변경
-            $('#multisort3 option[value!=""]').remove();
-            if (value !== ',sal_avg desc' && $('#multisort1').val()!=='sal_avg desc') {
-                $('#multisort3').append('<option value=",sal_avg desc">평균 연봉</option>');
-            }
-            if (value !== ',sales desc' && $('#multisort1').val()!=='sales desc') {
-                $('#multisort3').append('<option value=",sales desc">매출</option>');
-            }
-            if (value !== ',7 desc' && $('#multisort1').val()!=='7 desc') {
-                $('#multisort3').append('<option value=",7 desc">별점</option>');
+                $('#multisort3').append('<option value=",7 desc">별점▼</option>');
             }
         } else {
             // 선택되지 않으면 세 번째 셀렉트 박스를 비활성화하고 초기화
@@ -496,7 +464,7 @@ function searchWithMultiSort(){
         <select id="multisort2" name="multisort2" >
 				 <option value=''> 정렬 조건</option>		
                   <option value=",sal_avg desc">평균 연봉▼
-                  <option value=",sales desc">     매출▼
+                  <option value=",sales desc">매출▼
                   <option value=",7 desc"> 별점▼        </select> >>
  
         <!-- 세 번째 셀렉트 박스 -->

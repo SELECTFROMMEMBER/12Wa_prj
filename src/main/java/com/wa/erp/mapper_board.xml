@@ -13,54 +13,49 @@
 	<!-- select 구문을 내포한 <select> 태그 선언하기    -->
 	<!--=========================================================-->
 	<select id="getboardList"  parameterType="com.wa.erp.BoardSearchDTO" resultType="com.wa.erp.BoardDTO">
-		select
-			*
-		from ( select rownum "RNUM" , zxcvb.* from (
-		 select 
-		 		b.b_no,
-		 		b.subject,
-		 		p.nickname,
-		 		to_char(b.reg_date,'YYYY-MM-DD') "reg_date",
-		 		b.read_count,
-		 		<if test="boardname!='tradeboard'">
-		 		b.rec_count,
-		 		</if>
-		 		b.content 
-		 		<if test="boardname=='tradeboard'">
-		 		,b.trade_type
-		 		,b.price
-		 		</if>
-		from 
-			${boardname} b , person_mem p 
-		where 
-			1=1
-			and
-			p.p_no=b.p_no
-		 	<if test="keyword!=null and keyword.length()>0">
-		 		and ( 
-					upper(b.subject) like upper('%${keyword}%')
-					or
-					upper(b.content) like upper('%${keyword}%')
-					)
-		 	</if>
+	      select
+         *
+      from ( select rownum "RNUM" , zxcvb.* from (
+       select 
+             b.b_no,
+             b.subject,
+             p.nickname,
+             to_char(b.reg_date,'YYYY-MM-DD') "reg_date",
+             b.read_count,
+             <if test="boardname!='tradeboard'">
+             b.rec_count,
+             </if>
+             b.content 
+             <if test="boardname=='tradeboard'">
+             ,b.trade_type
+             ,b.price
+             </if>
+      from 
+         ${boardname} b , person_mem p 
+      where 
+         1=1
+         and
+         p.p_no=b.p_no
+          <if test="keyword!=null and keyword.length()>0">
+             and ( 
+               upper(b.subject) like upper('%${keyword}%')
+               or
+               upper(b.content) like upper('%${keyword}%')
+               )
+          </if>
                 <if test="tradetype != null and tradetype != ''">
                     and trade_type = #{tradetype}
                 </if>
-		 	
- 					  <if test="sort!=null and sort.length()>0">
-	                order by  ${sort}	
-	                </if>    		
-	                 	<![CDATA[
                 <if test="sort==null">
-		 			order  by b.reg_date desc
+                order  by b.reg_date desc
                 </if>
-			 	<if test="sort!=null and sort.length()>0">
+             <if test="sort!=null and sort.length()>0">
                     order by ${sort}   
-         	    </if>    
-		 	<![CDATA[
-			)zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo}
-		]]>
-	
+                </if>    
+          <![CDATA[
+         )zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo}
+      ]]>
+   
 	</select>
 
 	<select id="getcompanyList"  parameterType="com.wa.erp.BoardSearchDTO" resultType="com.wa.erp.BoardDTO">
