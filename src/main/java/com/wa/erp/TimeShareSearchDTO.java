@@ -12,12 +12,20 @@ public class TimeShareSearchDTO {
 	private String sort;
 	private String ing;
 	private String work_place;
-
+	
+	private String TimeShareSearchType;
+	
 	private int selectPageNo;		// 선택한 페이지 번호 관련 파값 저장 변수
 	private int rowCntPerPage;		// 페이지 당 보여줄 행의 개수 관련 파값 저장 변수
 	private int begin_rowNo;		// 테이블 검색 시 시작행 번호 저장 변수 선언.
 	private int end_rowNo;			// 테이블 검색 시 끝행 번호 저장 변수 선언.
 	
+	public String getTimeShareSearchType() {
+		return TimeShareSearchType;
+	}
+	public void setTimeShareSearchType(String timeShareSearchType) {
+		TimeShareSearchType = timeShareSearchType;
+	}
 	public String getWork_place() {
 		return work_place;
 	}

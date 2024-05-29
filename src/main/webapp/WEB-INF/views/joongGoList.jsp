@@ -86,6 +86,7 @@ function handleCheckboxClick(event) {
 
 					<tr>
 							<th>번호</th>
+							<th>거래</th>
 							<th>제목</th>
 							<th>닉네임</th>
 							<th>작성일</th>
@@ -105,6 +106,7 @@ function handleCheckboxClick(event) {
 								</c:if>
 								<th>글 선택</th>
 							</c:if>
+							<th>가격</th>
 						</tr>
 <%-- 			<c:if test='${requestScope.boardMap.selectPageNo==1}'> --%>
 <%-- 							<c:forEach var="board" items="${requestScope.noticeList}" --%>

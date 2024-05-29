@@ -95,7 +95,11 @@ public class BoardDTO {
 	private String category;
 	private String[] b_noList;
 	private String boardname;
-
+	private int count_c_no;
+	private String sal_avg_range;
+	private int gonggoCnt;
+	private String field;
+	
 		public String getBoardname() {
 		return boardname;
 	}
@@ -794,6 +798,32 @@ public class BoardDTO {
 		public void setMem_p_no(int mem_p_no) {
 			this.mem_p_no = mem_p_no;
 		}
+		public int getCount_c_no() {
+			return count_c_no;
+		}
+		public void setCount_c_no(int count_c_no) {
+			this.count_c_no = count_c_no;
+		}
+		public String getSal_avg_range() {
+			return sal_avg_range;
+		}
+		public void setSal_avg_range(String sal_avg_range) {
+			this.sal_avg_range = sal_avg_range;
+		}
+		public int getGonggoCnt() {
+			return gonggoCnt;
+		}
+		public void setGonggoCnt(int gonggoCnt) {
+			this.gonggoCnt = gonggoCnt;
+		}
+		public String getField() {
+			return field;
+		}
+		public void setField(String field) {
+			this.field = field;
+		}
+		
+		
 }	
 	
 	

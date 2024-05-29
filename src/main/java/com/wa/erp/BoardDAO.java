@@ -139,6 +139,11 @@ public interface BoardDAO {
 
 		List<BoardDTO> getMainNoticeList(BoardSearchDTO boardSearchDTO);
 
+		List<BoardDTO> getSalaryData();
+
+		List<BoardDTO> getFieldGonggoData();
+
+
 
 	
 }

@@ -123,7 +123,7 @@
     	select
     		 prj_no
     		,subject
-    		,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+    		,to_char(p.reg_date, 'YYYY-MM-DD') as "reg_date"
     		,field_name
     		,skill_name
     		,project_type
@@ -256,7 +256,7 @@
 	        
 	    ) values (
 	        (select nvl(max(comp_pk),0)+1 from competition),
-	        1,
+	        #{c_no},
 	        #{subject},
 	        #{field_code},
 	        #{start_time},
@@ -337,7 +337,7 @@
     		,subject
     		,name
     		,field_name
-    		,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+    		,to_char(c.reg_date, 'YYYY-MM-DD') as "reg_date"
 			,to_char(start_time, 'YYYY-MM-DD') as "start_time"
     		,to_char(end_time, 'YYYY-MM-DD') as "end_time"
     		,content

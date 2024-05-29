@@ -34,8 +34,8 @@ public class MvcConfiguration implements WebMvcConfigurer{
 		//---------------------------------------------------
 		registry.addInterceptor(new SessionInterceptor()).excludePathPatterns(
 				"/loginForm.do","/loginProc.do","/js/**","/style/**","/images/**","/memRegForm.do"
-				,"/memberProc.do"
-				,"/boardList.do"
+				,"/memProc.do"
+				,"/comProc.do"
 				,"/personalRegForm.do"
 				,"/companyRegForm.do"
 				,"/freedome.do"

@@ -32,7 +32,6 @@ function searchWithSort(sort){
 function search(){
 	
 	var commentFormObj = $("[name='commentRegForm']");
-		alert(commentFormObj.serialize());
 		return
 	$.ajax(
 	         {

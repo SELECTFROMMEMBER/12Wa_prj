@@ -51,7 +51,6 @@ input[type="checkbox"] {
 
 		boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val());
 		
-		alert(boardSearchFormObj.serialize());
 		$.ajax(
 			{
 				url: "/jobReady.do"
@@ -59,9 +58,6 @@ input[type="checkbox"] {
 				,data: boardSearchFormObj.serialize()
 				,success: function(responseHtml){
 					var obj = $(responseHtml);
-					alert(
-							boardSearchFormObj.serialize()
-					)
 					
 					$(".jobReadyListDiv").html(
 							obj.find(".jobReadyListDiv").html()

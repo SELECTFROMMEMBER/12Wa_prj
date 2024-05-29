@@ -10,9 +10,10 @@ public class BuupSearchDTO {
 	
 	private String keyword;
 	private String sort;
+
 	private String ing;
 	private String work_place;
-
+	private String BuupsearchType;
 	
 	private int selectPageNo;		// 선택한 페이지 번호 관련 파값 저장 변수
 	private int rowCntPerPage;		// 페이지 당 보여줄 행의 개수 관련 파값 저장 변수
@@ -71,6 +72,13 @@ public class BuupSearchDTO {
 	}
 	public void setEnd_rowNo(int end_rowNo) {
 		this.end_rowNo = end_rowNo;
+	}
+
+	public String getBuupsearchType() {
+		return BuupsearchType;
+	}
+	public void setBuupsearchType(String buupsearchType) {
+		BuupsearchType = buupsearchType;
 	}
 	
 }

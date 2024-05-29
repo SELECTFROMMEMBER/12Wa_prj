@@ -145,6 +145,7 @@ public class MemberController {
 		//-------------------------------------------
 		int insertMemCnt = this.memberService.insertMember(memberDTO);
 		
+		System.out.print("+"+insertMemCnt);
 		//-------------------------------------------
 		// HashMap 객체에 게시판 수정 행의 개수 저장하기
 		//-------------------------------------------
@@ -259,14 +260,16 @@ public class MemberController {
 			   // boardServiceImpl 객체의 updateBoard 메소드 호출로
 			   // 게시판 글 수정하고 [수정 적용행의 개수] 얻기
 			   
-			   int comInfoUpCnt = this.boardService.updateComInfo(boardDTO);
+			   int comMemUpCnt = this.boardService.updateComMem(boardDTO);
+			   	if(comMemUpCnt!=0) {
+			   		int comInfoUpCnt = this.boardService.updateComInfo(boardDTO);			   
+			   		
+			   		int comWelUpCnt = this.boardService.updateComWel(boardDTO);
+			   	}
 			   
-			   comInfoUpCnt = this.boardService.updateComMem(boardDTO);
-			   
-			   comInfoUpCnt = this.boardService.updateComWel(boardDTO);
 			   
 			   // HashMap 객체에 게시판 수정 행의 개수 저장하기
-			   resultMap.put("result", comInfoUpCnt+"");
+			   resultMap.put("result", comMemUpCnt+"");
 			   // HashMap 객체의 메위주 리턴하기
 			   return resultMap;
 			   

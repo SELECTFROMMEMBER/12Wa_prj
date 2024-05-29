@@ -39,8 +39,8 @@
     	}
     
     function goScoutCompanyDetail(c_no){
-    	$("[name='timeShareDetailForm']").find("[name='c_no']").val(c_no);
-    	  document.timeShareDetailForm.submit();
+    	$("[name='ScoutCompanyDetail']").find("[name='c_no']").val(c_no);
+    	  document.ScoutCompanyDetail.submit();
     	}
     
     function goMywriteDetail(Detail_b_no){
@@ -194,7 +194,7 @@
 <!-- 지원한 기업  -->
         <table>
             <tr>
-                <th colspan="4">내가 지원한 기업
+                <th colspan="4">내가 지원한 공고
                     <input type="button" class="button-right" value="더보기">
                 </th>
             </tr>
@@ -252,31 +252,31 @@
   
         <br><br>
 
-        <table>  
-            <tr>
-                <th colspan="3">내가 작성한 글
-                    <input type="button" class="button-right" value="더보기">
-                </th>
-            </tr>
-            <tr>
-                <th>제목</th>
-                <th>내용</th>
-                <th>등록일</th>                     
-            </tr> 
+<!--         <table>   -->
+<!--             <tr> -->
+<!--                 <th colspan="3">내가 작성한 글 -->
+<!--                     <input type="button" class="button-right" value="더보기"> -->
+<!--                 </th> -->
+<!--             </tr> -->
+<!--             <tr> -->
+<!--                 <th>제목</th> -->
+<!--                 <th>내용</th> -->
+<!--                 <th>등록일</th>                      -->
+<!--             </tr>  -->
             
-            <c:forEach var="WriteList" items="${requestScope.WriteList}" varStatus="status">
-                <tr style="cursor:pointer" onClick="goMywriteDetail(${WriteList.b_no})">                 
-                    <td align="center">${WriteList.subject}</td> 
-                    <td align="center">${WriteList.content}</td>  
-                    <td align="center">${WriteList.reg_date}</td>
-                </tr>
-            </c:forEach>
+<%--             <c:forEach var="WriteList" items="${requestScope.WriteList}" varStatus="status"> --%>
+<%--                 <tr style="cursor:pointer" onClick="goMywriteDetail(${WriteList.b_no})">                  --%>
+<%--                     <td align="center">${WriteList.subject}</td>  --%>
+<%--                     <td align="center">${WriteList.content}</td>   --%>
+<%--                     <td align="center">${WriteList.reg_date}</td> --%>
+<!--                 </tr> -->
+<%--             </c:forEach> --%>
             
-               <c:if test="${empty requestScope.WriteList}">
-                     <td colspan="4" align="center"><b>작성한 글이 없습니다.</b></td>    
-                </c:if>
+<%--                <c:if test="${empty requestScope.WriteList}"> --%>
+<!--                      <td colspan="4" align="center"><b>작성한 글이 없습니다.</b></td>     -->
+<%--                 </c:if> --%>
                 
-        </table>
+<!--         </table> -->
 
         <br><br>
 
@@ -299,7 +299,7 @@
 	     <input type="hidden" name="resume_no"   value="${requestScope.boardDTO.resume_no}">
     </form>
 
-    <form name="ApplyCompanyDetail" action="/gongGoLocationListDetail.do" method="post">
+    <form name="ApplyCompanyDetail" action="/gonggoDetailForm.do" method="post">
 	     <input type="hidden" name="g_no" class="g_no">
     </form>
     
@@ -308,7 +308,7 @@
     </form>
     
     <form name="MywriteDetail"  action="/freedomeDetailForm.do" method="post">
-	     <input type="hidden" name="b_no" class="b_no">
+	     <input type="hidden" name="Detail_b_no" class="Detail_b_no">
 	     
     </form>
 	

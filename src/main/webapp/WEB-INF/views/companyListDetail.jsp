@@ -43,7 +43,6 @@ function like_company(){
 function del_like_company(){
 	alert("왜 관심이 사라졌느냐")
 	 var reviewUpFormObj = $("[name='reviewUpForm']");
-	alert(reviewUpFormObj.serialize());
 	
 	$.ajax(
 	         { 
@@ -238,7 +237,6 @@ function reviewDel(r_no){
                 }
                 
                 else{
-                	alert(formObj.serialize( ));
                    alert("삭제 실패입니다.");
                 }
              }
@@ -288,7 +286,6 @@ function reviewEdit(r_no){
                // 이때 익명함수의 매개변수로 WAS 의 응답물이 들어 온다.
                //----------------------------------------------------------
                ,success : function(json){
-                 	alert(formObj.serialize( )+content);
 
                   var result = json["result"];
                   if(result==1){
@@ -297,7 +294,6 @@ function reviewEdit(r_no){
                   }
                   
                   else{
-                  	alert(formObj.serialize( )+content);
                      alert("수정 실패입니다.");
                   }
                }

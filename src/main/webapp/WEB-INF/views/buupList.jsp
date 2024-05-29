@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@include file="/WEB-INF/views/common.jsp" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -22,8 +24,8 @@ function buuping() {
     // 부업 검색 폼에서 ing 필드 설정
     $("[name='buupSearchForm']").find("[name='ing']").val(ingValue);
     // 검색 함수 호출
-    search1();
-   }
+    search();
+	}
 
 //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 // 상세보기 화면으로 이동하는 
@@ -31,110 +33,110 @@ function buuping() {
 // 매개변수로 게시판의 고유번호가 들어온다.
 //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 function gobuupDetailForm(b_no){
-   
-   //----------------------------------
-   // name='boardDetailForm' 을 가진 form 태그 후손중에 
-   // name='b_no' 가진 태그에 매개변수로 들어온 게시판의 고유번호를 
-   // 삽입하기
-   //----------------------------------
-   $("[name='buupListDetailForm']").find("[name='b_no']").val(b_no);
-   //----------------------------------
-   // name='buupListDetailForm' 을 가진 
-   // form 태그의 action 에 설정된 URL 주소로 WAS 접속해서 
-   // 얻은 새 HTML 를 웹브라우저 열기.
-   // 즉 화면 이동하기.
-   //---------------------------------- 
-   document.buupListDetailForm.submit();
+	
+	//----------------------------------
+	// name='boardDetailForm' 을 가진 form 태그 후손중에 
+	// name='b_no' 가진 태그에 매개변수로 들어온 게시판의 고유번호를 
+	// 삽입하기
+	//----------------------------------
+	$("[name='buupListDetailForm']").find("[name='b_no']").val(b_no);
+	//----------------------------------
+	// name='buupListDetailForm' 을 가진 
+	// form 태그의 action 에 설정된 URL 주소로 WAS 접속해서 
+	// 얻은 새 HTML 를 웹브라우저 열기.
+	// 즉 화면 이동하기.
+	//---------------------------------- 
+	document.buupListDetailForm.submit();
 }
 
     //정렬함수
-   function searchWithSort(sort){
-      $("[name='buupSearchForm']").find("[name='sort']").val(sort);      
-      $(".searchBtn").click();   
-       }
+	function searchWithSort(sort){
+		$("[name='buupSearchForm']").find("[name='sort']").val(sort);		
+		$(".searchBtn").click();	
+	    }
 
 
 
-      //페이징 함수 
-      function pageNoClick( clickPageNo ){
-         $("[name='buupSearchForm']").find(".selectPageNo").val(clickPageNo);      
-          search1();      
-      }
+		//페이징 함수 
+		function pageNoClick( clickPageNo ){
+			$("[name='buupSearchForm']").find(".selectPageNo").val(clickPageNo);		
+		    search();		
+		}
 
 //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 // body 태그 안의 내용을 모드 읽은 후 실행할 자스 코드 설정
 // $(function(){자스코드})
 //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 $(function(){
-   // class=rowCntPerPage 를 가진 태그에 value 값으로 20을 넣어주기
-   $(".rowCntPerPage").val("10"); 
-   // search 함수 호출하기
-   search1();
-   })   
+	// class=rowCntPerPage 를 가진 태그에 value 값으로 20을 넣어주기
+	$(".rowCntPerPage").val("10"); 
+	// search 함수 호출하기
+	search();
+	})	
 
-//   게시판 검색하는 함수 search() 선언.
-//   [검색] 버튼 클릭 시 호출되는 함수이다.
-   function search1(){
-   
-   var buupSearchFormObj = $("[name='buupSearchForm']");
-   var keywordObj = buupSearchFormObj.find(".keyword");
-//      var checkboxObj = buupSearchFormObj.find(".checkdate:checked")
-   
-   
-   //---------------------------------------------
-   // 입력된 키워드 읽어와서 변수 keyword 에 저장하기
-   // 만약에 변수 keyword 에 문자가 안들어 있으면 "" 저장하기
-   // 변수 keyword 에 앞뒤공백 제거하기
-   //---------------------------------------------
-   var keyword = keywordObj.val();
-   
-   if(typeof(keyword)!='string'){ keyword=""; }
-   
-   keyword = $.trim(keyword);
-   keywordObj.val(keyword);
+//	게시판 검색하는 함수 search() 선언.
+//	[검색] 버튼 클릭 시 호출되는 함수이다.
+	function search(){
+	
+	var buupSearchFormObj = $("[name='buupSearchForm']");
+	var keywordObj = buupSearchFormObj.find(".keyword");
+//		var checkboxObj = buupSearchFormObj.find(".checkdate:checked")
+	
+	
+	//---------------------------------------------
+	// 입력된 키워드 읽어와서 변수 keyword 에 저장하기
+	// 만약에 변수 keyword 에 문자가 안들어 있으면 "" 저장하기
+	// 변수 keyword 에 앞뒤공백 제거하기
+	//---------------------------------------------
+	var keyword = keywordObj.val();
+	
+	if(typeof(keyword)!='string'){ keyword=""; }
+	
+	keyword = $.trim(keyword);
+	keywordObj.val(keyword);
 
-   
-   
-   buupSearchFormObj.find(".rowCntPerPage").val($("select")
-                            .filter(".rowCntPerPage").val() )
-   
-   //alert(buupSearchFormObj.serialize());
+	
+	
+	buupSearchFormObj.find(".rowCntPerPage").val($("select")
+			                   .filter(".rowCntPerPage").val() )
+	
+	//alert(buupSearchFormObj.serialize());
 
-   
-   $.ajax(
-         {
+	
+	$.ajax(
+			{
 
-            url      : "/buupList.do"   
-            ,type    : "post"               
-            ,data    : buupSearchFormObj.serialize( )      
-            ,success : function(responseHtml){
-         
-               var obj = $(responseHtml);
-         
-               $(".buupListDiv").html( 
-                     obj.find(".buupListDiv").html() 
-               );
-               $(".pagingNos").html(
-                     obj.find(".pagingNos").html()
-               );
-               
-//                 $("body").append(
-//                            "<textarea cols=100 rows=100>" +obj.find(".buupListDiv").html() +   "</textarea>"   
-//                         )
-               /*$(".xxx").remove();
-               $("body").prepend(
-                  "<textarea class=xxx cols=100 rows=100>"
-                  + obj.filter(".boardListDiv").html()
-                  +"</textarea>"
-               )*/
-               
-            }
-            ,error   : function(){
-               alert("검색 실패! 관리자에게 문의 바람니다.");
-            }
-         }
-      );
-   }  // search( ) 종료부분
+				url      : "/buupList.do"	
+				,type    : "post"					
+				,data    : buupSearchFormObj.serialize( )		
+				,success : function(responseHtml){
+			
+					var obj = $(responseHtml);
+			
+					$(".buupListDiv").html( 
+							obj.find(".buupListDiv").html() 
+					);
+					$(".pagingNos").html(
+							obj.find(".pagingNos").html()
+					);
+					
+// 					 $("body").append(
+// 			                  "<textarea cols=100 rows=100>" +obj.find(".buupListDiv").html() +   "</textarea>"   
+// 			               )
+					/*$(".xxx").remove();
+					$("body").prepend(
+						"<textarea class=xxx cols=100 rows=100>"
+						+ obj.filter(".boardListDiv").html()
+						+"</textarea>"
+					)*/
+					
+				}
+				,error   : function(){
+					alert("검색 실패! 관리자에게 문의 바람니다.");
+				}
+			}
+		);
+	}  // search( ) 종료부분
 //******************************************************************* //
 
 
@@ -149,16 +151,16 @@ $(function(){
 
 
 
-   
+	
     <div class="container"  id="wrap">
     
      <span style="cursor:pointer" onclick="location.replace('/buupList.do')">      
-       <h1 style="text-align: center;">부업</h1></span>
+ 		<h1 style="text-align: center;">부업</h1></span>
  
       <form name="buupSearchForm">
          <div style="text-align: center; margin-bottom: 20px;">
-            
-         지역
+				
+		   지역
            <select name="work_place" id="work_place">
             <option value="">지역을 선택해 주세요
             <option value="서울특별시">서울특별시
@@ -168,22 +170,39 @@ $(function(){
             <option value="강원도">강원도
           </select>
           
-          <select name="searchType" class="searchType">
-            <option value="all">전체</option>
+          <select name="BuupsearchType" class="BuupsearchType">
+            <option value="">전체</option>
+            <option value="subject">제목</option>
             <option value="name">이름</option>
-            <option value="phone">휴대폰 번호</option>
             <option value="content">내용</option>
+             <option value="hope_work">희망업무</option>
+            <option value="phone">휴대폰 번호</option>
         </select>
-            
-               <input type="text" name="keyword" class="keyword" >
-              <input type="button" value="검색"  class="searchBtn" onclick="search1();">
-            <input type="hidden" name="sort"  class="sort" >
-            <input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
-            <input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
-             <input type="hidden" name="ing"  class="ing">
-              
-              <span onclick="buuping();" >[현재 채용가능 글만 보기]</span>          
-        </form>      
+
+
+
+
+
+        	    <input type="text" name="keyword" class="keyword" >
+        		<input type="button" value="검색"  class="searchBtn" onclick="search();">
+				<input type="hidden" name="sort"  class="sort" >
+				<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
+				<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
+		 		<input type="hidden" name="ing"  class="ing">
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		<span onclick="buuping();" >[현재 채용가능 글만 보기]</span>	    	
+		  </form>		
          </div>
 
      <div class="buupListDiv">
@@ -191,31 +210,32 @@ $(function(){
            <table style="border:1px solid black;margin-left:auto;margin-right:auto;">
                           
               <tr> 
-                   <th width="70">번호</th>
-                   <th width="200">제목</th> 
-                   <th width="300">희망업무</th>
-                   <th width="150">지원기간</th>
+                   <th>번호</th>
+                   <th>제목</th> 
+                   <th>희망업무</th>
+                   <th>주소</th>
+                   <th>지원기간</th>
                 <! --============================================================= -->
-            <!-- 만약 파명 "sort" 의 파값이 비었으면 -->
-            <!-- 즉 정렬 의지가 없으면               -->
-            <!--============================================================= -->
-            <c:if test="${param.sort!='reg_date asc' and param.sort!='reg_date desc'}">
-               <th width="130" style="cursor:pointer" onClick="searchWithSort('reg_date desc')">작성일</th>
-            </c:if>
-            <!--============================================================= -->
-            <!-- 만약 파명 "sort" 의 파값이 'reg_date desc' 면 -->
-            <!-- 즉 정렬 의지가 'reg_date desc' 면             -->
-            <!--============================================================= -->
-            <c:if test="${param.sort=='reg_date desc'}">
-               <th width="130"  style="cursor:pointer" onClick="searchWithSort('reg_date asc')">작성일▼</th>
-            </c:if>
-            <!--============================================================= -->
-            <!-- 만약 파명 "sort" 의 파값이 'reg_date asc' 면 -->
-            <!-- 즉 정렬 의지가 'reg_date asc' 면             -->
-            <!--============================================================= -->
-            <c:if test="${param.sort=='reg_date asc'}">
-               <th width="130" style="cursor:pointer" onClick="searchWithSort('')">작성일▲</th>
-            </c:if>  
+				<!-- 만약 파명 "sort" 의 파값이 비었으면 -->
+				<!-- 즉 정렬 의지가 없으면               -->
+				<!--============================================================= -->
+				<c:if test="${param.sort!='reg_date asc' and param.sort!='reg_date desc'}">
+					<th style="cursor:pointer" onClick="searchWithSort('reg_date desc')">작성일</th>
+				</c:if>
+				<!--============================================================= -->
+				<!-- 만약 파명 "sort" 의 파값이 'reg_date desc' 면 -->
+				<!-- 즉 정렬 의지가 'reg_date desc' 면             -->
+				<!--============================================================= -->
+				<c:if test="${param.sort=='reg_date desc'}">
+					<th  style="cursor:pointer" onClick="searchWithSort('reg_date asc')">작성일▼</th>
+				</c:if>
+				<!--============================================================= -->
+				<!-- 만약 파명 "sort" 의 파값이 'reg_date asc' 면 -->
+				<!-- 즉 정렬 의지가 'reg_date asc' 면             -->
+				<!--============================================================= -->
+				<c:if test="${param.sort=='reg_date asc'}">
+					<th style="cursor:pointer" onClick="searchWithSort('')">작성일▲</th>
+				</c:if>  
               </tr>
  
            <c:forEach var="buup" items="${requestScope.buupList}"  varStatus="status">
@@ -223,6 +243,7 @@ $(function(){
                   <td>${requestScope.boardMap.begin_serialNo_desc-status.index}</td>             
                   <td>${buup.subject}</td>
                   <td>${buup.hope_work}</td>
+                  <td>${buup.addr}</td>
                   <td>${buup.start_date} ~<br> ${buup.end_date}</td>
                   <td>${buup.reg_date}</td>
               </tr>   
@@ -232,80 +253,80 @@ $(function(){
          </table>
         </div>
                  <c:if test="${empty requestScope.buupList}">
-                       <center>
-                          <b>조회할 데이터가 없습니다.</b>
-                       </center>
-                       
-               </c:if>
-          
+			              <center>
+			              	<b>조회할 데이터가 없습니다.</b>
+			              </center>
+			              
+			      </c:if>
+			 
 <center> 
-   <!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-   <!--- 게시판 페이징 번호 출력하기.  시작   -->
-   <!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-   
-   <span class="pagingNos">
-   <!--------------------------------------------->
-   <!-- [처음] [이전] 출력하기 -->
-   <!--------------------------------------------->
-   <span style="cursor:pointer" 
-         onClick="pageNoClick(1)">[처음]</span>
-   <span style="cursor:pointer" 
-         onClick="pageNoClick(${requestScope.boardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
-   
-   <!--------------------------------------------->
-   <!--  [반복문 C코어 태그]를 사용하여 페이지 번호 출력하기 -->
-   <!--------------------------------------------->
-   <c:forEach var="pageNo"  begin = "${requestScope.boardMap.begin_pageNo}"    
-                      end   = "${requestScope.boardMap.end_pageNo}">
-      <!--------------------------------------------->
-      <!--  만약에 [선택한 페이지 번호]와 [화면에 출력할 페이지 번호]가 같으면  -->
-      <!--------------------------------------------->
-      <c:if test="${requestScope.boardMap.selectPageNo==pageNo}">
-         ${pageNo}
-      </c:if>
-      <!--------------------------------------------->
-      <!--  만약에 [선택한 페이지 번호]와 [화면에 출력할 페이지 번호]가 다르면  -->
-      <!--------------------------------------------->
-      <c:if test="${requestScope.boardMap.selectPageNo!=pageNo}">
-         <span style="cursor:pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
-      </c:if>
-   </c:forEach>&nbsp;&nbsp;
-   <!--------------------------------------------->
-   <!-- [다음] [마지막] 출력하기 -->
-   <!--------------------------------------------->
-   <span style="cursor:pointer" 
-         onClick="pageNoClick(${requestScope.boardMap.selectPageNo}+1)">[다음]</span>
-   <span style="cursor:pointer" 
-         onClick="pageNoClick(${requestScope.boardMap.last_pageNo})">[마지막]</span>
-   &nbsp;&nbsp;&nbsp;      
-      <!--------------------------------------------->
-      [${requestScope.buupListCnt}/${requestScope.buupListAllCnt}]개    
-      <!--------------------------------------------->
-   &nbsp;&nbsp;
-   </span>
-   <!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-   <!--- 게시판 페이징 번호 출력하기.  끝   -->
-   <!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-   
-   <select name="rowCntPerPage" class="rowCntPerPage" onChange="search1()">
-      <option value="10">10
-      <option value="15">15
-      <option value="20">20
-   </select>행보기 &nbsp;&nbsp;&nbsp;
-      </center> 
-               
+	<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+	<!--- 게시판 페이징 번호 출력하기.  시작   -->
+	<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+	
+	<span class="pagingNos">
+	<!--------------------------------------------->
+	<!-- [처음] [이전] 출력하기 -->
+	<!--------------------------------------------->
+	<span style="cursor:pointer" 
+			onClick="pageNoClick(1)">[처음]</span>
+	<span style="cursor:pointer" 
+			onClick="pageNoClick(${requestScope.boardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
+	
+	<!--------------------------------------------->
+	<!--  [반복문 C코어 태그]를 사용하여 페이지 번호 출력하기 -->
+	<!--------------------------------------------->
+	<c:forEach var="pageNo"  begin = "${requestScope.boardMap.begin_pageNo}"    
+							 end   = "${requestScope.boardMap.end_pageNo}">
+		<!--------------------------------------------->
+		<!--  만약에 [선택한 페이지 번호]와 [화면에 출력할 페이지 번호]가 같으면  -->
+		<!--------------------------------------------->
+		<c:if test="${requestScope.boardMap.selectPageNo==pageNo}">
+			${pageNo}
+		</c:if>
+		<!--------------------------------------------->
+		<!--  만약에 [선택한 페이지 번호]와 [화면에 출력할 페이지 번호]가 다르면  -->
+		<!--------------------------------------------->
+		<c:if test="${requestScope.boardMap.selectPageNo!=pageNo}">
+			<span style="cursor:pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+		</c:if>
+	</c:forEach>&nbsp;&nbsp;
+	<!--------------------------------------------->
+	<!-- [다음] [마지막] 출력하기 -->
+	<!--------------------------------------------->
+	<span style="cursor:pointer" 
+			onClick="pageNoClick(${requestScope.boardMap.selectPageNo}+1)">[다음]</span>
+	<span style="cursor:pointer" 
+			onClick="pageNoClick(${requestScope.boardMap.last_pageNo})">[마지막]</span>
+	&nbsp;&nbsp;&nbsp;		
+		<!--------------------------------------------->
+		[${requestScope.buupListCnt}/${requestScope.buupListAllCnt}]개 	
+		<!--------------------------------------------->
+	&nbsp;&nbsp;
+	</span>
+	<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+	<!--- 게시판 페이징 번호 출력하기.  끝   -->
+	<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+	
+	<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+		<option value="10">10
+		<option value="15">15
+		<option value="20">20
+	</select>행보기 &nbsp;&nbsp;&nbsp;
+		</center> 
+			      
               <center>
                  <input type="button" value="등록" onCLick= "location.replace('/buupListRegForm.do')">
-             </center>
+     	     </center>
      
       </form>
       
       
-      <form name="buupListDetailForm" action="/buupListDetailForm.do" method="post">
-         <input type="hidden" name="b_no" class="b_no">
-         <input type="hidden" name="resume_no" class="resume_no">
-      </form>
-   
+		<form name="buupListDetailForm" action="/buupListDetailForm.do" method="post">
+			<input type="hidden" name="b_no" class="b_no">
+			<input type="hidden" name="resume_no" class="resume_no">
+		</form>
+	
    </div>
 </body>
 
