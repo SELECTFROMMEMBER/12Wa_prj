@@ -13,8 +13,12 @@
 	function handleCheckboxClick(event) {
 	    event.stopPropagation(); // 이벤트 버블링 방지
 	}
-	
-	
+
+	function searchWithSort(sort){
+		$("[name='boardSearchForm']").find("[name='sort']").val(sort);
+	    $(".searchBtn").click();
+
+	}
 	
 	
 	//상세보기 화면으로 이동하는
@@ -88,6 +92,8 @@ input[type="checkbox"] {
             <input type="button" value="검색"   class="searchBtn" onclick="search('freedome')"></input>
             <input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
+			 <input type="hidden" name="sort" class="sort" value="">
+			
         </div>
      </form>
       
@@ -103,8 +109,28 @@ input[type="checkbox"] {
                   <th>제목</th>
                   <th>닉네임</th>                
                   <th>작성일</th>
-                  <th>조회수</th>
-                  <th>추천수</th>
+         		  <c:if  test="${param.sort!='read_count asc' and param.sort!='read_count desc'}">         
+                   <th style="cursor: pointer font-weight: bold;"onClick="searchWithSort('read_count desc')">조회수</th>
+                  </c:if>
+                  <c:if  test="${param.sort=='read_count desc'}">         
+                  <th style="cursor: pointer font-weight: bold;"onClick="searchWithSort('read_count asc')">조회수▼</th>
+                  </c:if>
+                  <c:if  test="${param.sort=='read_count asc'}">         
+                  <th style="cursor: pointer font-weight: bold;"onClick="searchWithSort('')">조회수▲</th>
+                  </c:if>
+                  
+          		  <c:if  test="${param.sort!='rec_count asc' and param.sort!='rec_count desc'}">         
+                   <th style="cursor: pointer font-weight: bold;"onClick="searchWithSort('rec_count desc')">추천수</th>
+                  </c:if>
+                  <c:if  test="${param.sort=='rec_count desc'}">         
+                  <th style="cursor: pointer font-weight: bold;"onClick="searchWithSort('rec_count asc')">추천수▼</th>
+                  </c:if>
+                  <c:if  test="${param.sort=='rec_count asc'}">         
+                  <th style="cursor: pointer font-weight: bold;"onClick="searchWithSort('')">추천수▲</th>
+                  </c:if>
+                  
+                  
+                  
                     <c:if test="${sessionScope.member == 'admin' }">
                   <th>글 선택</th>
                   </c:if>

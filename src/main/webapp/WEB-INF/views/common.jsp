@@ -82,7 +82,7 @@ const subFields = {
     construction: ["건축", "감리·공무", "시공", "안전·품질", "기타"],
     education: ["유치원·보육·교사", "초등학교", "중·고등학교", "특수교육"],
     medical: ["간호조무사", "원무·코디네이터", "의사·의료진", "보건·의료관리"],
-    production: ["생산·제조", "조립·가공·포장", "설비·검사·품질", "공정·생산관리", "창고·물류·유통"]
+    production: ["생산·제조", "조립·가공·포장", "설비·검사·품질", "공정·생산관리", "창고·물류df·유통"]
 };
 
 const fieldSelect = document.getElementById('field');
@@ -129,6 +129,8 @@ function rate(stars) {
 
 function submitReview() {
     let reviewText = document.getElementById('review').value;
+
+	}
     if (ratingValue === 0) {
         alert("평점을 선택해주세요.");
         return;
@@ -419,10 +421,12 @@ function downCount(comment_no){
 	//게시판 등록하기
 	//--------------------------------------------------------------------------
 function checkboardRegForm(boardname,boardurl) {
-		
+		if(${sessionScope.is_block=='block'}){
+			alert('게시판 이용이 제한된 회원입니다. 고객센터에 문의바랍니다.')
+			return;
+		}
 	    var formObj = $("[name='boardRegForm']");
 	    
-	    alert( formObj.serialize());
 	    
 	    $.ajax({
 	    	
@@ -455,8 +459,12 @@ function checkboardRegForm(boardname,boardurl) {
 	function checkCommentReg(){
 	 	var commentObj = $("form[name='commentRegForm']");
 	 	
+		if(${sessionScope.is_block=='block'}){
+			alert('게시판 이용이 제한된 회원입니다. 고객센터에 문의바랍니다.')
+			return;
+		}
 	 	
-	 
+	 	
 	 	if( 
 	 			commentObj.find(".content").val().trim().length==0 
 	 			||

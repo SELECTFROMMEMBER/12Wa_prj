@@ -146,7 +146,7 @@ function handleCheckboxClick(event) {
                         <td bgcolor='lightblue'>${board.subject}</td>
                         <td bgcolor='lightblue'>${board.reg_date}</td>
                         <td bgcolor='lightblue'>${board.read_count}</td>
-                          <td bgcolor='lightblue'></td> 	
+                        <td bgcolor='lightblue'></td> 	
                         
                         <td bgcolor='lightblue'>※</td>  
                             </tr>
@@ -176,8 +176,7 @@ function handleCheckboxClick(event) {
 								<td align="center">${board.read_count }</td>
 								<td align="center">${board.price}원</td>
 																<c:if test="${sessionScope.member == 'admin' }">
-									<td><input type="checkbox" value="${board.b_no }"
-										onclick="handleCheckboxClick(event)"></td>
+									<td><input type="checkbox" value="${board.b_no }"	onclick="handleCheckboxClick(event)"></td>
 								</c:if>
 							</tr>
 

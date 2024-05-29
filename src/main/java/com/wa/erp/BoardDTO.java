@@ -11,6 +11,7 @@ public class BoardDTO {
 	private int b_no;
 	private int p_no;
 	private int r_no;
+	private String cid;
 	private String table;
 	private String reg_date;
 	private int read_count;
@@ -95,7 +96,40 @@ public class BoardDTO {
 	private String category;
 	private String[] b_noList;
 	private String boardname;
-
+	private String ceo_phone;
+	private String id;
+	private String member_type;
+	private String is_block;
+	public String getIs_block() {
+		return is_block;
+	}
+	public void setIs_block(String is_block) {
+		this.is_block = is_block;
+	}
+	public String getMember_type() {
+		return member_type;
+	}
+	public void setMember_type(String member_type) {
+		this.member_type = member_type;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getCeo_phone() {
+		return ceo_phone;
+	}
+	public void setCeo_phone(String ceo_phone) {
+		this.ceo_phone = ceo_phone;
+	}
+	public String getCid() {
+		return cid;
+	}
+	public void setCid(String cid) {
+		this.cid = cid;
+	}
 		public String getBoardname() {
 		return boardname;
 	}

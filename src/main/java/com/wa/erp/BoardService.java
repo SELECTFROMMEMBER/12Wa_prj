@@ -117,4 +117,19 @@ public interface BoardService {
 		int updateComWel(BoardDTO boardDTO);
 
 		List<BoardDTO> getlikeCompany(int p_no);
+
+		int getMemberListCnt(BoardSearchDTO boardSearchDTO);
+
+		int getMemberListAllCnt(BoardSearchDTO boardSearchDTO);
+
+		List<BoardDTO> getMemberList(BoardSearchDTO boardSearchDTO);
+
+		int getBlockMemberListCnt(BoardSearchDTO boardSearchDTO);
+
+		int getBlockMemberListAllCnt(BoardSearchDTO boardSearchDTO);
+
+		List<BoardDTO> getBlockMemberList(BoardSearchDTO boardSearchDTO);
+
+		
+
 }

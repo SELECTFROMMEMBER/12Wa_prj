@@ -934,5 +934,94 @@ public class BoardController {
 						return mav;
 					}
 
+			//=================================================
+			//회원정보 리스트 불러오기
+			//=================================================
+			@RequestMapping(value = "/memberList.do")
+			public ModelAndView memberList(
+			        BoardSearchDTO boardSearchDTO,
+			        HttpSession session
+			) {
 
+			    Object p_noObj = session.getAttribute("p_no");
+			    int p_no = 0;
+			    if (p_noObj != null) {
+			        p_no = Integer.parseInt(p_noObj.toString());
+			    }
+
+			    int memberListCnt = this.boardService.getMemberListCnt(boardSearchDTO);
+			    int memberListAllCnt = this.boardService.getMemberListAllCnt(boardSearchDTO);
+	
+			    
+				Map<String,Integer> boardMap = Util.getPagingMap(
+						boardSearchDTO.getSelectPageNo()	//선택한 페이지 번호
+						,boardSearchDTO.getRowCntPerPage()	//페이지 당 보여줄 검색 행의 개수
+						,memberListCnt			);
+				boardSearchDTO.setSelectPageNo(  (int)boardMap.get("selectPageNo")  ); 
+				boardSearchDTO.setRowCntPerPage( (int)boardMap.get("rowCntPerPage") ); 
+				boardSearchDTO.setBegin_rowNo(   (int)boardMap.get("begin_rowNo")   ); 
+				boardSearchDTO.setEnd_rowNo(     (int)boardMap.get("end_rowNo")     );		//검색결과 개수
+			    List<BoardDTO> memberList = this.boardService.getMemberList(boardSearchDTO);
+			    
+
+			    ModelAndView mav = new ModelAndView();
+
+
+			    
+			    mav.addObject("memberListCnt", memberListCnt);
+			    mav.addObject("memberListAllCnt", memberListAllCnt);
+			    mav.addObject("memberList", memberList);
+				mav.addObject("boardMap", boardMap);
+
+			    // boardMap 변수가 정의되지 않았으므로 추가가 필요합니다.
+			    // Map<String, Object> boardMap = new HashMap<>();
+			    // 필요에 따라 boardMap 초기화 및 사용
+			    mav.setViewName("memberList.jsp");
+			    return mav;
+			}
+			//=================================================
+			//차단회원정보 리스트 불러오기
+			//=================================================
+			@RequestMapping(value = "/blockMemberList.do")
+			public ModelAndView blockMemberList(
+			        BoardSearchDTO boardSearchDTO,
+			        HttpSession session
+			) {
+
+			    Object p_noObj = session.getAttribute("p_no");
+			    int p_no = 0;
+			    if (p_noObj != null) {
+			        p_no = Integer.parseInt(p_noObj.toString());
+			    }
+
+			    int blockMemberListCnt = this.boardService.getBlockMemberListCnt(boardSearchDTO);
+			    int blockMemberListAllCnt = this.boardService.getBlockMemberListAllCnt(boardSearchDTO);
+	
+			    
+				Map<String,Integer> boardMap = Util.getPagingMap(
+						boardSearchDTO.getSelectPageNo()	//선택한 페이지 번호
+						,boardSearchDTO.getRowCntPerPage()	//페이지 당 보여줄 검색 행의 개수
+						,blockMemberListCnt			);
+				boardSearchDTO.setSelectPageNo(  (int)boardMap.get("selectPageNo")  ); 
+				boardSearchDTO.setRowCntPerPage( (int)boardMap.get("rowCntPerPage") ); 
+				boardSearchDTO.setBegin_rowNo(   (int)boardMap.get("begin_rowNo")   ); 
+				boardSearchDTO.setEnd_rowNo(     (int)boardMap.get("end_rowNo")     );		//검색결과 개수
+			    List<BoardDTO> blockMemberList = this.boardService.getBlockMemberList(boardSearchDTO);
+			    
+
+			    ModelAndView mav = new ModelAndView();
+
+
+			    
+			    mav.addObject("memberListCnt", blockMemberListCnt);
+			    mav.addObject("memberListAllCnt", blockMemberListAllCnt);
+			    mav.addObject("memberList", blockMemberList);
+				mav.addObject("boardMap", boardMap);
+
+			    // boardMap 변수가 정의되지 않았으므로 추가가 필요합니다.
+			    // Map<String, Object> boardMap = new HashMap<>();
+			    // 필요에 따라 boardMap 초기화 및 사용
+			    mav.setViewName("blockMemberList.jsp");
+			    return mav;
+			}
 }

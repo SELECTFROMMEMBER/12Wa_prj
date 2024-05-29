@@ -22,6 +22,8 @@ $(document).ready(function() {
         if (value) {
             // 첫 번째 셀렉트 박스가 선택되면 두 번째 셀렉트 박스를 활성화
             $('#multisort2').prop('disabled', false);
+            $('#multisort3').prop('disabled', true);
+
             // 두 번째 셀렉트 박스의 옵션 변경
             $('#multisort2 option[value!=""]').remove();
             if (value !== 'sal_avg desc') {
@@ -74,27 +76,43 @@ searchWithMultiSort()  ;
         });
 });
 </script>
-
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container {
+            text-align: center;
+        }
+        .welfare-options {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+            columns: 4; /* 두 개의 열로 나누어 정렬 */
+            column-gap: 20px; /* 열 간격 */
+        }
+        .welfare-options label {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
 <style>
+
 .fas.fa-heart {
     color: red;
 }
-.star-container {
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.star-container { 
+       font-size: 18px; 
+       display: flex; 
+       align-items: center; 
+       gap: 10px; 
+     } 
 
-    .star {
-      background: linear-gradient(to right, #EAB838, #EAB838 50%, #E0E2E7 50%);
-      color: transparent;
-      -webkit-background-clip: text;
-    }
-
-    .star-container .star-grade {
-      font-weight: 700;
-    }
+     .star { 
+       background: linear-gradient(to right, #EAB838, #EAB838 50%, #E0E2E7 50%); 
+       color: transparent; 
+       -webkit-background-clip: text; 
+     } 
+     .star-container .star-grade { 
+       font-weight: 700; 
+     }
 </style>
 <style>
   #firstSelect {
@@ -116,6 +134,30 @@ searchWithMultiSort()  ;
     text-align: center; /* 옵션 텍스트를 수평 가운데 정렬합니다. */
   }
 </style>
+
+
+    <title>기업 정보</title>
+ <style>
+        .company-info {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+        }
+        .company-info .label {
+            font-weight: bold;
+            color: #333;
+            width: 120px;
+            display: inline-block;
+        }
+        .company-info .value {
+            color: #555;
+        }
+        .company-info .row {
+            margin-bottom: 5px;
+        }
+    </style>
 <script>
 
 function search(){
@@ -190,17 +232,7 @@ function search(){
             );
             $(".pagingNos").html( 
                   obj.filter(".pagingNos").html() 
-            );
-         
-
-            
-            
-//             $("body").append(
-//                "<textarea class=xxx cols=100 rows=100>"
-//                + obj.filter(".boardListDiv").html()
-//                +"</textarea>"
-            //)
-            
+            ); 
          }
          ,error   : function(){
             alert("검색 실패! 관리자에게 문의 바람니다.");
@@ -368,25 +400,27 @@ function searchWithMultiSort(){
                </select>
             </p>
             <br>
-              <p align="center">            
-                <b>사내 복지</b><br>
-                   <label><input type="checkbox" name="welfare" value="4대보험가입" id="1"> 4대보험가입</label>
-                   <label><input type="checkbox" name="welfare" value="연금가입" id="2"> 연금가입</label>
-                   <label><input type="checkbox" name="welfare" value="보너스 및 인센티브" id="3"> 보너스 및 인센티브</label>
-                   <label><input type="checkbox" name="welfare" value="수당제도" id="4"> 수당제도</label> <br>
-                   <label><input type="checkbox" name="welfare" value="사내동호회 운영" id="5"> 사내동호회 운영</label>
-                   <label><input type="checkbox" name="welfare" value="경조사 지원" id="6"> 경조사 지원</label>
-                   <label><input type="checkbox" name="welfare" value="출산/육아 지원제도" id="7"> 출산/육아 지원제도</label>
-                   <label><input type="checkbox" name="welfare" value="사무용품 지원" id="8"> 사무용품 지원</label><br>
-                   <label><input type="checkbox" name="welfare" value="자유복장" id="9"> 자유복장</label>
-                   <label><input type="checkbox" name="welfare" value="식대제공" id="10"> 식대제공</label>
-                   <label><input type="checkbox" name="welfare" value="기숙사 및 사택 제공" id="11"> 기숙사 및 사택 제공</label>
-                   <label><input type="checkbox" name="welfare" value="차량유류비 지급" id="12"> 차량유류비 지급</label><br>
-                   <label><input type="checkbox" name="welfare" value="통근버스 운행" id="13"> 통근버스 운행</label>
-                   <label><input type="checkbox" name="welfare" value="교통비 지급" id="14"> 교통비 지급</label>
-                   <label><input type="checkbox" name="welfare" value="유연근무제" id="15"> 유연근무제</label>           
-					<label><input type="checkbox" name="welfare" value="각종 행사" id="16"> 각종 행사</label>
-            </p>
+              <div class="container">
+        <b>사내 복지</b><br>
+        <div class="welfare-options">
+            <label><input type="checkbox" name="welfare" value="4대보험가입" id="1"> 4대보험가입</label>
+            <label><input type="checkbox" name="welfare" value="연금가입" id="2"> 연금가입</label>
+            <label><input type="checkbox" name="welfare" value="보너스 및 인센티브" id="3"> 보너스 및 인센티브</label>
+            <label><input type="checkbox" name="welfare" value="수당제도" id="4"> 수당제도</label>
+            <label><input type="checkbox" name="welfare" value="사내동호회 운영" id="5"> 사내동호회 운영</label>
+            <label><input type="checkbox" name="welfare" value="경조사 지원" id="6"> 경조사 지원</label>
+            <label><input type="checkbox" name="welfare" value="출산/육아 지원제도" id="7"> 출산/육아 지원제도</label>
+            <label><input type="checkbox" name="welfare" value="사무용품 지원" id="8"> 사무용품 지원</label>
+            <label><input type="checkbox" name="welfare" value="자유복장" id="9"> 자유복장</label>
+            <label><input type="checkbox" name="welfare" value="식대제공" id="10"> 식대제공</label>
+            <label><input type="checkbox" name="welfare" value="기숙사 및 사택 제공" id="11"> 기숙사 및 사택 제공</label>
+            <label><input type="checkbox" name="welfare" value="차량유류비 지급" id="12"> 차량유류비 지급</label>
+            <label><input type="checkbox" name="welfare" value="통근버스 운행" id="13"> 통근버스 운행</label>
+            <label><input type="checkbox" name="welfare" value="교통비 지급" id="14"> 교통비 지급</label>
+            <label><input type="checkbox" name="welfare" value="유연근무제" id="15"> 유연근무제</label>
+            <label><input type="checkbox" name="welfare" value="각종 행사" id="16"> 각종 행사</label>
+        </div>
+    </div>
              <div>
              <br>
              
@@ -426,8 +460,7 @@ function searchWithMultiSort(){
          <br>
                   <div class="boardListDiv" id="container">
          
-         <c:if
-            test="${param.sort!='sal_avg asc' and param.sort!='sal_avg desc'}">
+         <c:if  test="${param.sort!='sal_avg asc' and param.sort!='sal_avg desc'}">
             <p style="cursor: pointer" onClick="searchWithSort('sal_avg desc')">연봉</p>
          </c:if>
 
@@ -483,45 +516,51 @@ function searchWithMultiSort(){
 				</tr>
                   <c:forEach var="board" items="${requestScope.companyList }"
                      varStatus="status">
-                     					           
-                     
-                     <tr style="cursor: pointer"
-                        onClick="gocompanyListDetailForm(${board.c_no});">
-                        <td>
-                           <div style="display: flex; align-items: center;">
-                              <img width="80" src="images/photo-1.jpg" style="margin-right: 10px;">
-                              <input type="hidden" value="	${requestScope.boardMap.begin_serialNo_desc - status.index}">
-                        
-                              &nbsp;&nbsp;&nbsp; &lt업종&gt &nbsp;&nbsp;&nbsp;${board.indus}<br>
-                              &nbsp;&nbsp;&nbsp; &lt매출&gt &nbsp;&nbsp;&nbsp;${board.sales}<br>
-                              &nbsp;&nbsp;&nbsp; &lt연봉&gt &nbsp;&nbsp;&nbsp;${board.sal_avg}<br>
-                              &nbsp;&nbsp;&nbsp; &lt주소&gt &nbsp;&nbsp;&nbsp;${board.addr}<br>
-                           </div>
-                          </td>
-                          <td align="center">
-	                          <div class="star-container">
-								<p class="star">★★★★★</p><br>
-								<span class="star-grade" >${board.star_avg}</span>
-							 </div>
-                          </td>
-                          <td>
-                              <c:choose>
-								<c:when test="${likeNoList.contains(board.c_no)}">
-									<i class="fas fa-heart"></i>
-								</c:when>
-								<c:otherwise>
-									<i class="far fa-heart"></i>
-								</c:otherwise>
-							</c:choose>
-							${board.rec_count}
+
+
+				<tr style="cursor: pointer"
+					onClick="gocompanyListDetailForm(${board.c_no});">
+					<td>
+						<div class="company-info">
+							<div class="row">
+								<span class="label">&lt기업명&gt</span> <span class="value">${board.name}</span>
+							</div>
+							<div class="row">
+								<span class="label">&lt업종&gt</span> <span class="value">${board.indus}</span>
+							</div>
+							<div class="row">
+								<span class="label">&lt매출&gt</span> <span class="value">${board.sales}</span>
+							</div>
+							<div class="row">
+								<span class="label">&lt평균 연봉&gt</span> <span class="value">${board.sal_avg}</span>
+							</div>
+							<div class="row">
+								<span class="label">&lt주소&gt</span> <span class="value">${board.addr}</span>
+							</div>
+						</div>
 					</td>
-                     </tr>
-                     						
-                  </c:forEach>
+            <td align="center">
+                <div class="star-container">
+                    <div class="star" id="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <span class="star-grade" id="star-grade">${board.star_avg}</span>
+                </div>
+            </td>
+					<td><c:choose>
+							<c:when test="${likeNoList.contains(board.c_no)}">
+								<i class="fas fa-heart"></i>
+							</c:when>
+							<c:otherwise>
+								<i class="far fa-heart"></i>
+							</c:otherwise>
+						</c:choose> ${board.rec_count}</td>
+				</tr>
+
+			</c:forEach>
 
 
                </table>
-               <c:if test="${empty requestScope.companyList}">
+
+		<c:if test="${empty requestScope.companyList}">
                   <center>
                      <b> 조회할 데이터가 없습니다. </b>
                   </center>

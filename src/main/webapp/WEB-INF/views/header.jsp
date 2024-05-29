@@ -71,9 +71,20 @@
             <li>
                 <a style="cursor: pointer;" href="javascript:location.replace('/resumeList.do')">이력서 열람</a>
             </li>
+        
             <li>
                 <a style="cursor: pointer;" href="javascript:location.replace('/gongGoRegForm.do')">공고 등록</a>
             </li>
+        </c:if>
+                <c:if test="${sessionScope.member == 'admin'}">
+            <li>
+                <a style="cursor: pointer;" href="javascript:location.replace('/memberList.do')">회원 관리</a>
+                 <ul>
+                <li><a href="javascript:location.replace('/memberList.do')">회원 관리</a></li>
+                <li><a href="javascript:location.replace('/blockMemberList.do')">차단 회원 관리</a></li>
+            </ul>
+            </li>
+        
         </c:if>
     </ul>
 </nav>
@@ -97,8 +108,10 @@
 				</c:when>
 				<c:otherwise>
 					<a href="javascript:location.replace('/loginForm.do')" id="logoutButton">로그아웃</a>
-				</c:otherwise>
+				</c:otherwise>  
 			</c:choose>
+
+
 			<c:if test="${sessionScope.member=='company'}">
 				<a onClick="document.MyCompanyForm.submit()" id="myPageButton">기업마이페이지</a>
 			</c:if>
@@ -109,6 +122,7 @@
 							<c:if test="${sessionScope.member=='admin'}">
 				<a href="javascript:location.replace('/notice.do')" id="myPageButton">공지사항관리</a>
 				</c:if>  
+						
   </header>
   </div>
   

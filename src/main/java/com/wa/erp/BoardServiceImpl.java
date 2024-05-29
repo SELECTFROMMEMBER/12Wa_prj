@@ -543,5 +543,54 @@ public class BoardServiceImpl implements BoardService{
 			return MainNoticeList;
 		}
 
+		@Override
+		public int getMemberListCnt(BoardSearchDTO boardSearchDTO) {
+			int MemberListCnt = this.boardDAO.getMemberListCnt( boardSearchDTO );
+			
+			return MemberListCnt;
+		}
+
+		@Override
+		public int getMemberListAllCnt(BoardSearchDTO boardSearchDTO) {
+			int MemberListAllCnt = this.boardDAO.getMemberListAllCnt(boardSearchDTO);
+			
+			//--------------------------------------
+			// 변수 boardListCnt 안의 데이터를 리턴하기
+			//--------------------------------------
+			return MemberListAllCnt;
+		}
+
+		@Override
+		public List<BoardDTO> getMemberList(BoardSearchDTO boardSearchDTO) {
+			List<BoardDTO> memberList = this.boardDAO.getMemberList( boardSearchDTO );
+			
+			return memberList;
+		}
+
+		@Override
+		public int getBlockMemberListCnt(BoardSearchDTO boardSearchDTO) {
+			int blockMemberListCnt = this.boardDAO.getBlockMemberListCnt( boardSearchDTO );
+			
+			return blockMemberListCnt;
+		}
+
+		@Override
+		public int getBlockMemberListAllCnt(BoardSearchDTO boardSearchDTO) {
+			int blockMemberListAllCnt = this.boardDAO.getBlockMemberListAllCnt(boardSearchDTO);
+			
+			//--------------------------------------
+			// 변수 boardListCnt 안의 데이터를 리턴하기
+			//--------------------------------------
+			return blockMemberListAllCnt;
+		}
+
+		@Override
+		public List<BoardDTO> getBlockMemberList(BoardSearchDTO boardSearchDTO) {
+			List<BoardDTO> blockMemberList = this.boardDAO.getBlockMemberList( boardSearchDTO );
+			
+			return blockMemberList;
+		}
+
+	
 		
 }

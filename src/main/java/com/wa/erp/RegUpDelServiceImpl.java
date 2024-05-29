@@ -498,5 +498,35 @@ public int updatebuup(BuupDTO buupDTO)  {
 		//--------------------------------------
 		return PrivacyDelCnt;
 		}
+	@Override
+	public int deletePersonMemberCnt(BoardDTO boardDTO) {
+		int deletePersonMember = this.regUpDelDAO.deletePersonMember(boardDTO);
+		return deletePersonMember;
+	}
+	@Override
+	public int deleteCompanyMemberCnt(BoardDTO boardDTO) {
+		int deleteCompanyMember = this.regUpDelDAO.deleteCompanyMember(boardDTO);
+		return deleteCompanyMember;
+	}
+	@Override
+	public int updateBlockMemberCnt(BoardDTO boardDTO) {
+		int updateBlockMember = this.regUpDelDAO.updateBlockMember(boardDTO);
+		
+		return updateBlockMember;
+	}
+	@Override
+	public int updateBlockCancleMember(BoardDTO boardDTO) {
+		int updateBlockCancleMemberCnt = this.regUpDelDAO.updateBlockCancleMember(boardDTO);
+		
+		return updateBlockCancleMemberCnt;
+	}
+	@Override
+	public int deleteBlockMember(BoardDTO boardDTO) {
+		int deleteBlockMemberCnt = this.regUpDelDAO.deleteBlockMember(boardDTO);
+		
+		return deleteBlockMemberCnt;
+	}
+
+	
 	
 }

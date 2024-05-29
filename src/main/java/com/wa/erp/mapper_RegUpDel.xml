@@ -365,8 +365,8 @@
     	,b_no
     	,p_no
     	,content
-    	)
-    	values(
+    	) 
+    	 values(
     	(select nvl(max(comment_no),0)+1 from ${table})
     	,#{b_no}
         ,#{p_no}
@@ -634,6 +634,62 @@
 		parameterType="com.wa.erp.BoardDTO">
 		DELETE FROM ${boardname}
 		WHERE b_no IN
+		<foreach item="item" collection="b_noList" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+<delete id="deletePersonMember"
+		parameterType="com.wa.erp.BoardDTO">
+		DELETE FROM person_mem
+		WHERE p_no = #{p_no}
+
+	</delete>
+	<delete id="deleteCompanyMember"
+		parameterType="com.wa.erp.BoardDTO">
+		DELETE FROM company_mem
+		WHERE c_no = #{c_no}
+
+	</delete>
+	
+	    <update id="updateBlockMember"  parameterType="com.wa.erp.RegUpDelDAO">
+		update 
+			person_mem
+		set	
+    is_block     = 'block'
+		where 
+			p_no	in	
+			<foreach item="item" collection="b_noList" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		</update>
+			  
+			  
+
+  <update id="updateBlockCancleMember"  parameterType="com.wa.erp.RegUpDelDAO">
+		update 
+			person_mem
+		set	
+            is_block     = 'unblock'
+		where 
+			p_no in	
+			<foreach item="item" collection="b_noList" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>	
+	</update>
+	
+		<delete id="deleteBlockMember"
+		parameterType="com.wa.erp.BoardDTO">
+		DELETE 
+		FROM 
+		     person_mem
+		
+		WHERE 
+		      p_no 
+		IN
 		<foreach item="item" collection="b_noList" open="("
 			separator="," close=")">
 			#{item}

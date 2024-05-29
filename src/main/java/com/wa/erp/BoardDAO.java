@@ -139,6 +139,25 @@ public interface BoardDAO {
 
 		List<BoardDTO> getMainNoticeList(BoardSearchDTO boardSearchDTO);
 
+		
+		
+		
+		
+		
+
+		int getMemberListAllCnt(BoardSearchDTO boardSearchDTO);
+
+		int getMemberListCnt(BoardSearchDTO boardSearchDTO);
+
+		List<BoardDTO> getMemberList(BoardSearchDTO boardSearchDTO);
+
+		int getBlockMemberListCnt(BoardSearchDTO boardSearchDTO);
+
+		int getBlockMemberListAllCnt(BoardSearchDTO boardSearchDTO);
+
+		List<BoardDTO> getBlockMemberList(BoardSearchDTO boardSearchDTO);
+
+
 
 	
 }

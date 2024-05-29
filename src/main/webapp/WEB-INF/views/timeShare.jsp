@@ -63,7 +63,7 @@ function searchWithSort(sort){
 		// value 값에 [클릭한 페이지 번호]를 저장하기
 		//---------------------------------------------
 		$("[name='timeShareSearchForm']").find(".selectPageNo").val(clickPageNo);
-		search();	
+		search1();	
 		}
 	
 
@@ -76,12 +76,12 @@ function searchWithSort(sort){
 		// class=rowCntPerPage 를 가진 태그에 value 값으로 20을 넣어주기
 		$(".rowCntPerPage").val("10"); 
 		// search 함수 호출하기
-		search();
+		search1();
 	})	
 
 // 	게시판 검색하는 함수 search() 선언.
 // 	[검색] 버튼 클릭 시 호출되는 함수이다.
-	function search(){
+	function search1(){
 		//---------------------------------------------
 		// 변수 timeShareSearchFormObj 선언하고 
 		// name='timeShareSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
@@ -183,7 +183,7 @@ function searchWithSort(sort){
          
            
         	<input type="text" name="keyword" class="keyword"  placeholder="검색어를 입력해주세요.">
-        	<input type="button" value="검색"  class="searchBtn" onclick="search();" >	    
+        	<input type="button" value="검색"  class="searchBtn" onclick="search1();" >	    
 			<input type="hidden" name="sort"  class="sort" >
 			<input type="hidden" name="selectPageNo"  class="selectPageNo"  value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
@@ -302,7 +302,7 @@ function searchWithSort(sort){
 <!--- 게시판 페이징 번호 출력하기.  끝   -->
 <!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 
-<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+<select name="rowCntPerPage" class="rowCntPerPage" onChange="search1()">
 	<option value="10">10
 	<option value="15">15
 	<option value="20">20

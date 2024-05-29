@@ -18,6 +18,7 @@
 			p_no
 			,nickname
 			,name
+			,is_block
 			</if>
 			<if test="board=='company_mem' and mid!='admin'">
 			c_no

@@ -65,15 +65,18 @@
 		        ) as age
 				,m.sex
 				,g.content
+				,r.resume_no
+				,p.p_no
 			from
-				pertocom p, gonggo g, person_mem m
+				pertocom p, gonggo g, person_mem m,resume r
 			where
 				p.g_no = #{g_no}
 				and
 				g.g_no = p.g_no
 				and
 				m.p_no = p.p_no
-				
+				and 
+				p.p_no=r.p_no
     		</select>
     		
     		

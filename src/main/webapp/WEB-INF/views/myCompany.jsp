@@ -33,11 +33,11 @@
 	 		document.gongMoDetailForm.submit();
 		}
     
-    function goGongGoDetailForm(c_no){
+    function goGongGoDetailForm(g_no){
 		// 		name='boardDetailForm' 을 간 form 태그 후손 중에
 		// 		name='b_no' 가진 태그에 매개변수로 들어온 게시판의 고유번호를 삽입하기
 		//		location.replace("/boardDetailForm.do?b_no="+b_no);		>> get 방식.
-	 		$("[name='gongGoDetailForm']").find("[name='c_no']").val(c_no);
+	 		$("[name='gongGoDetailForm']").find("[name='g_no']").val(g_no);
 	 		//----------------------------------
 	 		// name='boardDetailForm' 을 가진 
 	 		// form 태그의 action 에 설정된 URL 주소로 WAS 접속해서 
@@ -46,6 +46,14 @@
 	 		//----------------------------------
 	 		document.gongGoDetailForm.submit();
 		}
+    
+    function goresumeListDetailForm(p_no,resume_no){
+    	$("[name='resumeListDetailForm']").find("[name='p_no']").val(p_no);
+    	$("[name='resumeListDetailForm']").find("[name='resume_no']").val(resume_no);
+
+    	document.resumeListDetailForm.submit();
+
+    }
     
     </script>
   
@@ -95,24 +103,28 @@
             <thead>
                 <tr>
                     <th colspan="4">입사 지원한 이력서
-                    <input type="button" value=" 전체 이력서 " class="button-right"  onClick="location.replace('/.do')">
+                    <input type="button" value=" 전체 이력서 " class="button-right"  onClick="location.replace('/resumeList.do')">
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th style="width: 20%;">공고내용</th>
+                    <th style="width: 20%;">지원받은 공고내용</th>
                     <th style="width: 20%;">지원자명</th>
                     <th style="width: 20%;">나이(만)</th>
                     <th style="width: 20%;">성별</th>
                  </tr>
                  <c:forEach var="comPertocom" items="${requestScope.gonggoPertocom}"  varStatus="status">
-		              <tr style="cursor:pointer" onClick= "resumeListDetailForm(${comPertocom.resume_no})"
+					<tr style="cursor:pointer" onClick="goresumeListDetailForm(${comPertocom.p_no},${comPertocom.resume_no});"
 		              class="<c:if test="${status.index >= 5}">hidden-row</c:if>">
 		              	<td align="center"> ${comPertocom.content}</td>
 		              	<td align="center"> ${comPertocom.name}</td>
 		              	<td align="center"> ${comPertocom.age}세</td>
 		              	<td align="center"> ${comPertocom.sex}</td>
+		                <input type="hidden" name="resume_no" value="${comPertocom.resume_no}">
+		                <input type="hidden" name="p_no" value="${comPertocom.p_no}">
+		                
+		              	
 		              </tr>
              	 </c:forEach>
             </tbody>
@@ -144,6 +156,8 @@
 		              	<td align="center"> ${gongGo.content}</td>
 		              	<td align="center"> ${gongGo.gonggoreg_date}</td>
 		              	<td align="center"> ${gongGo.opendate} ~ ${gongGo.closedate}</td>
+		              			<input type="hidden" name="g_no" value="${gongGo.g_no}">
+		              	
 		              </tr>
               </c:forEach>
                <tr id="showMoreBtn" <c:if test="${requestScope.gongMoList.size() <= 5}">style="display: none;"</c:if>>
@@ -203,7 +217,15 @@
 		<input type="hidden" name="comp_pk">
 		<input type="hidden" name="g_no">
 		</form>
-
+		
+		<form name="gongGoDetailForm" action="/gonggoDetailForm.do" method="post">
+		<input type="hidden" name="g_no" >
+		</form>
+				<form name="resumeListDetailForm" action="/resumeListDetail.do" method="post">
+		<input type="hidden" name="resume_no" >
+		<input type="hidden" name="p_no" >
+		</form>
+		
 <br>
     </div>
       

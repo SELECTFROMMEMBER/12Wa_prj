@@ -105,7 +105,7 @@
 						}
 						else{
 							alert("수정 성공입니다.")
-							location.replace("/gongMo.do")
+						    document.forms['MyCompanyForm'].submit();
 						}
 					}
 					//----------------------------------------------------------

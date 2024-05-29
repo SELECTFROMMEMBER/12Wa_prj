@@ -100,8 +100,22 @@
               	<td align="center"> ${board.subject }</td>
               	<td align="center"> ${board.reg_date }</td>
               	<td align="center"> ${board.read_count }</td>
-              	<td align="center"> ${board.category }</td>
+              	<td align="center"> 
+              		<c:if test="${board.category eq 'trade'}"> 중고게시판</c:if>
+             	 	<c:if test="${board.category eq 'main'}">  메인 공지</c:if>
+              		<c:if test="${board.category eq 'qna'}"> Q&A 게시판</c:if>
+              		<c:if test="${board.category eq 'job'}">취업준비 게시판</c:if>
+              		<c:if test="${board.category eq 'newbie'}">신입 게시판</c:if>
+              		<c:if test="${board.category eq 'board'}">전체 게시판</c:if>
+             	 	 <c:if test="${board.category eq 'interview'}">면접 게시판</c:if>
+             	 	  <c:if test="${board.category eq 'free'}">자유 게시판</c:if>
+             	 	 
+              	</td>
               	
+              	
+              	
+              	
+              
               	
               	
 <!--               </tr> -->
