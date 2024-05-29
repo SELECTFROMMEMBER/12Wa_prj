@@ -76,7 +76,6 @@
                 <a style="cursor: pointer;" href="javascript:location.replace('/gongGoRegForm.do')">공고 등록</a>
             </li>
         </c:if>
-<<<<<<< HEAD
                 <c:if test="${sessionScope.member == 'admin'}">
             <li>
                 <a style="cursor: pointer;" href="javascript:location.replace('/memberList.do')">회원 관리</a>
@@ -85,13 +84,11 @@
                 <li><a href="javascript:location.replace('/blockMemberList.do')">차단 회원 관리</a></li>
             </ul>
             </li>
-        
-=======
+        </c:if>
         <c:if test="${sessionScope.member=='admin'}">
         	<li>
         	 <a style="cursor: pointer;" href="javascript:location.replace('/resumeList.do')">이력서 열람</a>
         	</li>
->>>>>>> refs/heads/develop
         </c:if>
     </ul>
 </nav>

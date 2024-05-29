@@ -114,7 +114,7 @@ function nextSlide() {
           <h2>공지사항 내용입니다.</h2>     
           <ul>        
          <c:set var="mainCount" value="0" />
-         <c:forEach var="board" items="${requestScope.noticeList}" varStatus="status"></c:if>
+         <c:forEach var="board" items="${requestScope.noticeList}" varStatus="status">
              <c:if test="${mainCount < 5}">
                  <c:if test="${board.category eq 'main'}">
                      <c:set var="mainCount" value="${mainCount + 1}" />

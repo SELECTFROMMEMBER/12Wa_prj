@@ -13,13 +13,13 @@
 <script>
 //해당 주소로 들어갈 때 파라미터값 입력하는 함수
 function pushboardname(boardname,boardurl){
-		
-		$("form[name='freedome']").attr({"name":boardurl,"action":"/"+boardurl+".do"});
-		
-		$("[name='"+boardurl+"']").find("[name='boardname']").val(boardname);
-		
-		document.forms[boardurl].submit();
-	}
+      
+      $("form[name='freedome']").attr({"name":boardurl,"action":"/"+boardurl+".do"});
+      
+      $("[name='"+boardurl+"']").find("[name='boardname']").val(boardname);
+      
+      document.forms[boardurl].submit();
+   }
 
 //주소 
 $('document').ready(function() {
@@ -84,7 +84,7 @@ const subFields = {
     construction: ["건축", "감리·공무", "시공", "안전·품질", "기타"],
     education: ["유치원·보육·교사", "초등학교", "중·고등학교", "특수교육"],
     medical: ["간호조무사", "원무·코디네이터", "의사·의료진", "보건·의료관리"],
-    production: ["생산·제조", "조립·가공·포장", "설비·검사·품질", "공정·생산관리", "창고·물류df·유통"]
+    production: ["생산·제조", "조립·가공·포장", "설비·검사·품질", "공정·생산관리", "창고·물류·유통"]
 };
 
 const fieldSelect = document.getElementById('field');
@@ -131,8 +131,6 @@ function rate(stars) {
 
 function submitReview() {
     let reviewText = document.getElementById('review').value;
-
-	}
     if (ratingValue === 0) {
         alert("평점을 선택해주세요.");
         return;
@@ -154,24 +152,24 @@ let isLiked = false;
 let likeCount = 0;
 
 function toggleLike(button, comment_no) {
-	if(${empty sessionScope.p_no} && ${empty sessionScope.c_no}){
-		alert("로그인을 하고 이용해주세요");
-		return;
-	}
-	
+   if(${empty sessionScope.p_no} && ${empty sessionScope.c_no}){
+      alert("로그인을 하고 이용해주세요");
+      return;
+   }
+   
     var likeButton = $(button);
     var likeIcon = likeButton.find('i');
     var isLiked = likeButton.find('i').hasClass('far');
     if (isLiked) {
-    	
-    	likeButton.addClass('clicked');
-    	likeIcon.removeClass('far').addClass('fas');
-    	likeButton.css('color', 'red');  // 버튼 색상 변경
+       
+       likeButton.addClass('clicked');
+       likeIcon.removeClass('far').addClass('fas');
+       likeButton.css('color', 'red');  // 버튼 색상 변경
         likeButton.css('color', 'red !important');
         upCount(comment_no);
     } else {
-    	
-    	likeButton.removeClass('clicked');
+       
+       likeButton.removeClass('clicked');
         likeIcon.removeClass('fas').addClass('far');
         downCount(comment_no);
     }
@@ -180,419 +178,413 @@ function toggleLike(button, comment_no) {
 
 //추천수 up
 function upCount(comment_no){
-	
-	var commentObj = $("form[name='commentRegForm']");
-	commentObj.find("[name='comment_no']").val(comment_no);
-	
-	$.ajax(
-			{
-				url: "/recUpProc.do"
-				,type: "post"
-				,data: commentObj.serialize()
-				,success: function(json) {
-	        	
-	            var result = json["result"];
-	            if (result == 1) {
-	                alert("개추요~");
-	                location.reload();
-	            }
-	            else if(result==-2){
-	            	alert("이미 추천한 댓글입니다.")
-	            }
-	            else {
-	                alert("추천실패");
-	            }
-	        }
-				,error: function(){
-					alert("개추 실패! 관리자에게 문의 바람");
-				}
-			}		
-		);
+   
+   var commentObj = $("form[name='commentRegForm']");
+   commentObj.find("[name='comment_no']").val(comment_no);
+   
+   $.ajax(
+         {
+            url: "/recUpProc.do"
+            ,type: "post"
+            ,data: commentObj.serialize()
+            ,success: function(json) {
+              
+               var result = json["result"];
+               if (result == 1) {
+                   alert("개추요~");
+                   location.reload();
+               }
+               else if(result==-2){
+                  alert("이미 추천한 댓글입니다.")
+               }
+               else {
+                   alert("추천실패");
+               }
+           }
+            ,error: function(){
+               alert("개추 실패! 관리자에게 문의 바람");
+            }
+         }      
+      );
 }
 
 //추천수 down
 function downCount(comment_no){
-	var commentObj = $("form[name='commentRegForm']");
-	commentObj.find("[name='comment_no']").val(comment_no);
-	
-	$.ajax(
-			{
-				url: "/recDownProc.do"
-				,type: "post"
-				,data: commentObj.serialize()
-				,success: function(json) {
-	        	
-	            var result = json["result"];
-	            if (result == 1) {
-	                alert("비추요~");
-	                location.reload();
-	            } else {
-	                alert("추천해제실패");
-	            }
-	        }
-				,error: function(){
-					alert("검색 실패! 관리자에게 문의 바람");
-				}
-			}		
-		);
+   var commentObj = $("form[name='commentRegForm']");
+   commentObj.find("[name='comment_no']").val(comment_no);
+   
+   $.ajax(
+         {
+            url: "/recDownProc.do"
+            ,type: "post"
+            ,data: commentObj.serialize()
+            ,success: function(json) {
+              
+               var result = json["result"];
+               if (result == 1) {
+                   alert("비추요~");
+                   location.reload();
+               } else {
+                   alert("추천해제실패");
+               }
+           }
+            ,error: function(){
+               alert("검색 실패! 관리자에게 문의 바람");
+            }
+         }      
+      );
 }
 
 
 
 
 //게시판 비동기 검색 공용함수
-	function search(community){
-		var boardSearchFormObj = $("[name='boardSearchForm']");
-		
-		var keywordObj = boardSearchFormObj.find(".keyword");
+   function search(community){
+      var boardSearchFormObj = $("[name='boardSearchForm']");
+      
+      var keywordObj = boardSearchFormObj.find(".keyword");
 
-		var keyword = keywordObj.val();
-		
-		if(typeof(keyword)!='string'){ keyword=""; }
-		
-		keyword = $.trim(keyword);
-		keywordObj.val(keyword);
+      var keyword = keywordObj.val();
+      
+      if(typeof(keyword)!='string'){ keyword=""; }
+      
+      keyword = $.trim(keyword);
+      keywordObj.val(keyword);
 
-		boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val());
-		
-		if(community=="joongGo"){
-			 var tradeType = $("input[name='tradetype']:checked").val();
-		        boardSearchFormObj.find(".tradetype").val(tradeType);	
-		        }
-	
-		$.ajax(
-			{
-				url: "/"+community+".do"
-				,type: "post"
-				,data: boardSearchFormObj.serialize()
-				,success: function(responseHtml){
-					var obj = $(responseHtml);
-					$("."+community+"ListDiv").html(
-							obj.find("."+community+"ListDiv").html()
-					);
-					$(".pagingNos").html(
-							obj.find(".pagingNos").html()
-					);
-				}
-				,error: function(){
-					alert(1123)
-					alert("검색 실패! 관리자에게 문의 바람");
-				}
-			}		
-		);
+      boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val());
+      
+      if(community=="joongGo"){
+          var tradeType = $("input[name='tradetype']:checked").val();
+              boardSearchFormObj.find(".tradetype").val(tradeType);   
+              }
+   
+      $.ajax(
+         {
+            url: "/"+community+".do"
+            ,type: "post"
+            ,data: boardSearchFormObj.serialize()
+            ,success: function(responseHtml){
+               var obj = $(responseHtml);
+               $("."+community+"ListDiv").html(
+                     obj.find("."+community+"ListDiv").html()
+               );
+               $(".pagingNos").html(
+                     obj.find(".pagingNos").html()
+               );
+            }
+            ,error: function(){
+               alert(1123)
+               alert("검색 실패! 관리자에게 문의 바람");
+            }
+         }      
+      );
 
 
-		}
+      }
 
 //--------------------------------------------------------------------------
 //게시판 상세글 들어가기
 //--------------------------------------------------------------------------
-	function goBoardDetailForm(b_no,boardurl,boardname,comment,sort){
-	
-		//boardSideCategori 에 있는 <form name="freedomeDetailForm"> 의 name과 action값을 매개변수로 들어온 boarurl과 boardname을 사용하여 변경
-		$("form[name='freedomeDetailForm']").attr({"name":boardurl+"DetailForm","action":"/"+boardurl+"DetailForm.do"});
-	
-		//name이 b_no인 히든태그에 b_no값을 value로 저장
-		$("[name='"+boardurl+"DetailForm']").find("[name='Detail_b_no']").val(b_no);
-		
-		//name이 table인 히든태그에 table을 value로 저장
- 		$("[name='"+boardurl+"DetailForm']").find("[name='Detail_board']").val(boardname);
+   function goBoardDetailForm(b_no,boardurl,boardname,comment,sort){
+   
+      //boardSideCategori 에 있는 <form name="freedomeDetailForm"> 의 name과 action값을 매개변수로 들어온 boarurl과 boardname을 사용하여 변경
+      $("form[name='freedomeDetailForm']").attr({"name":boardurl+"DetailForm","action":"/"+boardurl+"DetailForm.do"});
+   
+      //name이 b_no인 히든태그에 b_no값을 value로 저장
+      $("[name='"+boardurl+"DetailForm']").find("[name='Detail_b_no']").val(b_no);
+      
+      //name이 table인 히든태그에 table을 value로 저장
+       $("[name='"+boardurl+"DetailForm']").find("[name='Detail_board']").val(boardname);
 
-		//댓글테이블명 입력하기
-		$("[name='"+boardurl+"DetailForm']").find("[name='Comment_board']").val("comment_"+comment);
-		//댓글 sort
-		$("[name='"+boardurl+"DetailForm']").find("[name='comment_sort']").val(sort);
-		
-		if(${sessionScope.member=='person'}){			
-			$("[name='"+boardurl+"DetailForm']").find("[name='p_no']").val(${sessionScope.p_no});
-		}
-		if(${sessionScope.member=='company'}){
-			$("[name='"+boardurl+"DetailForm']").find("[name='c_no']").val(${sessionScope.c_no});			
-		}
- 		
-		//히든태그에 저장된 값을 파라미터값으로 가지고 form 네임값이 board+"DetailForm"을 가진 태그에 action에 지정된 주소로 이동
- 		document.forms[boardurl+"DetailForm"].submit();
+      //댓글테이블명 입력하기
+      $("[name='"+boardurl+"DetailForm']").find("[name='Comment_board']").val("comment_"+comment);
+      //댓글 sort
+      $("[name='"+boardurl+"DetailForm']").find("[name='comment_sort']").val(sort);
+      
+      if(${sessionScope.member=='person'}){         
+         $("[name='"+boardurl+"DetailForm']").find("[name='p_no']").val(${sessionScope.p_no});
+      }
+      if(${sessionScope.member=='company'}){
+         $("[name='"+boardurl+"DetailForm']").find("[name='c_no']").val(${sessionScope.c_no});         
+      }
+       
+      //히든태그에 저장된 값을 파라미터값으로 가지고 form 네임값이 board+"DetailForm"을 가진 태그에 action에 지정된 주소로 이동
+       document.forms[boardurl+"DetailForm"].submit();
 }
 
 //--------------------------------------------------------------------------
 //게시판 수정,삭제 들어가기
 //--------------------------------------------------------------------------
-	function goUpDelForm(b_no, boardurl, boardname){
-		//boardSideCategori 에 있는 <form name="freedomeDetailForm"> 의 name과 action값을 매개변수로 들어온 boarurl과 boardname을 사용하여 변경
-		$("form[name='freedomeUpDelForm']").attr({"name":boardurl+"UpDelForm","action":"/"+boardurl+"UpDelForm.do"});
-	
-		//name이 b_no인 히든태그에 b_no값을 value로 저장
-		$("[name='"+boardurl+"UpDelForm']").find("[name='UpDel_b_no']").val(b_no);
-		
-		//name이 table인 히든태그에 table을 value로 저장
- 		$("[name='"+boardurl+"UpDelForm']").find("[name='UpDel_board']").val(boardname);
- 		
-		//히든태그에 저장된 값을 파라미터값으로 가지고 form 네임값이 board+"DetailForm"을 가진 태그에 action에 지정된 주소로 이동
- 		document.forms[boardurl+"UpDelForm"].submit();
+   function goUpDelForm(b_no, boardurl, boardname){
+      //boardSideCategori 에 있는 <form name="freedomeDetailForm"> 의 name과 action값을 매개변수로 들어온 boarurl과 boardname을 사용하여 변경
+      $("form[name='freedomeUpDelForm']").attr({"name":boardurl+"UpDelForm","action":"/"+boardurl+"UpDelForm.do"});
+   
+      //name이 b_no인 히든태그에 b_no값을 value로 저장
+      $("[name='"+boardurl+"UpDelForm']").find("[name='UpDel_b_no']").val(b_no);
+      
+      //name이 table인 히든태그에 table을 value로 저장
+       $("[name='"+boardurl+"UpDelForm']").find("[name='UpDel_board']").val(boardname);
+       
+      //히든태그에 저장된 값을 파라미터값으로 가지고 form 네임값이 board+"DetailForm"을 가진 태그에 action에 지정된 주소로 이동
+       document.forms[boardurl+"UpDelForm"].submit();
 }
 
-	//--------------------------------------------------------------------------
-	//게시판 수정하기
-	//--------------------------------------------------------------------------
-	function checkboardUpForm(boardname,boardurl){
+   //--------------------------------------------------------------------------
+   //게시판 수정하기
+   //--------------------------------------------------------------------------
+   function checkboardUpForm(boardname,boardurl){
 
-	var formObj  = $("[name='boardUpDelForm']");
-	var pwdObj   = formObj.find(".pwd");
-	
-	if( pwdObj.val().trim().length==0 ){
-		alert("암호를 입력하십시요");
-		pwdObj.val("");
-		return;
-	}
-	
-	if( confirm("정말 수정하시겠습니까?")==false ){ return; }
+   var formObj  = $("[name='boardUpDelForm']");
+   var pwdObj   = formObj.find(".pwd");
+   
+   if( pwdObj.val().trim().length==0 ){
+      alert("암호를 입력하십시요");
+      pwdObj.val("");
+      return;
+   }
+   
+   if( confirm("정말 수정하시겠습니까?")==false ){ return; }
 
-	$.ajax(
-		{ 
-			url    : "/boardUpProc.do"
-			,type  : "post"
-			,data  : formObj.serialize( )
-			,success : function(json){
-				var result = json["result"];
-				if(result==-1){
-					alert("암호가 틀립니다.");
-					pwdObj.val("");
-				}
-				
-				else if(result==-2){
-					alert("삭제된 게시글 입니다.");
-					pushboardname(boardname,boardurl);
-				}
-				else if(result==0){
-					alert("수정 실패입니다.");
-				}
-				else{
-					alert("게시글 수정 성공입니다.");
-					pushboardname(boardname,boardurl);
-				}
-				
-			}
-			,error : function(){
-				alert("수정 실패! 관리자에게 문의 바람니다.");
-			}
-		}
-	);
+   $.ajax(
+      { 
+         url    : "/boardUpProc.do"
+         ,type  : "post"
+         ,data  : formObj.serialize( )
+         ,success : function(json){
+            var result = json["result"];
+            if(result==-1){
+               alert("암호가 틀립니다.");
+               pwdObj.val("");
+            }
+            
+            else if(result==-2){
+               alert("삭제된 게시글 입니다.");
+               pushboardname(boardname,boardurl);
+            }
+            else if(result==0){
+               alert("수정 실패입니다.");
+            }
+            else{
+               alert("게시글 수정 성공입니다.");
+               pushboardname(boardname,boardurl);
+            }
+            
+         }
+         ,error : function(){
+            alert("수정 실패! 관리자에게 문의 바람니다.");
+         }
+      }
+   );
 }
 
-	//--------------------------------------------------------------------------
-	//게시판 삭제하기
-	//--------------------------------------------------------------------------
-	function checkboardDelForm(boardname,boardurl){
-	//----------------------------------------------
-	var formObj    = $("[name='boardUpDelForm']");
-	var pwdObj     = formObj.find(".pwd");
-	//----------------------------------------------
-	if( pwdObj.val().trim().length==0 ){
-		alert("암호를 입력하십시요");
-		pwdObj.val("");
-		return;
-	}
-	if( confirm("정말 삭제 하시겠습니까?")==false ){ return; }
+   //--------------------------------------------------------------------------
+   //게시판 삭제하기
+   //--------------------------------------------------------------------------
+   function checkboardDelForm(boardname,boardurl){
+   //----------------------------------------------
+   var formObj    = $("[name='boardUpDelForm']");
+   var pwdObj     = formObj.find(".pwd");
+   //----------------------------------------------
+   if( pwdObj.val().trim().length==0 ){
+      alert("암호를 입력하십시요");
+      pwdObj.val("");
+      return;
+   }
+   if( confirm("정말 삭제 하시겠습니까?")==false ){ return; }
 
-	$.ajax(
-		{ 
-			url    : "/boardDelProc.do"
-			,type  : "post"
-			,data  : formObj.serialize( )
-			,success : function(json){
-				var result = json["result"];
-				if(result==-1){
-					alert("암호가 틀립니다.");
-				}
-				else if(result==0){
-					alert("삭제된 글 입니다.")
-					pushboardname(boardname,boardurl);
-				}
-				else{
-					alert("게시글 삭제 성공입니다.")
-					pushboardname(boardname,boardurl);
-				}
-			}
-			,error : function(){
-				alert("삭제 실패! 관리자에게 문의 바람니다.");
-			}
-		}
-	);
+   $.ajax(
+      { 
+         url    : "/boardDelProc.do"
+         ,type  : "post"
+         ,data  : formObj.serialize( )
+         ,success : function(json){
+            var result = json["result"];
+            if(result==-1){
+               alert("암호가 틀립니다.");
+            }
+            else if(result==0){
+               alert("삭제된 글 입니다.")
+               pushboardname(boardname,boardurl);
+            }
+            else{
+               alert("게시글 삭제 성공입니다.")
+               pushboardname(boardname,boardurl);
+            }
+         }
+         ,error : function(){
+            alert("삭제 실패! 관리자에게 문의 바람니다.");
+         }
+      }
+   );
 }
 
-	//--------------------------------------------------------------------------
-	//게시판 등록하기
-	//--------------------------------------------------------------------------
+   //--------------------------------------------------------------------------
+   //게시판 등록하기
+   //--------------------------------------------------------------------------
 function checkboardRegForm(boardname,boardurl) {
-		if(${sessionScope.is_block=='block'}){
-			alert('게시판 이용이 제한된 회원입니다. 고객센터에 문의바랍니다.')
-			return;
-		}
-	    var formObj = $("[name='boardRegForm']");
-	    
-	    
-	    $.ajax({
-	    	
-	        url: "/boardRegProc.do",
-	        
-	        type: "post",
-	        
-	        data: formObj.serialize(),
-	        
-	        success: function(json) {
-	        	
-	            var result = json["result"];
-	            if (result == 1) {
-	                alert("게시판 작성 성공입니다.");
-	                pushboardname(boardname,boardurl);
-	            } else {
-	                alert("게시판 작성 실패입니다. 관리자에게 문의 바람!");
-	            }
-	        }
-	        ,error: function() {
-	            alert("작성 실패! 관리자에게 문의 바람니다.");
-	        }
-	    });
-	}
-	
-	
-	//---------------------------------------------------------
-	//커뮤니티 게시판 댓글 입력하기
-	//---------------------------------------------------------
-	function checkCommentReg(){
-	 	var commentObj = $("form[name='commentRegForm']");
-	 	
-		if(${sessionScope.is_block=='block'}){
-			alert('게시판 이용이 제한된 회원입니다. 고객센터에 문의바랍니다.')
-			return;
-		}
-	 	
-	 	
-	 	if( 
-	 			commentObj.find(".content").val().trim().length==0 
-	 			||
-	 			commentObj.find(".content").val().trim().length>20 
-	 	){
-	 		alert("댓글은 임의 문자 1~20자 입력해야합니다.");
-	 		return;
-	 	}
-	 	if( confirm("댓글을 입력하시겠습니까?")==false ){ return; }
-		$.ajax(
-				{ 
-					url    : "/commentRegProc.do"
-					,type  : "post"
-					,data  : commentObj.serialize( )
-					,success : function(json){
-						var result = json["result"];
-						if(result==1){
-							alert("댓글 입력 성공입니다.");
-							location.reload(); 
-						}
-						
-						else{
-							alert("댓글 입력 실패입니다. 관리자에게 문의 바람!");
-						}
-					}
-					,error : function(){
-						alert("입력 실패! 관리자에게 문의 바람니다.");
-					}
-				}
-			);
-	}
-	
-	
-	function showMoreComments() {
-		//hidden-row를 가지는 모든 태그의 디스플레이 스타일을 table-row로 설정한다. 즉 화면에 표시
-	    $(".hidden-row").css("display", "table-row");
-		//showMoreBtn을 id로 가지는 요소를 숨긴다.
-	    $("#showMoreBtn").hide();
-	}
-	
-	
-	//댓글 삭제
-	function del_comment(comment_no){
-		 	var commentObj = $("form[name='commentRegForm']");
-		 	
-		 	commentObj.find("[name='comment_no']").val(comment_no);
-		 	
-		 	if( confirm("정말 삭제할것임까~?")==false ){ return; }
-		 	
-			$.ajax(
-					{ 
-						url    : "/delCommentProc.do"
-						,type  : "post"
-						,data  : commentObj.serialize( )
-						,success : function(json){
-							var result = json["result"];
-							if(result==1){
-								alert("댓글 삭제 성공입니다.");
-								location.reload(); 
-							}
-							
-							else{
-								alert(result)
-								alert("댓글 삭제 실패입니다. 관리자에게 문의 바람!");
-							}
-						}
-						,error : function(){
-							alert("입력 실패! 관리자에게 문의 바람니다.");
-						}
-					}
-				);
-		}
-	
-	
-	//댓글 수정
-	function up_comment(comment_no){
-		 	var commentObj = $("form[name='commentRegForm']");
-		 	var updatecomment = $("textarea[name='updateContent']").val();
-		 	
-		 	commentObj.find("[name='updateComment']").val(updatecomment);
-		 	commentObj.find("[name='comment_no']").val(comment_no);
-		 	
-		 	
-// 		 	if( 
-// 		 			updatecomment.val().trim().length==0 
-// 		 			||
-// 		 			updatecomment.val().trim().length>20 
-// 		 	){
-// 		 		alert("댓글은 임의 문자 1~20자 입력해야합니다.");
-// 		 		return;
-// 		 	}
-		 	if( confirm("정말 수정할것임까~?")==false ){ return; }
-			$.ajax(
-					{ 
-						url    : "/upCommentProc.do"
-						,type  : "post"
-						,data  : commentObj.serialize( )
-						,success : function(json){
-							var result = json["result"];
-							if(result==1){
-								alert("댓글 수정 성공입니다.");
-								location.reload(); 
-							}
-							
-							else{
-								alert("댓글 수정 실패입니다. 관리자에게 문의 바람!");
-							}
-						}
-						,error : function(){
-							alert("입력 실패! 관리자에게 문의 바람니다.");
-						}
-					}
-				);
-		}
-	
-	//댓글 수정 시 textarea 추가
-	function updateForm(comment_no,content){
-			$("#comment"+comment_no).html(
-					"<textarea  style='width:100%; height:50%;' rows='3'  name='updateContent' class='content'>"
-					+content+
-					"</textarea><input type='button' value='수정' onClick='up_comment("+comment_no+")'>"+
-					"<input type='button' value='삭제' onClick='del_comment("+comment_no+")'>")
-		}
-	// 관리자 게시판 게시글 다중 삭제
-	function deleteSelectedPosts(boardname) {
+      
+       var formObj = $("[name='boardRegForm']");
+       
+       alert( formObj.serialize());
+       
+       $.ajax({
+          
+           url: "/boardRegProc.do",
+           
+           type: "post",
+           
+           data: formObj.serialize(),
+           
+           success: function(json) {
+              
+               var result = json["result"];
+               if (result == 1) {
+                   alert("게시판 작성 성공입니다.");
+                   pushboardname(boardname,boardurl);
+               } else {
+                   alert("게시판 작성 실패입니다. 관리자에게 문의 바람!");
+               }
+           }
+           ,error: function() {
+               alert("작성 실패! 관리자에게 문의 바람니다.");
+           }
+       });
+   }
+   
+   
+   //---------------------------------------------------------
+   //커뮤니티 게시판 댓글 입력하기
+   //---------------------------------------------------------
+   function checkCommentReg(){
+       var commentObj = $("form[name='commentRegForm']");
+       
+       
+    
+       if( 
+             commentObj.find(".content").val().trim().length==0 
+             ||
+             commentObj.find(".content").val().trim().length>20 
+       ){
+          alert("댓글은 임의 문자 1~20자 입력해야합니다.");
+          return;
+       }
+       if( confirm("댓글을 입력하시겠습니까?")==false ){ return; }
+      $.ajax(
+            { 
+               url    : "/commentRegProc.do"
+               ,type  : "post"
+               ,data  : commentObj.serialize( )
+               ,success : function(json){
+                  var result = json["result"];
+                  if(result==1){
+                     alert("댓글 입력 성공입니다.");
+                     location.reload(); 
+                  }
+                  
+                  else{
+                     alert("댓글 입력 실패입니다. 관리자에게 문의 바람!");
+                  }
+               }
+               ,error : function(){
+                  alert("입력 실패! 관리자에게 문의 바람니다.");
+               }
+            }
+         );
+   }
+   
+   
+   function showMoreComments() {
+      //hidden-row를 가지는 모든 태그의 디스플레이 스타일을 table-row로 설정한다. 즉 화면에 표시
+       $(".hidden-row").css("display", "table-row");
+      //showMoreBtn을 id로 가지는 요소를 숨긴다.
+       $("#showMoreBtn").hide();
+   }
+   
+   
+   //댓글 삭제
+   function del_comment(comment_no){
+          var commentObj = $("form[name='commentRegForm']");
+          
+          commentObj.find("[name='comment_no']").val(comment_no);
+          
+          if( confirm("정말 삭제할것임까~?")==false ){ return; }
+          
+         $.ajax(
+               { 
+                  url    : "/delCommentProc.do"
+                  ,type  : "post"
+                  ,data  : commentObj.serialize( )
+                  ,success : function(json){
+                     var result = json["result"];
+                     if(result==1){
+                        alert("댓글 삭제 성공입니다.");
+                        location.reload(); 
+                     }
+                     
+                     else{
+                        alert(result)
+                        alert("댓글 삭제 실패입니다. 관리자에게 문의 바람!");
+                     }
+                  }
+                  ,error : function(){
+                     alert("입력 실패! 관리자에게 문의 바람니다.");
+                  }
+               }
+            );
+      }
+   
+   
+   //댓글 수정
+   function up_comment(comment_no){
+          var commentObj = $("form[name='commentRegForm']");
+          var updatecomment = $("textarea[name='updateContent']").val();
+          
+          commentObj.find("[name='updateComment']").val(updatecomment);
+          commentObj.find("[name='comment_no']").val(comment_no);
+          
+          
+//           if( 
+//                 updatecomment.val().trim().length==0 
+//                 ||
+//                 updatecomment.val().trim().length>20 
+//           ){
+//              alert("댓글은 임의 문자 1~20자 입력해야합니다.");
+//              return;
+//           }
+          if( confirm("정말 수정할것임까~?")==false ){ return; }
+         $.ajax(
+               { 
+                  url    : "/upCommentProc.do"
+                  ,type  : "post"
+                  ,data  : commentObj.serialize( )
+                  ,success : function(json){
+                     var result = json["result"];
+                     if(result==1){
+                        alert("댓글 수정 성공입니다.");
+                        location.reload(); 
+                     }
+                     
+                     else{
+                        alert("댓글 수정 실패입니다. 관리자에게 문의 바람!");
+                     }
+                  }
+                  ,error : function(){
+                     alert("입력 실패! 관리자에게 문의 바람니다.");
+                  }
+               }
+            );
+      }
+   
+   //댓글 수정 시 textarea 추가
+   function updateForm(comment_no,content){
+         $("#comment"+comment_no).html(
+               "<textarea  style='width:100%; height:50%;' rows='3'  name='updateContent' class='content'>"
+               +content+
+               "</textarea><input type='button' value='수정' onClick='up_comment("+comment_no+")'>"+
+               "<input type='button' value='삭제' onClick='del_comment("+comment_no+")'>")
+      }
+   // 관리자 게시판 게시글 다중 삭제
+   function deleteSelectedPosts(boardname) {
     var checkboxes = $('input[type="checkbox"]');
     var selectedPosts = [];
     checkboxes.each(function() {
@@ -609,7 +601,7 @@ function checkboardRegForm(boardname,boardurl) {
             data: JSON.stringify({ b_noList: selectedPosts, boardname:boardname }), // selectedPosts는 배열
             contentType: "application/json", // JSON 데이터를 전송할 때는 content type을 명시
             success: function(response) {
-            	alert ('게시글이 삭제되었습니다.')
+               alert ('게시글이 삭제되었습니다.')
                 // 성공적으로 삭제되었으므로 페이지를 새로고침합니다.
                 location.reload();
             },
@@ -621,5 +613,5 @@ function checkboardRegForm(boardname,boardurl) {
         alert("선택된 게시글이 없습니다.");
     }
 }
-	
+   
 </script>

@@ -460,29 +460,7 @@ function searchWithMultiSort(){
                </select>
             </p>
             <br>
-<<<<<<< HEAD
-              <div class="container">
-        <b>사내 복지</b><br>
-        <div class="welfare-options">
-            <label><input type="checkbox" name="welfare" value="4대보험가입" id="1"> 4대보험가입</label>
-            <label><input type="checkbox" name="welfare" value="연금가입" id="2"> 연금가입</label>
-            <label><input type="checkbox" name="welfare" value="보너스 및 인센티브" id="3"> 보너스 및 인센티브</label>
-            <label><input type="checkbox" name="welfare" value="수당제도" id="4"> 수당제도</label>
-            <label><input type="checkbox" name="welfare" value="사내동호회 운영" id="5"> 사내동호회 운영</label>
-            <label><input type="checkbox" name="welfare" value="경조사 지원" id="6"> 경조사 지원</label>
-            <label><input type="checkbox" name="welfare" value="출산/육아 지원제도" id="7"> 출산/육아 지원제도</label>
-            <label><input type="checkbox" name="welfare" value="사무용품 지원" id="8"> 사무용품 지원</label>
-            <label><input type="checkbox" name="welfare" value="자유복장" id="9"> 자유복장</label>
-            <label><input type="checkbox" name="welfare" value="식대제공" id="10"> 식대제공</label>
-            <label><input type="checkbox" name="welfare" value="기숙사 및 사택 제공" id="11"> 기숙사 및 사택 제공</label>
-            <label><input type="checkbox" name="welfare" value="차량유류비 지급" id="12"> 차량유류비 지급</label>
-            <label><input type="checkbox" name="welfare" value="통근버스 운행" id="13"> 통근버스 운행</label>
-            <label><input type="checkbox" name="welfare" value="교통비 지급" id="14"> 교통비 지급</label>
-            <label><input type="checkbox" name="welfare" value="유연근무제" id="15"> 유연근무제</label>
-            <label><input type="checkbox" name="welfare" value="각종 행사" id="16"> 각종 행사</label>
-        </div>
-    </div>
-=======
+
             <div class="container">
 		        <b>사내 복지</b><br>
 		        <div class="welfare-options">
@@ -504,7 +482,6 @@ function searchWithMultiSort(){
 		            <label><input type="checkbox" name="welfare" value="각종 행사" id="16"> 각종 행사</label>
 		        </div>
 		    </div>
->>>>>>> refs/heads/develop
              <div>
              <br>
              	
@@ -599,30 +576,7 @@ function searchWithMultiSort(){
 				</tr>
                   <c:forEach var="board" items="${requestScope.companyList }"
                      varStatus="status">
-<<<<<<< HEAD
 
-
-				<tr style="cursor: pointer"
-					onClick="gocompanyListDetailForm(${board.c_no});">
-					<td>
-						<div class="company-info">
-							<div class="row">
-								<span class="label">&lt기업명&gt</span> <span class="value">${board.name}</span>
-							</div>
-							<div class="row">
-								<span class="label">&lt업종&gt</span> <span class="value">${board.indus}</span>
-							</div>
-							<div class="row">
-								<span class="label">&lt매출&gt</span> <span class="value">${board.sales}</span>
-							</div>
-							<div class="row">
-								<span class="label">&lt평균 연봉&gt</span> <span class="value">${board.sal_avg}</span>
-							</div>
-							<div class="row">
-								<span class="label">&lt주소&gt</span> <span class="value">${board.addr}</span>
-							</div>
-						</div>
-=======
                      					           
                      
                      <tr style="cursor: pointer"
@@ -638,24 +592,7 @@ function searchWithMultiSort(){
                               &nbsp;&nbsp;&nbsp; &lt주소&gt &nbsp;&nbsp;&nbsp;${board.addr}<br>
                            </div>
                           </td>
-                          <td align="center">
-	                          <div class="star-container">
-								<p class="star">★★★★★</p><br>
-								<span class="star-grade" ><b>${board.star_avg}</b></span>
-							 </div>
-                          </td>
-                          <td>
-                              <c:choose>
-								<c:when test="${likeNoList.contains(board.c_no)}">
-									<i class="fas fa-heart"></i>
-								</c:when>
-								<c:otherwise>
-									<i class="far fa-heart"></i>
-								</c:otherwise>
-							</c:choose>
-							${board.rec_count}
->>>>>>> refs/heads/develop
-					</td>
+
             <td align="center">
                 <div class="star-container">
                     <div class="star" id="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>

@@ -34,20 +34,7 @@
       }
     
     function goGongGoDetailForm(g_no){
-<<<<<<< HEAD
-		// 		name='boardDetailForm' 을 간 form 태그 후손 중에
-		// 		name='b_no' 가진 태그에 매개변수로 들어온 게시판의 고유번호를 삽입하기
-		//		location.replace("/boardDetailForm.do?b_no="+b_no);		>> get 방식.
-	 		$("[name='gongGoDetailForm']").find("[name='g_no']").val(g_no);
-	 		//----------------------------------
-	 		// name='boardDetailForm' 을 가진 
-	 		// form 태그의 action 에 설정된 URL 주소로 WAS 접속해서 
-	 		// 얻은 새 HTML 를 웹브라우저 열기.
-	 		// 즉 화면 이동하기.
-	 		//----------------------------------
-	 		document.gongGoDetailForm.submit();
-		}
-=======
+
       //       name='boardDetailForm' 을 간 form 태그 후손 중에
       //       name='b_no' 가진 태그에 매개변수로 들어온 게시판의 고유번호를 삽입하기
       //      location.replace("/boardDetailForm.do?b_no="+b_no);      >> get 방식.
@@ -68,7 +55,6 @@
        document.resumeListDetailForm.submit();
 
     }
->>>>>>> refs/heads/develop
     
     function goresumeListDetailForm(p_no,resume_no){
     	$("[name='resumeListDetailForm']").find("[name='p_no']").val(p_no);
@@ -138,20 +124,7 @@
                     <th style="width: 20%;">성별</th>
                  </tr>
                  <c:forEach var="comPertocom" items="${requestScope.gonggoPertocom}"  varStatus="status">
-<<<<<<< HEAD
-					<tr style="cursor:pointer" onClick="goresumeListDetailForm(${comPertocom.p_no},${comPertocom.resume_no});"
-		              class="<c:if test="${status.index >= 5}">hidden-row</c:if>">
-		              	<td align="center"> ${comPertocom.content}</td>
-		              	<td align="center"> ${comPertocom.name}</td>
-		              	<td align="center"> ${comPertocom.age}세</td>
-		              	<td align="center"> ${comPertocom.sex}</td>
-		                <input type="hidden" name="resume_no" value="${comPertocom.resume_no}">
-		                <input type="hidden" name="p_no" value="${comPertocom.p_no}">
-		                
-		              	
-		              </tr>
-             	 </c:forEach>
-=======
+
                <tr style="cursor:pointer" onClick="goresumeListDetailForm(${comPertocom.p_no},${comPertocom.resume_no});"
                     class="<c:if test="${status.index >= 5}">hidden-row</c:if>">
                        <td align="center"> ${comPertocom.content}</td>
@@ -164,7 +137,6 @@
                        
                     </tr>
                  </c:forEach>
->>>>>>> refs/heads/develop
             </tbody>
         </table>
 
@@ -188,17 +160,7 @@
                     <th style="width: 15%;">공고 기간</th>
                 </tr>
                 <c:forEach var="gongGo" items="${requestScope.gongGoList}"  varStatus="status">
-<<<<<<< HEAD
-		              <tr style="cursor:pointer" onClick= "goGongGoDetailForm(${gongGo.g_no})"
-		              class="<c:if test="${status.index >= 5}">hidden-row</c:if>">
-		              	<td align="center"> ${status.index+1}</td>
-		              	<td align="center"> ${gongGo.content}</td>
-		              	<td align="center"> ${gongGo.gonggoreg_date}</td>
-		              	<td align="center"> ${gongGo.opendate} ~ ${gongGo.closedate}</td>
-		              			<input type="hidden" name="g_no" value="${gongGo.g_no}">
-		              	
-		              </tr>
-=======
+
                     <tr style="cursor:pointer" onClick= "goGongGoDetailForm(${gongGo.g_no})"
                     class="<c:if test="${status.index >= 5}">hidden-row</c:if>">
                        <td align="center"> ${status.index+1}</td>
@@ -208,7 +170,6 @@
                              <input type="hidden" name="g_no" value="${gongGo.g_no}">
                        
                     </tr>
->>>>>>> refs/heads/develop
               </c:forEach>
                <tr id="showMoreBtn" <c:if test="${requestScope.gongMoList.size() <= 5}">style="display: none;"</c:if>>
                 <td colspan="4" style="text-align: center;" onclick="showMoreComments()">
@@ -263,21 +224,7 @@
             <input type="hidden" name="c_no"  value='${sessionScope.c_no}'>
       </form>
 
-<<<<<<< HEAD
-		<form name="gongMoDetailForm" action="/gongMoDetailForm.do" method="post">
-		<input type="hidden" name="comp_pk">
-		<input type="hidden" name="g_no">
-		</form>
-		
-		<form name="gongGoDetailForm" action="/gonggoDetailForm.do" method="post">
-		<input type="hidden" name="g_no" >
-		</form>
-				<form name="resumeListDetailForm" action="/resumeListDetail.do" method="post">
-		<input type="hidden" name="resume_no" >
-		<input type="hidden" name="p_no" >
-		</form>
-		
-=======
+
       <form name="gongMoDetailForm" action="/gongMoDetailForm.do" method="post">
       <input type="hidden" name="comp_pk">
       <input type="hidden" name="g_no">
@@ -291,7 +238,6 @@
       <input type="hidden" name="p_no" >
       </form>
       
->>>>>>> refs/heads/develop
 <br>
     </div>
       

@@ -68,11 +68,8 @@
                    
                   </c:if>
           </table>
-<<<<<<< HEAD
-                   	 <input type="hidden" value="COMMENT_INTERVIEWBOARD" name="table" class="table"> 
-=======
+
                    	 <input type="hidden" value="comment_interviewboard" name="table" class="table"> 
->>>>>>> refs/heads/develop
                   	 <input type="hidden" value="${sessionScope.p_no }" name="p_no" class="p_no"> 
                   	 <input type="hidden" value="${boardDTO.b_no }" name="b_no" class="b_no">
                   	 <input type="hidden" name="commentSort" class="commentSort" value="">
