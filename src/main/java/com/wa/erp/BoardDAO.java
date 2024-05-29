@@ -139,6 +139,26 @@ public interface BoardDAO {
 
 		List<BoardDTO> getMainNoticeList(BoardSearchDTO boardSearchDTO);
 
+		
+		
+		
+		
+		
+// 관리자 
+		int getMemberListAllCnt(BoardSearchDTO boardSearchDTO);
+
+		int getMemberListCnt(BoardSearchDTO boardSearchDTO);
+
+		List<BoardDTO> getMemberList(BoardSearchDTO boardSearchDTO);
+
+		int getBlockMemberListCnt(BoardSearchDTO boardSearchDTO);
+
+		int getBlockMemberListAllCnt(BoardSearchDTO boardSearchDTO);
+
+		List<BoardDTO> getBlockMemberList(BoardSearchDTO boardSearchDTO);
+		
+		
+	//통계
 		List<BoardDTO> getSalaryData();
 
 		List<BoardDTO> getFieldGonggoData();

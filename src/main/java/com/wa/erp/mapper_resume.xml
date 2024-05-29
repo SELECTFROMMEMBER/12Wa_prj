@@ -297,6 +297,7 @@ select
                 and ( 
                upper(addr) like upper('%${gugun}%')
                   )
+
          </if>
          <if test="sex!=null and sex.length()>0 and sex!=''">
          and p.sex=#{sex}

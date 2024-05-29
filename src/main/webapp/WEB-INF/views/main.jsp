@@ -12,6 +12,7 @@ function gonoticeDetailForm(n_no){
      document.noticeDetailForm.submit();
  
 }
+
 </script>
 </head>
 <body>

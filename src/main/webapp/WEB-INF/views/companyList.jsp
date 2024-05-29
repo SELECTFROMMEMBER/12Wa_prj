@@ -27,13 +27,13 @@ $(document).ready(function() {
             // 두 번째 셀렉트 박스의 옵션 변경
             $('#multisort2 option[value!=""]').remove();
             if (value !== 'sal_avg desc') {
-                $('#multisort2').append('<option value=",sal_avg desc">평균 연봉</option>');
+                $('#multisort2').append('<option value=",sal_avg desc">평균 연봉▼</option>');
             }
             if (value !== 'sales desc') {
-                $('#multisort2').append('<option value=",sales desc">매출</option>');
+                $('#multisort2').append('<option value=",sales desc">매출▼</option>');
             }
             if (value !== '7 desc') {
-                $('#multisort2').append('<option value=",7 desc">별점</option>');
+                $('#multisort2').append('<option value=",7 desc">별점▼</option>');
             }
         } else {
             // 선택되지 않으면 나머지 셀렉트 박스를 비활성화하고 초기화
@@ -53,45 +53,13 @@ $(document).ready(function() {
             // 세 번째 셀렉트 박스의 옵션 변경
             $('#multisort3 option[value!=""]').remove();
             if (value !== ',sal_avg desc' && $('#multisort1').val()!=='sal_avg desc') {
-                $('#multisort3').append('<option value=",sal_avg desc">평균 연봉</option>');
+                $('#multisort3').append('<option value=",sal_avg desc">평균 연봉▼/option>');
             }
             if (value !== ',sales desc' && $('#multisort1').val()!=='sales desc') {
-                $('#multisort3').append('<option value=",sales desc">매출</option>');
+                $('#multisort3').append('<option value=",sales desc">매출▼</option>');
             }
             if (value !== ',7 desc' && $('#multisort1').val()!=='7 desc') {
-                $('#multisort3').append('<option value=",7 desc">별점</option>');
-            }
-        } else {
-            // 선택되지 않으면 세 번째 셀렉트 박스를 비활성화하고 초기화
-            $('#multisort3').prop('disabled', true).val('');
-        }
-        // 호출할 search 함수
-        searchWithMultiSort();
-    });
-
-    // 세 번째 셀렉트 박스의 값이 변경될 때
-    $('#multisort3').on('change', function() {
-        // 호출할 search 함수
-searchWithMultiSort()  ;
-        });
-});
-
-    // 두 번째 셀렉트 박스의 값이 변경될 때
-    $('#multisort2').on('change', function() {
-        var value = $(this).val();
-        if (value) {
-            // 두 번째 셀렉트 박스가 선택되면 세 번째 셀렉트 박스를 활성화
-            $('#multisort3').prop('disabled', false);
-            // 세 번째 셀렉트 박스의 옵션 변경
-            $('#multisort3 option[value!=""]').remove();
-            if (value !== ',sal_avg desc' && $('#multisort1').val()!=='sal_avg desc') {
-                $('#multisort3').append('<option value=",sal_avg desc">평균 연봉</option>');
-            }
-            if (value !== ',sales desc' && $('#multisort1').val()!=='sales desc') {
-                $('#multisort3').append('<option value=",sales desc">매출</option>');
-            }
-            if (value !== ',7 desc' && $('#multisort1').val()!=='7 desc') {
-                $('#multisort3').append('<option value=",7 desc">별점</option>');
+                $('#multisort3').append('<option value=",7 desc">별점▼</option>');
             }
         } else {
             // 선택되지 않으면 세 번째 셀렉트 박스를 비활성화하고 초기화
@@ -108,18 +76,47 @@ searchWithMultiSort()  ;
         });
 });
 </script>
-
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container {
+            text-align: center;
+        }
+        .welfare-options {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+            columns: 4; /* 두 개의 열로 나누어 정렬 */
+            column-gap: 20px; /* 열 간격 */
+        }
+        .welfare-options label {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
 <style>
+
 .fas.fa-heart {
     color: red;
 }
-.star-container {
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.star-container { 
+       font-size: 18px; 
+       display: flex; 
+       align-items: center; 
+       gap: 10px; 
+     } 
 
+<<<<<<< HEAD
+     .star { 
+       background: linear-gradient(to right, #EAB838, #EAB838 50%, #E0E2E7 50%); 
+       color: transparent; 
+       -webkit-background-clip: text; 
+     } 
+     .star-container .star-grade { 
+       font-weight: 700; 
+     }
+</style>
+<style>
+=======
     .star {
       background: linear-gradient(to right, #EAB838, #EAB838 50%, #E0E2E7 50%);
       color: transparent;
@@ -145,6 +142,7 @@ searchWithMultiSort()  ;
             margin: 5px 0;
         }
 
+>>>>>>> refs/heads/develop
   #firstSelect {
     text-align: center; /* 텍스트를 수평 가운데 정렬합니다. */
   }
@@ -164,6 +162,30 @@ searchWithMultiSort()  ;
     text-align: center; /* 옵션 텍스트를 수평 가운데 정렬합니다. */
   }
 </style>
+
+
+    <title>기업 정보</title>
+ <style>
+        .company-info {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+        }
+        .company-info .label {
+            font-weight: bold;
+            color: #333;
+            width: 120px;
+            display: inline-block;
+        }
+        .company-info .value {
+            color: #555;
+        }
+        .company-info .row {
+            margin-bottom: 5px;
+        }
+    </style>
 <script>
 
 function search(){
@@ -238,17 +260,7 @@ function search(){
             );
             $(".pagingNos").html( 
                   obj.filter(".pagingNos").html() 
-            );
-         
-
-            
-            
-//             $("body").append(
-//                "<textarea class=xxx cols=100 rows=100>"
-//                + obj.filter(".boardListDiv").html()
-//                +"</textarea>"
-            //)
-            
+            ); 
          }
          ,error   : function(){
             alert("검색 실패! 관리자에게 문의 바람니다.");
@@ -416,6 +428,7 @@ function searchWithMultiSort(){
                </select>
             </p>
             <br>
+
             <div class="container">
 		        <b>사내 복지</b><br>
 		        <div class="welfare-options">
@@ -451,7 +464,7 @@ function searchWithMultiSort(){
         <select id="multisort2" name="multisort2" >
 				 <option value=''> 정렬 조건</option>		
                   <option value=",sal_avg desc">평균 연봉▼
-                  <option value=",sales desc">     매출▼
+                  <option value=",sales desc">매출▼
                   <option value=",7 desc"> 별점▼        </select> >>
  
         <!-- 세 번째 셀렉트 박스 -->
@@ -475,8 +488,7 @@ function searchWithMultiSort(){
          <br>
                   <div class="boardListDiv" id="container">
          
-         <c:if
-            test="${param.sort!='sal_avg asc' and param.sort!='sal_avg desc'}">
+         <c:if  test="${param.sort!='sal_avg asc' and param.sort!='sal_avg desc'}">
             <p style="cursor: pointer" onClick="searchWithSort('sal_avg desc')">연봉</p>
          </c:if>
 
@@ -532,6 +544,7 @@ function searchWithMultiSort(){
 				</tr>
                   <c:forEach var="board" items="${requestScope.companyList }"
                      varStatus="status">
+
                      					           
                      
                      <tr style="cursor: pointer"
@@ -547,30 +560,29 @@ function searchWithMultiSort(){
                               &nbsp;&nbsp;&nbsp; &lt주소&gt &nbsp;&nbsp;&nbsp;${board.addr}<br>
                            </div>
                           </td>
-                          <td align="center">
-	                          <div class="star-container">
-								<p class="star">★★★★★</p><br>
-								<span class="star-grade" ><b>${board.star_avg}</b></span>
-							 </div>
-                          </td>
-                          <td>
-                              <c:choose>
-								<c:when test="${likeNoList.contains(board.c_no)}">
-									<i class="fas fa-heart"></i>
-								</c:when>
-								<c:otherwise>
-									<i class="far fa-heart"></i>
-								</c:otherwise>
-							</c:choose>
-							${board.rec_count}
-					</td>
-                     </tr>
-                     						
-                  </c:forEach>
+
+            <td align="center">
+                <div class="star-container">
+                    <div class="star" id="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <span class="star-grade" id="star-grade">${board.star_avg}</span>
+                </div>
+            </td>
+					<td><c:choose>
+							<c:when test="${likeNoList.contains(board.c_no)}">
+								<i class="fas fa-heart"></i>
+							</c:when>
+							<c:otherwise>
+								<i class="far fa-heart"></i>
+							</c:otherwise>
+						</c:choose> ${board.rec_count}</td>
+				</tr>
+
+			</c:forEach>
 
 
                </table>
-               <c:if test="${empty requestScope.companyList}">
+
+		<c:if test="${empty requestScope.companyList}">
                   <center>
                      <b> 조회할 데이터가 없습니다. </b>
                   </center>

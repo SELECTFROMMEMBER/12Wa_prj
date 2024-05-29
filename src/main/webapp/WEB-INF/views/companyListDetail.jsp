@@ -147,6 +147,9 @@ function upReview(){
        return;
     }
     if( confirm("리뷰를 입력하시겠습니까?")==false ){ return; }
+	if(${sessionScope.is_block=='block'}){
+		alert('글 등록 이용이 제한된 회원입니다. 고객센터에 문의바랍니다.')
+		return;}
    $.ajax(
          { 
             //--------------------------------------
@@ -262,8 +265,8 @@ function reviewEdit(r_no){
 	 var r_noObj= formObj.find("[name='r_no']").val(r_no);
 	var content = $(".xxx").val();
 	if(content==''){
-		alert("뒤질래?")
-		return;
+		'공백은 입력할 수 없습니다.'
+	return;
 	}
 
 	if( confirm("리뷰를 수정하시겠습니까?")==false ){ return; }
@@ -326,10 +329,8 @@ function reviewEdit(r_no){
 				<c:if test="${sessionScope.member=='person' }">
 				 <c:choose>
                    <c:when test="${likeNoList.contains(boardDTO.c_no)}">
-                      <button id="likecompany" onclick="del_like_company()">관심기업해제</button>
                     </c:when>
                     <c:otherwise>
-                     <button id="likecompany" onclick="like_company()">관심기업등록</button>
                     </c:otherwise>
                   </c:choose>
 				</c:if>
@@ -485,6 +486,7 @@ function reviewEdit(r_no){
 			<br>
 				<form class="reviewUpForm" name="reviewUpForm"
 					style="display: inline-block; vertical-align: top;">
+
 					<c:if test="${sessionScope.member=='person'}">
 				    <input type="hidden" name="p_no" value=" ${sessionScope.p_no}">	
 				    </c:if>
