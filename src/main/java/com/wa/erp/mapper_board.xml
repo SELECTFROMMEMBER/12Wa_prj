@@ -538,7 +538,7 @@ group by m.c_no
 	        SELECT '4500-4999' FROM DUAL UNION ALL
 	        SELECT '5000-5499' FROM DUAL UNION ALL
 	        SELECT '5500-5999' FROM DUAL UNION ALL
-	        SELECT '6000이상' FROM DUAL
+	        SELECT '6000 이상' FROM DUAL
 	    ),
 	    DATA AS (
 	        SELECT 
