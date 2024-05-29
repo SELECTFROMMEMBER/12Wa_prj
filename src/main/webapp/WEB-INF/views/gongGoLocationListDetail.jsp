@@ -48,7 +48,6 @@
 	function gonggoSupportForm() {
 	
 		var formObj = $("[name='getgonggoSupportForm']");
-		alert(formObj.serialize())
 
 		$.ajax({
 
@@ -105,7 +104,7 @@
 				<tr>
 					<c:if test="${requestScope.GonggoDTO.seeker_age!='~' }">
 						<td>나이 : ${requestScope.GonggoDTO.seeker_age}
-							${requestScope.GonggoDTO.age_irrelevant}</td>
+							</td>
 
 					</c:if>
 					<c:if test="${requestScope.GonggoDTO.seeker_age=='~'}">

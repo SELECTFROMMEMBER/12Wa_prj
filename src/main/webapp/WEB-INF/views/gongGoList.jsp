@@ -247,8 +247,6 @@
             
              <%-- ${requestScope.gonggoListCnt - status.index } --%>
                  기업: ${gonggo.name} <br>
-                 학력: ${gonggo.graduation}<br>
-                 경력: ${gonggo.career}<br>
                  주소: ${gonggo.work_place}<br>
                  업종: ${gonggo.business_industry}	
          <%--         ${requestScope.BoardDTO.role}

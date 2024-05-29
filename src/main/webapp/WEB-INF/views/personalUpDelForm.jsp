@@ -53,7 +53,7 @@ function checkPrivacyUpForm(){
 // 		return;
 // 	}
 
-alert( formObj.serialize( ));
+
 	if( confirm("정말 수정하시겠습니까?")==false ){ return; }
 
 	$.ajax(
@@ -71,7 +71,6 @@ alert( formObj.serialize( ));
 				
 				else if(result==0){
 					alert(" .");
-					location.replace("/personalUpdelForm.do");
 				}
 				
 				else{
@@ -88,7 +87,7 @@ alert( formObj.serialize( ));
 }
 //(회원정보 수정버튼 함수)
 function checkPrivacyDelForm(){
-	var formObj  = $("[name='personalUpDelForm']");
+	var formObj  = $("[name='PrivacyUpDelForm']");
 	
 	
 // 	    var pwdObj   = formObj.find(".pwd");
@@ -100,7 +99,6 @@ function checkPrivacyDelForm(){
 // 		return;
 // 	}
 	if( confirm("정말 탈퇴하시겠습니까?")==false ){ return; }
-
 	$.ajax(
 		{ 			
 			url    : "/PrivacyDelProc.do"			
@@ -115,13 +113,13 @@ function checkPrivacyDelForm(){
 				}
 				
 				else if(result==0){
-					alert(" .");
-					location.replace("/personalUpdelForm.do");
+					
+					alert("삭제가 실패했습니다.");
 				}
 				
 				else{
 					alert("회원탈퇴 성공입니다.");
-					location.replace("/12Wa.do");
+					location.replace("/loginForm.do");
 				}
 				
 			}
@@ -174,9 +172,9 @@ function checkPrivacyDelForm(){
     <td>성별</td>
     <td>
         <input type="radio" id="sex_male" name="sex" value="남" 
-            <c:if test="${requestScope.mypageDTO.sex == '남성'}">checked</c:if> disabled>남
+            <c:if test="${requestScope.mypageDTO.sex == '남'}">checked</c:if> disabled>남
         <input type="radio" id="sex_female" name="sex" value="여" 
-            <c:if test="${requestScope.mypageDTO.sex == '여성'}">checked</c:if> disabled>여
+            <c:if test="${requestScope.mypageDTO.sex == '여'}">checked</c:if> disabled>여
     </td>
 </tr>
 

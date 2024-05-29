@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@include file="/WEB-INF/views/common.jsp"%>  
  
 
 <!DOCTYPE html>
@@ -173,25 +174,22 @@ function searchWithSort(sort){
                      <option value="강원도">강원도
         </select>
         
-         <select name="searchType" class="searchType">
+   <select name="TimeShareSearchType" class="TimeShareSearchType">
             <option value="">전체</option>
+            <option value="subject">제목</option>
             <option value="name">이름</option>
-            <option value="phone">휴대폰 번호</option>
             <option value="content">내용</option>
+             <option value="preferred_work">선호업무</option>
+            <option value="phone">휴대폰 번호</option>
         </select>
-         
-         
-           
+                 
         	<input type="text" name="keyword" class="keyword"  placeholder="검색어를 입력해주세요.">
-        	<input type="button" value="검색"  class="searchBtn" onclick="search();" >	    
+        	<input type="button" value="검색"  class="searchBtn" onclick="search();"  style="padding: 5px 5px;">	    
 			<input type="hidden" name="sort"  class="sort" >
 			<input type="hidden" name="selectPageNo"  class="selectPageNo"  value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 			<input type="hidden" name="ing"  class="ingBtn" >
 	  	
-		
-        
-       
         <span onclick="timeShareing();" >[현재 채용가능 글만 보기]</span>	    	
 	   
 		</form>			
@@ -203,12 +201,12 @@ function searchWithSort(sort){
               
               <tr>
 
-                  <th width="50">번호</th>
-              	  <th width="100">제목</th>
-                  <th width="120">선호업무</th> 
-                  <th width="130">주소</th>
-                  <th width="130">희망 근무시간</th>
-                  <th width="130">지원기간</th>
+                  <th width="60">번호</th>
+              	  <th>제목</th>
+                  <th>선호업무</th> 
+                  <th>주소</th>
+                  <th width="140">희망 근무시간</th>
+                  <th width="140">지원기간</th>
                   
                                                   
                
@@ -223,19 +221,17 @@ function searchWithSort(sort){
 				<c:if test="${param.sort=='reg_date asc'}">
 					<th style="cursor:pointer" onClick="searchWithSort('')">등록일▲</th>
 				</c:if>
-
           </tr>
               
           
           <c:forEach var="timeShare" items="${requestScope.timeShare}"  varStatus="status">
               <tr style="cursor:pointer" onClick="gotimeShareDetailForm(${timeShare.b_no});">
                  
-                  <td>${requestScope.boardMap.begin_serialNo_desc-status.index}</td>
-                 
+                  <td align="center">${requestScope.boardMap.begin_serialNo_desc-status.index}</td>                 
                   <td align="center">${timeShare.subject}</td>
                   <td align="center">${timeShare.preferred_work}</td>
                   <td align="center">${timeShare.addr}</td>
-                  <td align="center">${timeShare.start_time}시 ~ ${timeShare.end_time}시</td>
+                  <td align="center">${timeShare.start_time}시 ~  ${timeShare.end_time}시</td>
                   <td align="center">${timeShare.start_date} ~<br> ${timeShare.end_date}</td>
                   <td align="center">${timeShare.reg_date}</td>   
               </tr> 
@@ -308,11 +304,10 @@ function searchWithSort(sort){
 	<option value="20">20
 </select>행보기 &nbsp;&nbsp;&nbsp;
 	</center>
-	      <c:if test="${sessionScope.member=='person'}">
+	      
           <center>
               <input type="button" value="등록"  onCLick= "location.replace('/timeShareRegForm.do')">
           </center>
-          </c:if>
    </form>
    
    <form name="timeShareDetailForm" action="/timeShareDetailForm.do" method="post">

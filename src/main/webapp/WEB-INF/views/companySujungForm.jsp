@@ -41,6 +41,8 @@
 				    checkWelfareCodes();
 				};
 					
+			
+				
 			function showSelect(){
 				 $(".hidden-row").css("display", "table-row");
 				 $("#showMoreBtn").hide();
@@ -62,10 +64,6 @@
 			}
 			
 		  var formObj = $("[name='companyInfoUpForm']");
-		  alert($("#addr1").val());
-		  alert($("#addr2").val());
-		  alert($("#addr3").val());
-		  alert(formObj.serialize());
 		  	if(confirm("정말 수정 하시겠습니까?")==false) {return;}
 			//-----------------------------------------------------
 			// JQuery 객체의 [ajax 메소드]를 호출하여
@@ -103,9 +101,12 @@
 							alert("암호가 틀립니다.")
 							pwdObj.val("")
 						}
+						else if(result==0){
+							alert("수정에 실패했습니다.")
+						}
 						else{
-							alert("수정 성공입니다.")
-							location.replace("/gongMo.do")
+							alert("수정 성공입니다.");
+							document.forms['MyCompanyForm'].submit();
 						}
 					}
 					//----------------------------------------------------------
@@ -316,11 +317,11 @@
 						<input type="hidden" id="addr1" name="addr1" value="${addr1}">
 						<input type="hidden" id="addr2" name="addr2" value="${addr2}">
 						<input type="hidden" id="addr3" name="addr3" value="${addr3}"> 
+						<input type="hidden" name="c_no"  value='${sessionScope.c_no}'>
 						
 				<center>
 					 <input type="button" value=" 수정 " onClick="checkComInfoUpForm()">
 				</center>
-					<input type="hidden" name="c_no"  value='${sessionScope.c_no}'>
 			</form>
 				
 			<br>

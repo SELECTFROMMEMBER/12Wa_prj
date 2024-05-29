@@ -10,7 +10,6 @@
 	<script>
 function regCompany(){
 	var formObj = $("[name='company_mem']");
-	alert(formObj.serialize())
 	
 $.ajax(
 		{ 

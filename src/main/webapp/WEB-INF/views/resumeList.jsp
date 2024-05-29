@@ -362,11 +362,11 @@ function pageNoClick(clickPageNo){
 									<div style="display: flex; align-items: center;">
 										<img width="80" src="images/photo-1.jpg"
 											style="margin-right: 10px;"> 
-										&lt이름&gt  ${board.name} <br>
-										&lt나이&gt 만 ${board.age}  세    <br>
-										&lt성별&gt ${board.sex}       <br>
-										&lt주소&gt ${board.addr}    <br>
-										&lt보유스킬&gt ${board.skills}    <br>
+										&nbsp;&nbsp;&nbsp;&lt이름&gt &nbsp;&nbsp; ${board.name} <br>
+										&nbsp;&nbsp;&nbsp;&lt나이&gt &nbsp;&nbsp; 만 ${board.age}  세    <br>
+										&nbsp;&nbsp;&nbsp;&lt성별&gt &nbsp;&nbsp; ${board.sex}       <br>
+										&nbsp;&nbsp;&nbsp;&lt주소&gt &nbsp;&nbsp; ${board.addr}    <br>
+										&lt보유스킬&gt <c:if test="${empty board.skills}">없음</c:if> ${board.skills}    <br>
 		                         
 									</div>
 						

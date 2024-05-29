@@ -11,7 +11,6 @@
 function checkmemberRegForm(){
 	   var formObj = $("[name='memRegForm']");
 	   
-	   alert(formObj.serialize());
 	   
 	$.ajax(
 	      { 

@@ -67,7 +67,9 @@
 					or
 					upper(preferred_work) like upper('%${keyword}%')
 					or
-					upper(subject) like upper('%${keyword}%')									
+					upper(subject) like upper('%${keyword}%')		
+					or
+					upper(addr) like upper('%${keyword}%')									
 					)
 		 </if>
 		 
@@ -75,8 +77,27 @@
 	         and(
 	         upper(addr) like upper('%${work_place}%')
 	         )
-	
 	      </if>
+	 
+<if test="TimeShareSearchType != null and TimeShareSearchType != ''" >
+	    <if test="TimeShareSearchType == 'subject'">
+	    and  upper(subject) like upper('%${keyword}%')
+	    </if>
+	    <if test="TimeShareSearchType == 'name'">
+	    and    upper(name) like upper('%${keyword}%')
+	    </if>
+	    <if test="TimeShareSearchType == 'content'">
+	     and    upper(content) like upper('%${keyword}%')
+	    </if>
+	    <if test="TimeShareSearchType == 'phone'">
+	     and    upper(phone) like upper('%${keyword}%')
+	    </if>
+	    <if test="TimeShareSearchType == 'preferred_work'">
+	    and     upper(preferred_work) like upper('%${keyword}%')
+	    </if>
+	</if>
+	      
+
 	      
          <if test="sort==null or sort.length()==0">
            order by b_no desc 
@@ -158,6 +179,16 @@
 			person_mem  p, freelancer f
 		where  
 			p.p_no= f.p_no
+	
+					 	
+		<if test="ing!=null and ing.length()>0">
+			and		
+	        to_number(to_char(f.end_date,'YYYYMMDD')) - to_number(to_char(sysdate,'YYYYMMDD'))>0
+	        and	
+	        <![CDATA[	
+	        to_number(to_char(f.start_date,'YYYYMMDD')) - to_number(to_char(sysdate,'YYYYMMDD'))<0
+	       	]]>	
+		</if>
 			
 		<if test="keyword!=null and keyword.length()>0">
 		 	   and ( 
@@ -167,27 +198,36 @@
 					or
 					upper(preferred_work) like upper('%${keyword}%')
 					or
-					upper(subject) like upper('%${keyword}%')									
+					upper(subject) like upper('%${keyword}%')		
+					or
+					upper(addr) like upper('%${keyword}%')									
 					)
 		 </if>
-		 	
-		<if test="ing!=null and ing.length()>0">
-			and		
-	        to_number(to_char(f.end_date,'YYYYMMDD')) - to_number(to_char(sysdate,'YYYYMMDD'))>0
-	        and	
-	        <![CDATA[	
-	        to_number(to_char(f.start_date,'YYYYMMDD')) - to_number(to_char(sysdate,'YYYYMMDD'))<0
-	       	]]>	
-		</if>
-		
-		
-		 
+
 		 <if test="work_place !=null">
 	         and(
 	         upper(addr) like upper('%${work_place}%')
 	         )
-	
 	      </if>
+	      
+<if test="TimeShareSearchType != null and TimeShareSearchType != ''" >
+	    <if test="TimeShareSearchType == 'subject'">
+	    and  upper(subject) like upper('%${keyword}%')
+	    </if>
+	    <if test="TimeShareSearchType == 'name'">
+	    and    upper(name) like upper('%${keyword}%')
+	    </if>
+	    <if test="TimeShareSearchType == 'content'">
+	     and    upper(content) like upper('%${keyword}%')
+	    </if>
+	    <if test="TimeShareSearchType == 'phone'">
+	     and    upper(phone) like upper('%${keyword}%')
+	    </if>
+	    <if test="TimeShareSearchType == 'preferred_work'">
+	    and     upper(preferred_work) like upper('%${keyword}%')
+	    </if>
+	</if>
+
 	      
          <if test="sort==null or sort.length()==0">
            order by b_no desc 
@@ -207,7 +247,7 @@
 				b_no=#{b_no}
 		
 				
-			<if test="keyword!=null and keyword.length()>0">
+		<if test="keyword!=null and keyword.length()>0">
 		 	   and ( 
 					upper(name) like upper('%${keyword}%')
 					or
@@ -215,9 +255,11 @@
 					or
 					upper(preferred_work) like upper('%${keyword}%')
 					or
-					upper(subject) like upper('%${keyword}%')									
+					upper(subject) like upper('%${keyword}%')		
+					or
+					upper(addr) like upper('%${keyword}%')									
 					)
-		 	</if>
+		 </if>
 		 	 
 	</select>	
 	

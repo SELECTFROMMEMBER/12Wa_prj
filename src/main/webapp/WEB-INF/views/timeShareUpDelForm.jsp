@@ -250,7 +250,7 @@ function checktimeShareDelForm(){
 	        <td>선호업무</td>
 	        <!-------------------------------------------------------->
 	        <td><textarea id="Preferred_work" name="Preferred_work" style="width:300px;height:100px;" 
-	             value="${requestScope.timeShareDTO.preferred_work}"></textarea>
+	           >${requestScope.timeShareDTO.preferred_work}</textarea>
 	        </td>
 	        <!-------------------------------------------------------->		    
 	    </tr>

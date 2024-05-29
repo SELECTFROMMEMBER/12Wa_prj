@@ -82,6 +82,12 @@ input[type="checkbox"] {
 	     document.noticeDetailForm.submit();
 	 
 	}
+	
+	function searchWithSort(sort){
+	      $("[name='boardSearchForm']").find("[name='sort']").val(sort);
+	       $(".searchBtn").click();
+
+	   }
 	</script>
 
 </head>
@@ -104,6 +110,7 @@ input[type="checkbox"] {
 						value="1"> <input type="hidden" name="rowCntPerPage"
 						class="rowCntPerPage"> <input type="hidden"
 						name="boardname" class="boardname" value="newbieboard">
+						<input type="hidden" name="sort" class="sort" value="">
 				</div>
 			</form>
 
@@ -117,10 +124,21 @@ input[type="checkbox"] {
 							<th>제목</th>
 							<th>닉네임</th>
 							<th>작성일</th>
-							<th>조회수</th>
-<!-- 							<th>추천수</th> -->
+							<c:if test="${sessionScope.member!='admin'}">
+								<th>조회수</th>
+							</c:if>
+							<!--                   <th>추천수</th> -->
 							<c:if test="${sessionScope.member == 'admin' }">
-								<th colspan=2>글 선택</th>
+								<c:if test="${param.sort!='read_count asc' and param.sort!='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count desc')">조회수</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count asc')">조회수▼</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count asc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('')">조회수▲</th>
+								</c:if>
+								<th>글 선택</th>
 							</c:if>
 						</tr>
 										<c:if test="${sessionScope.member == 'admin' }">
@@ -183,65 +201,64 @@ input[type="checkbox"] {
 							</tr>
 						</c:forEach>
 </c:if>
-												<c:if test="${sessionScope.member == 'person' || sessionScope.member == 'company'}">
+						<c:if test="${sessionScope.member == 'person' || sessionScope.member == 'company' || sessionScope.member==null}">
+							<c:if test='${requestScope.boardMap.selectPageNo==1}'>
+								<c:forEach var="board" items="${requestScope.noticeList}"
+									varStatus="status">
+									<c:if test="${board.category eq 'board'}">
+										<tr onClick="gonoticeDetailForm(${board.n_no})">
+											<td bgcolor='pink'>※</td>
+											<td bgcolor='pink'>${board.subject}</td>
+											<td bgcolor='pink'>관리자</td>
+											<td bgcolor='pink'>${board.reg_date}</td>
+											<td bgcolor='pink'>${board.read_count}</td>
+											<!-- 										<td bgcolor='pink'>※</td> -->
+										</tr>
+									</c:if>
+								</c:forEach>
+							</c:if>
 
-						<c:if test='${requestScope.boardMap.selectPageNo==1}'>
-							<c:forEach var="board" items="${requestScope.noticeList}"
+
+
+
+							<c:if test='${requestScope.boardMap.selectPageNo==1}'>
+								<c:forEach var="board" items="${requestScope.noticeList}"
+									varStatus="status">
+									<c:if test="${board.category eq 'newbie'}">
+										<tr onClick="gonoticeDetailForm(${board.n_no})">
+											<td bgcolor='lightblue'>※</td>
+											<td bgcolor='lightblue'>${board.subject}</td>
+											<td bgcolor='lightblue'>관리자</td>
+											<td bgcolor='lightblue'>${board.reg_date}</td>
+											<td bgcolor='lightblue'>${board.read_count}</td>
+
+											<!-- 										<td bgcolor='lightblue'>※</td> -->
+										</tr>
+									</c:if>
+								</c:forEach>
+							</c:if>
+
+
+
+							<c:forEach var="board" items="${requestScope.newComerList }"
 								varStatus="status">
-								<c:if test="${board.category eq 'board'}">
-									<tr onClick="gonoticeDetailForm(${board.n_no})">
-										<td bgcolor='pink'>※</td>
-										<td bgcolor='pink'>${board.subject}</td>
-										<td bgcolor='pink'>관리자</td>
-										<td bgcolor='pink'>${board.reg_date}</td>
-										<td bgcolor='pink'>${board.read_count}</td>
-<!-- 										<td bgcolor='pink'>※</td> -->
-									</tr>
-								</c:if>
+
+								<tr style="cursor: pointer"
+									onCLick="goBoardDetailForm(${board.b_no},'newComer', 'newbieboard','newbie','');">
+									<td align="center">
+										${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
+									<td align="center">${board.subject }</td>
+									<td align="center">${board.nickname }</td>
+									<td align="center">${board.reg_date }</td>
+									<td align="center">${board.read_count }</td>
+									<%-- 								<td align="center">${board.rec_count }</td> --%>
+									<c:if test="${sessionScope.member == 'admin' }">
+										<td><input type="checkbox" value="${board.b_no }"
+											onclick="handleCheckboxClick(event)"></td>
+									</c:if>
+								</tr>
 							</c:forEach>
 						</c:if>
-
-						
-						
-
-						<c:if test='${requestScope.boardMap.selectPageNo==1}'>
-							<c:forEach var="board" items="${requestScope.noticeList}"
-								varStatus="status">
-								<c:if test="${board.category eq 'newbie'}">
-									<tr onClick="gonoticeDetailForm(${board.n_no})">
-										<td bgcolor='lightblue'>※</td>
-										<td bgcolor='lightblue'>${board.subject}</td>
-										<td bgcolor='lightblue'>관리자</td>
-										<td bgcolor='lightblue'>${board.reg_date}</td>
-										<td bgcolor='lightblue'>${board.read_count}</td>
-
-<!-- 										<td bgcolor='lightblue'>※</td> -->
-									</tr>
-								</c:if>
-							</c:forEach>
-						</c:if>
-
-
-
-						<c:forEach var="board" items="${requestScope.newComerList }"
-							varStatus="status">
-
-							<tr style="cursor: pointer"
-								onCLick="goBoardDetailForm(${board.b_no},'newComer', 'newbieboard','newbie','');">
-								<td align="center">
-									${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
-								<td align="center">${board.subject }</td>
-								<td align="center">${board.nickname }</td>
-								<td align="center">${board.reg_date }</td>
-								<td align="center">${board.read_count }</td>
-<%-- 								<td align="center">${board.rec_count }</td> --%>
-								<c:if test="${sessionScope.member == 'admin' }">
-									<td><input type="checkbox" value="${board.b_no }"
-										onclick="handleCheckboxClick(event)"></td>
-								</c:if>
-							</tr>
-						</c:forEach>
-			</c:if>
 					</table>
 				</div>
 				<center>

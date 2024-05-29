@@ -27,11 +27,11 @@
     	
         <li>
             <a style="cursor: pointer;" href="javascript:location.replace('/gongGoList.do')">채용정보</a>
-            <ul>
-                <li><a href="javascript:location.replace('/gongGoList.do')">지역별</a></li>
-                <li><a href="javascript:location.replace('/gongGoList.do')">업무별</a></li>
-                <li><a href="javascript:location.replace('/gongGoList.do')">TOP100</a></li>
-            </ul>
+<!--             <ul> -->
+<!--                 <li><a href="javascript:location.replace('/gongGoList.do')">지역별</a></li> -->
+<!--                 <li><a href="javascript:location.replace('/gongGoList.do')">업무별</a></li> -->
+<!--                 <li><a href="javascript:location.replace('/gongGoList.do')">TOP100</a></li> -->
+<!--             </ul> -->
         </li>
         <li>
             <a href="javascript:location.replace('/companyList.do')">기업정보</a>
@@ -75,6 +75,11 @@
                 <a style="cursor: pointer;" href="javascript:location.replace('/gongGoRegForm.do')">공고 등록</a>
             </li>
         </c:if>
+        <c:if test="${sessionScope.member=='admin'}">
+        	<li>
+        	 <a style="cursor: pointer;" href="javascript:location.replace('/resumeList.do')">이력서 열람</a>
+        	</li>
+        </c:if>
     </ul>
 </nav>
 	
@@ -100,7 +105,7 @@
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${sessionScope.member=='company'}">
-				<a onClick="document.MyCompanyForm.submit()" id="myPageButton">기업마이페이지</a>
+				<a onClick="document.forms['MyCompanyForm'].submit()" id="myPageButton">기업마이페이지</a>
 			</c:if>
 			<c:if test="${sessionScope.member == 'person'}">
                  <a href="#" onclick="document.MyPageForm.submit();" id="myPageButton">개인마이페이지</a>

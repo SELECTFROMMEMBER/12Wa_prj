@@ -7,6 +7,8 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"> -->
 <link href="/style/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-3d/dist/chartjs-plugin-3d.min.js"></script>
  
 <script>
 //해당 주소로 들어갈 때 파라미터값 입력하는 함수
@@ -271,6 +273,7 @@ function downCount(comment_no){
 					);
 				}
 				,error: function(){
+					alert(1123)
 					alert("검색 실패! 관리자에게 문의 바람");
 				}
 			}		

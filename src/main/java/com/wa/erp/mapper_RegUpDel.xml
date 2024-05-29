@@ -951,8 +951,13 @@
         resume_no = #{resume_no}
 </delete>
 
-  
-
-	
+  <delete id="deletePrivacy" parameterType="com.wa.erp.MypageDTO">
+	delete
+		from person_mem
+	where
+		p_no = #{p_no}
+		and
+		pwd = #{pwd}
+	</delete>
 </mapper>
  

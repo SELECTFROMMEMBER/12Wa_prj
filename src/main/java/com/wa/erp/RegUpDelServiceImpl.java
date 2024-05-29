@@ -481,8 +481,8 @@ public int updatebuup(BuupDTO buupDTO)  {
 		// 삭제할 게시판의 존재 개수 얻기
 		// 만약 삭제할 게시판의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
 		//--------------------------------------
-		int PrivacyCnt = this.regUpDelDAO.getPrivacyCnt( mypageDTO.getP_no() );
-		if( PrivacyCnt==0 ) { return PrivacyCnt; }
+//		int PrivacyCnt = this.regUpDelDAO.getPrivacyCnt( mypageDTO.getP_no() );
+//		if( PrivacyCnt==0 ) { return PrivacyCnt; }
 		//--------------------------------------
 		// 암호의 존재 개수 얻기
 		// 만약 암호의 존재 개수가 0개면(=암호가 틀렸으면) -1리턴하기
@@ -493,6 +493,8 @@ public int updatebuup(BuupDTO buupDTO)  {
 		//--------------------------------------
 		// 삭제 실행하고 삭제 적용행의 개수 얻기
 		//--------------------------------------
+		System.out.print("12"+mypageDTO.getP_no());
+		System.out.print("12"+mypageDTO.getPwd());
 		int PrivacyDelCnt = this.regUpDelDAO.deletePrivacy( mypageDTO );
 		//--------------------------------------
 		// 수정 적용행의 개수 리턴하기

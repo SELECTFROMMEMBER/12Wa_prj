@@ -84,8 +84,6 @@
 
 	function checkresumeRegForm(){
 		   var formObj = $("[name='resumeRegForm']");
-		   alert(formObj.serialize())
-		   
 		$.ajax(
 		      { 
 		         url    : "/resumeRegProc.do"

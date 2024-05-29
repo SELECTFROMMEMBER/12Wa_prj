@@ -11,10 +11,6 @@
 <link
    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
    rel="stylesheet">
-<!-- 좋아요 하트 모양 수입 -->
-<link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link rel="stylesheet" href="styles.css">
 
 
 <style>
@@ -58,8 +54,6 @@ img {
 
    var formObj = $("[name='gonggoUpDelForm']");
    
-   /* var field_detail1 = formObj.find(".field_detail1"); */
-   var field_detail1Obj = $("input[name='field_detail1']")
    
 
 // 세부분야 테이블 초기화1
@@ -90,11 +84,13 @@ function clearTable1() {
    
    // 세부분야 테이블 초기화2
    function clearTable2() {
-       alert("초기화를 시작합니다.");
+
        var table = document.getElementById('Table_Clear2');
        
        // 모든 input 요소들을 초기화
        var inputs = table.querySelectorAll('input[type="text"]');
+       var result = confirm("테이블을 삭제하시겠습니까?");
+       if(result){
        inputs.forEach(function(input) {
            input.value = '';
        });
@@ -111,16 +107,27 @@ function clearTable1() {
            fieldDetailInput.value = "";
            
            document.getElementById('field_detail2').removeAttribute('name');
+           $("#Table_Clear2").hide();
        }
+   }
+   }
+   function showTable2(){
+      var result = confirm("테이블을 추가하시겠습니까?");
+         if(result){
+      $("#Table_Clear2").show();
+         }
+   
    }
    
    // 세부분야 테이블 초기화3
    function clearTable3() {
-       alert("초기화를 시작합니다.");
+       
        var table = document.getElementById('Table_Clear3');
+       var result = confirm("테이블을 삭제하시겠습니까?");
        
        // 모든 input 요소들을 초기화
        var inputs = table.querySelectorAll('input[type="text"]');
+       if(result){
        inputs.forEach(function(input) {
            input.value = '';
        });
@@ -137,7 +144,17 @@ function clearTable1() {
            fieldDetailInput.value = "";
            
            document.getElementById('field_detail3').removeAttribute('name');
+           $("#Table_Clear3").hide();
        }
+       }
+   }
+   
+   function showTable3(){
+      var result = confirm("테이블을 추가하시겠습니까?");
+      if(result){
+         $("#Table_Clear3").show();   
+      }
+      
    }
 
 //연봉 히든숨기기 ---------------------------
@@ -252,12 +269,9 @@ $(document).ready(function() {
       if(   text_field_detail3.val() != ""){
          field_detail3.removeAttr("name");
       }
-
-      alert(formObj.serialize())
       
-
-   
-   
+      alert(formObj.serialize());
+      return
       $.ajax({
 
          url : "/gonggoUpProc.do"
@@ -371,12 +385,12 @@ $(document).ready(function() {
                <tr>
                   <td>나이 : <input type="text" class="seeker_age"
                      name="seeker_age" class="seeker_age" size="7"
-                     value=${requestScope.gonggoDTO.seeker_age1}> ~ <input
+                     value="${requestScope.gonggoDTO.seeker_age1}"> ~ <input
                      type="text" class="seeker_age" name="seeker_age"
-                     class="seeker_age" size="7" value=${requestScope.gonggoDTO.seeker_age2}> 
+                     class="seeker_age" size="7" value="${requestScope.gonggoDTO.seeker_age2}"> 
                      <input type="checkbox"
                      name="age_irrelevant"
-                     value="나이무관" ${requestScope.gonggoDTO.age_irrelevant == '나이무관' ? 'checked' : ''}>나이무관
+                     value="나이무관" ${requestScope.gonggoDTO.seeker_age2 == '무관' ? 'checked' : ''}>나이무관
                      <%--  value="true" ${requestScope.gonggoDTO.age_irrelevant ? 'checked' : ''}>나이무관 --%>
                   
 
@@ -690,7 +704,8 @@ $(document).ready(function() {
          
       
          <!-- -------------------------------------------------- -->
-         <table align="center" bordercolor="gray" border="1" cellpadding="7" id="Table_Clear2">
+         <table align="center" bordercolor="gray" border="1" cellpadding="7" id="Table_Clear2"
+         style="${empty requestScope.gonggoDTO.content2 ? 'display:none;' : ''}">
             <tr>
                <th colspan="1">담당부서</th>
                <th colspan="2">상세내용</th>
@@ -796,13 +811,15 @@ $(document).ready(function() {
                <td><input type="text" id="content2" class="content2" name="content2" value=${requestScope.gonggoDTO.content2}></td>
             </tr>
          </table>
-         <span type="button" onclick="clearTable2()">초기화</span>
+         <span type="button" onclick="clearTable2()">삭제</span>
+         <span type="button" onclick="showTable2()">추가</span>
          </c:if>
          <!-- -------------------------------------------------- -->
          </table>
          <br>
          <c:if test="${gonggoDTO.field_detail3!='null'}"> 
-         <table align="center" bordercolor="gray" border="1" cellpadding="7" id="Table_Clear3">
+         <table align="center" bordercolor="gray" border="1" cellpadding="7" id="Table_Clear3"
+         style="${empty requestScope.gonggoDTO.content3 ? 'display:none;' : ''}">
             <tr>
                <th colspan="1">담당부서</th>
                <th colspan="2">상세내용</th>
@@ -876,10 +893,10 @@ $(document).ready(function() {
                 <option value="창고·물류·유통" ${requestScope.gonggoDTO.field_detail3 == '창고·물류·유통' ? 'selected' : ''}>창고·물류·유통</option>
                 <option value="">직접입력</option>
             </select>
-              <c:if test="${ empty requestScope.gonggoDTO.field_detail3}">
+<%--               <c:if test="${ empty requestScope.gonggoDTO.field_detail3}"> --%>
           
             <input type="text" id="text_field_detail3" name="field_detail3" class="hidden" placeholder="${requestScope.gonggoDTO.field_detail3}"/>
-          </c:if>
+<%--           </c:if> --%>
            
         </div>
         <div class="row_plus"></div></td>
@@ -901,15 +918,17 @@ $(document).ready(function() {
             </tr>
             <tr>
                <td>업무내용</td>
-               <td><input type="text" id="content3" class="content3" name="content3" value=${requestScope.gonggoDTO.content3}></td>
+               <td><input type="text" id="content3" class="content3" name="content3" value="${requestScope.gonggoDTO.content3}"></td>
+                                    
             </tr>
          </table> 
          </c:if>
-         <span type="button" onclick="clearTable3()">초기화</span>
+            <span type="button" onclick="clearTable3()">삭제</span>         
+         <span type="button" onclick="showTable3()">추가</span>
 
          <br> 채용절차        
     <table align="center">
-    
+
     <div class="container mx-auto px-4 py-10">
         <div class="grid grid-cols-3 gap-8">
             <div class="text-center">

@@ -117,4 +117,8 @@ public interface BoardService {
 		int updateComWel(BoardDTO boardDTO);
 
 		List<BoardDTO> getlikeCompany(int p_no);
+
+		List<BoardDTO> getSalaryData();
+
+		List<BoardDTO> getFieldGonggoData();
 }
