@@ -13,7 +13,6 @@ function gonoticeDetailForm(n_no){
  
 }
 
-
 </script>
 </head>
 

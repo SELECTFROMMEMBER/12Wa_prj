@@ -34,6 +34,7 @@
       }
     
     function goGongGoDetailForm(g_no){
+
       //       name='boardDetailForm' 을 간 form 태그 후손 중에
       //       name='b_no' 가진 태그에 매개변수로 들어온 게시판의 고유번호를 삽입하기
       //      location.replace("/boardDetailForm.do?b_no="+b_no);      >> get 방식.
@@ -52,6 +53,14 @@
        $("[name='resumeListDetailForm']").find("[name='resume_no']").val(resume_no);
 
        document.resumeListDetailForm.submit();
+
+    }
+    
+    function goresumeListDetailForm(p_no,resume_no){
+    	$("[name='resumeListDetailForm']").find("[name='p_no']").val(p_no);
+    	$("[name='resumeListDetailForm']").find("[name='resume_no']").val(resume_no);
+
+    	document.resumeListDetailForm.submit();
 
     }
     
@@ -115,6 +124,7 @@
                     <th style="width: 20%;">성별</th>
                  </tr>
                  <c:forEach var="comPertocom" items="${requestScope.gonggoPertocom}"  varStatus="status">
+
                <tr style="cursor:pointer" onClick="goresumeListDetailForm(${comPertocom.p_no},${comPertocom.resume_no});"
                     class="<c:if test="${status.index >= 5}">hidden-row</c:if>">
                        <td align="center"> ${comPertocom.content}</td>
@@ -150,6 +160,7 @@
                     <th style="width: 15%;">공고 기간</th>
                 </tr>
                 <c:forEach var="gongGo" items="${requestScope.gongGoList}"  varStatus="status">
+
                     <tr style="cursor:pointer" onClick= "goGongGoDetailForm(${gongGo.g_no})"
                     class="<c:if test="${status.index >= 5}">hidden-row</c:if>">
                        <td align="center"> ${status.index+1}</td>
@@ -212,6 +223,7 @@
       <form name="MyCompanyInfo"  action="/companySujungForm.do"  method="post">
             <input type="hidden" name="c_no"  value='${sessionScope.c_no}'>
       </form>
+
 
       <form name="gongMoDetailForm" action="/gongMoDetailForm.do" method="post">
       <input type="hidden" name="comp_pk">

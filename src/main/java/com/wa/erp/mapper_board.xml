@@ -13,49 +13,49 @@
 	<!-- select 구문을 내포한 <select> 태그 선언하기    -->
 	<!--=========================================================-->
 	<select id="getboardList"  parameterType="com.wa.erp.BoardSearchDTO" resultType="com.wa.erp.BoardDTO">
-		select
-			*
-		from ( select rownum "RNUM" , zxcvb.* from (
-		 select 
-		 		b.b_no,
-		 		b.subject,
-		 		p.nickname,
-		 		to_char(b.reg_date,'YYYY-MM-DD') "reg_date",
-		 		b.read_count,
-		 		<if test="boardname!='tradeboard'">
-		 		b.rec_count,
-		 		</if>
-		 		b.content 
-		 		<if test="boardname=='tradeboard'">
-		 		,b.trade_type
-		 		,b.price
-		 		</if>
-		from 
-			${boardname} b , person_mem p 
-		where 
-			1=1
-			and
-			p.p_no=b.p_no
-		 	<if test="keyword!=null and keyword.length()>0">
-		 		and ( 
-					upper(b.subject) like upper('%${keyword}%')
-					or
-					upper(b.content) like upper('%${keyword}%')
-					)
-		 	</if>
+	      select
+         *
+      from ( select rownum "RNUM" , zxcvb.* from (
+       select 
+             b.b_no,
+             b.subject,
+             p.nickname,
+             to_char(b.reg_date,'YYYY-MM-DD') "reg_date",
+             b.read_count,
+             <if test="boardname!='tradeboard'">
+             b.rec_count,
+             </if>
+             b.content 
+             <if test="boardname=='tradeboard'">
+             ,b.trade_type
+             ,b.price
+             </if>
+      from 
+         ${boardname} b , person_mem p 
+      where 
+         1=1
+         and
+         p.p_no=b.p_no
+          <if test="keyword!=null and keyword.length()>0">
+             and ( 
+               upper(b.subject) like upper('%${keyword}%')
+               or
+               upper(b.content) like upper('%${keyword}%')
+               )
+          </if>
                 <if test="tradetype != null and tradetype != ''">
                     and trade_type = #{tradetype}
                 </if>
                 <if test="sort==null">
-		 			order  by b.reg_date desc
+                order  by b.reg_date desc
                 </if>
-			 	<if test="sort!=null and sort.length()>0">
+             <if test="sort!=null and sort.length()>0">
                     order by ${sort}   
-         	    </if>    
-		 	<![CDATA[
-			)zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo}
-		]]>
-	
+                </if>    
+          <![CDATA[
+         )zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo}
+      ]]>
+   
 	</select>
 
 	<select id="getcompanyList"  parameterType="com.wa.erp.BoardSearchDTO" resultType="com.wa.erp.BoardDTO">
@@ -630,5 +630,150 @@ group by m.c_no
 		                        숫자면 
 									표현 데이터 앞뒤에  '  를 붙이지 말란 의미이다.
 		-->
+		<select id="getpersonMemList"  parameterType="com.wa.erp.BoardSearchDTO" resultType="com.wa.erp.BoardDTO">
+			select
+			*
+		from ( select rownum "RNUM" , zxcvb.* from (select 
+name,
+    TO_CHAR(reg_date, 'YYYY-MM-DD') AS reg_date,
+
+pid,
+pwd,
+addr,
+email,
+phone
+from person_mem
+	 	<![CDATA[
+ 			)zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} 
+		]]> 
+	</select>
+	
+<select id="getMemberList"  parameterType="com.wa.erp.BoardSearchDTO" resultType="com.wa.erp.BoardDTO">
+   select
+			*
+		from ( select rownum "RNUM" , zxcvb.* from (
+        SELECT
+            member_type,
+            name,
+            c_no,
+            p_no,
+            is_block,
+            reg_date,
+            id,
+            pwd,
+            addr,
+            email,
+            phone,
+            ROW_NUMBER() OVER (ORDER BY reg_date) AS row_num
+        FROM (
+            SELECT
+                '개인' AS member_type,
+                name,
+                0 as c_no,
+                p_no,
+                is_block,
+                TO_CHAR(reg_date, 'YYYY-MM-DD') AS reg_date,
+                pid AS id,
+                pwd,
+                addr,
+                email,
+                phone
+            FROM person_mem 
+          where
+1=1
+            		<if test="member_type!= null and member_type.length()>0">
+		 	and		'개인'=#{member_type}
+		 	</if>
+            UNION ALL
+            SELECT
+                '기업' AS member_type,
+                c.name,
+                c.c_no as c_no,
+                0 as p_no,
+                'no' as is_block,
+                TO_CHAR(c.reg_date, 'YYYY-MM-DD') AS reg_date,
+                c.cid AS id,
+                c.pwd,
+                ci.addr,
+                c.email,
+                c.ceo_phone AS phone
+            FROM company_mem c
+            INNER JOIN company_info ci ON c.c_no = ci.c_no
+            		<if test="member_type!= null and member_type.length()>0">
+		  where
+		 		'기업'=#{member_type}
+		 	</if>
+        )
+   	<![CDATA[
+ 			)zxcvb) where (RNUM between #{begin_rowNo} and  #{end_rowNo})
+		]]> 
+ 
+	</select>
+	
+			<select id="getMemberListCnt" parameterType="com.wa.erp.BoardSearchDTO" resultType="int">
+	SELECT SUM(total_count) AS total_count
+FROM (
+    SELECT COUNT(*) AS total_count FROM person_mem 
+     where 
+      	1=1
+    <if test="member_type=='기업'">
+        and p_no = 0
+    </if>
+       <if test="member_type=='개인'">
+        and p_no > 0
+    </if>
+    UNION ALL
+    SELECT COUNT(*) FROM company_mem 
+
+       <if test="member_type=='기업'">
+      where c_no > 0
+    </if>
+       <if test="member_type=='개인'">
+      where  c_no = 0
+    </if>  
+)      
+      
+
+	</select>
+
+	<select id="getMemberListAllCnt"  parameterType="com.wa.erp.BoardSearchDTO" resultType="int">
+
+		SELECT SUM(total_count) AS total_count
+FROM (
+    SELECT COUNT(*) AS total_count FROM person_mem      
+    UNION ALL
+    SELECT COUNT(*) FROM company_mem 
+)        
+	</select>
+	
+
+
+	
+
+<select id="getBlockMemberListAllCnt"  parameterType="com.wa.erp.BoardSearchDTO" resultType="int">
+    SELECT COUNT(*) FROM person_mem      where 
+      	is_block='block'
+	</select>
+	<select id="getBlockMemberListCnt"  parameterType="com.wa.erp.BoardSearchDTO" resultType="int">
+    SELECT COUNT(*) FROM person_mem      where 
+      	is_block='block'
+	</select>
+	<select id="getBlockMemberList"  parameterType="com.wa.erp.BoardSearchDTO" resultType="com.wa.erp.BoardDTO">
+
+	select
+		p_no,
+		name,
+		 TO_CHAR(reg_date, 'YYYY-MM-DD') AS reg_date,
+		 pid AS id ,
+		pwd ,
+		addr,
+		email ,
+		is_block,
+		phone
+	from 
+		person_mem 
+	where
+		 is_block='block'
+</select>
 </mapper>
  

@@ -8,6 +8,7 @@
 <!--***************************************************-->
 <mapper namespace="com.wa.erp.BoardDAO">
 
+
       <select id="getMyGongMoList"  parameterType="int"  resultType="com.wa.erp.BoardDTO">
            select
                comp_pk 

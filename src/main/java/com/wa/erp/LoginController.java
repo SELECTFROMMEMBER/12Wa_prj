@@ -92,7 +92,8 @@ public class LoginController {
 				session.removeAttribute("admin_no");
 				session.removeAttribute("p_no");
 				session.removeAttribute("c_no");
-				
+				session.removeAttribute("is_block");
+
 		
 				//--------------------------
 				//[ModelAndView 객체] 생성하기
@@ -149,6 +150,7 @@ public class LoginController {
 					session.setAttribute("member", "person" );
 					session.setAttribute("p_no", getMem.getP_no());
 					session.setAttribute("nickname", getMem.getNickname());
+					session.setAttribute("is_block", getMem.getIs_block());
 					int is_resume = this.loginService.getIs_resume(map);
 					if(is_resume == 1) {return 3;}
 				}

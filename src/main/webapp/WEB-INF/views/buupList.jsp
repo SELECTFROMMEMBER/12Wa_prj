@@ -24,7 +24,7 @@ function buuping() {
     // 부업 검색 폼에서 ing 필드 설정
     $("[name='buupSearchForm']").find("[name='ing']").val(ingValue);
     // 검색 함수 호출
-    search();
+    search1();
 	}
 
 //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -60,7 +60,7 @@ function gobuupDetailForm(b_no){
 		//페이징 함수 
 		function pageNoClick( clickPageNo ){
 			$("[name='buupSearchForm']").find(".selectPageNo").val(clickPageNo);		
-		    search();		
+		    search1();		
 		}
 
 //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -71,12 +71,12 @@ $(function(){
 	// class=rowCntPerPage 를 가진 태그에 value 값으로 20을 넣어주기
 	$(".rowCntPerPage").val("10"); 
 	// search 함수 호출하기
-	search();
+	search1();
 	})	
 
 //	게시판 검색하는 함수 search() 선언.
 //	[검색] 버튼 클릭 시 호출되는 함수이다.
-	function search(){
+	function search1(){
 	
 	var buupSearchFormObj = $("[name='buupSearchForm']");
 	var keywordObj = buupSearchFormObj.find(".keyword");
@@ -113,9 +113,7 @@ $(function(){
 			
 					var obj = $(responseHtml);
 			
-					$(".buupListDiv").html( 
-							obj.find(".buupListDiv").html() 
-					);
+					$(".buupListDiv").html(obj.find(".buupListDiv").html());
 					$(".pagingNos").html(
 							obj.find(".pagingNos").html()
 					);
@@ -184,7 +182,7 @@ $(function(){
 
 
         	    <input type="text" name="keyword" class="keyword" >
-        		<input type="button" value="검색"  class="searchBtn" onclick="search();">
+        		<input type="button" value="검색"  class="searchBtn" onclick="search1();">
 				<input type="hidden" name="sort"  class="sort" >
 				<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
 				<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
@@ -308,7 +306,7 @@ $(function(){
 	<!--- 게시판 페이징 번호 출력하기.  끝   -->
 	<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 	
-	<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+	<select name="rowCntPerPage" class="rowCntPerPage" onChange="search1()">
 		<option value="10">10
 		<option value="15">15
 		<option value="20">20

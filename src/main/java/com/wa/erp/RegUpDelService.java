@@ -66,6 +66,11 @@ public interface RegUpDelService {
 		MypageDTO getPrivacyForUpDel(int p_no);		
 		
 		int updateReview(BoardDTO boardDTO);
+		int deletePersonMemberCnt(BoardDTO boardDTO);
+		int deleteCompanyMemberCnt(BoardDTO boardDTO);
+		int updateBlockMemberCnt(BoardDTO boardDTO);
+		int updateBlockCancleMember(BoardDTO boardDTO);
+		int deleteBlockMember(BoardDTO boardDTO);
 		
 
 		

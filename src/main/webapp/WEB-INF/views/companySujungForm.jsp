@@ -105,8 +105,13 @@
 							alert("수정에 실패했습니다.")
 						}
 						else{
+<<<<<<< HEAD
+							alert("수정 성공입니다.")
+						    document.forms['MyCompanyForm'].submit();
+=======
 							alert("수정 성공입니다.");
 							document.forms['MyCompanyForm'].submit();
+>>>>>>> refs/heads/develop
 						}
 					}
 					//----------------------------------------------------------

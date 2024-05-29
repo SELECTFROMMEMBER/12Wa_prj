@@ -12,13 +12,9 @@ public class BoardSearchDTO {
 	private String boardname;
 	private String selectedIndustry;
 	private String category;
+	private String member_type;
 
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
+
 	private int c_no;
 	private int b_no;
 	private int p_no;
@@ -53,6 +49,8 @@ public class BoardSearchDTO {
 	 private String multisort1;
 	 private String multisort2;
 	 private String multisort3;
+	 private String name;
+
 	 
 	 
 	
@@ -65,6 +63,19 @@ public class BoardSearchDTO {
 		private String ing;
 		private String project_type;
 		private String field_name;
+	
+		public String getMember_type() {
+			return member_type;
+		}
+		public void setMember_type(String member_type) {
+			this.member_type = member_type;
+		}
+		public String getCategory() {
+			return category;
+		}
+		public void setCategory(String category) {
+			this.category = category;
+		}
 	
 	
 		public String getMultisort1() {
@@ -93,7 +104,14 @@ public class BoardSearchDTO {
 		private String gonggoStatus;
 	
 	
-		
+
+		 
+		public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 		
 		public String getTradetype() {
 			return tradetype;
