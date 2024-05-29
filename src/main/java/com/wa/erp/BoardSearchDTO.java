@@ -13,6 +13,8 @@ public class BoardSearchDTO {
 	private String selectedIndustry;
 	private String category;
 	private String member_type;
+
+
 	private int c_no;
 	private int b_no;
 	private int p_no;
@@ -48,6 +50,11 @@ public class BoardSearchDTO {
 	 private String multisort2;
 	 private String multisort3;
 	 private String name;
+
+	 
+	 
+	
+	 
 		private int resume_no;
 		private  String[] welfare;
 		/////////////////////////////
@@ -69,6 +76,8 @@ public class BoardSearchDTO {
 		public void setCategory(String category) {
 			this.category = category;
 		}
+	
+	
 		public String getMultisort1() {
 			return multisort1;
 		}

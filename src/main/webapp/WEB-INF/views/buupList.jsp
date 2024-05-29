@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@include file="/WEB-INF/views/common.jsp" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -111,9 +113,7 @@ $(function(){
 			
 					var obj = $(responseHtml);
 			
-					$(".buupListDiv").html( 
-							obj.find(".buupListDiv").html() 
-					);
+					$(".buupListDiv").html(obj.find(".buupListDiv").html());
 					$(".pagingNos").html(
 							obj.find(".pagingNos").html()
 					);
@@ -168,19 +168,36 @@ $(function(){
             <option value="강원도">강원도
           </select>
           
-          <select name="searchType" class="searchType">
-            <option value="all">전체</option>
+          <select name="BuupsearchType" class="BuupsearchType">
+            <option value="">전체</option>
+            <option value="subject">제목</option>
             <option value="name">이름</option>
-            <option value="phone">휴대폰 번호</option>
             <option value="content">내용</option>
+             <option value="hope_work">희망업무</option>
+            <option value="phone">휴대폰 번호</option>
         </select>
-				
+
+
+
+
+
         	    <input type="text" name="keyword" class="keyword" >
         		<input type="button" value="검색"  class="searchBtn" onclick="search1();">
 				<input type="hidden" name="sort"  class="sort" >
 				<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
 				<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 		 		<input type="hidden" name="ing"  class="ing">
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
 		  		
 		  		<span onclick="buuping();" >[현재 채용가능 글만 보기]</span>	    	
 		  </form>		

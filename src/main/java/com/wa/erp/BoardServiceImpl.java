@@ -543,6 +543,8 @@ public class BoardServiceImpl implements BoardService{
 			return MainNoticeList;
 		}
 
+
+		//관리자
 		@Override
 		public int getMemberListCnt(BoardSearchDTO boardSearchDTO) {
 			int MemberListCnt = this.boardDAO.getMemberListCnt( boardSearchDTO );
@@ -592,5 +594,16 @@ public class BoardServiceImpl implements BoardService{
 		}
 
 	
+		public List<BoardDTO> getSalaryData() {
+			List<BoardDTO> SalaryData = this.boardDAO.getSalaryData();
+			
+	        return SalaryData;
+		}
+		
+		public List<BoardDTO> getFieldGonggoData(){
+			List<BoardDTO> FieldData = this.boardDAO.getFieldGonggoData();
+			
+			return FieldData;
+		}
 		
 }

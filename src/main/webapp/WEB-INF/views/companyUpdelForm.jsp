@@ -23,11 +23,10 @@
 					
 					,success : function(json){
 						var result = json["result"];
-						alert(result);
 						
 						if(result==1){
 							alert("정보등록 성공입니다!");
-							location.replace("/loginForm.do")
+							location.replace("/12Wa.do")
 						}
 						else {
 							alert("잘못됨ㅅㄱ")

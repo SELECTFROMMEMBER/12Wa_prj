@@ -51,12 +51,19 @@
 	                order by  ${sort}	
 	                </if>    		
 	                 	<![CDATA[
+                <if test="sort==null">
+		 			order  by b.reg_date desc
+                </if>
+			 	<if test="sort!=null and sort.length()>0">
+                    order by ${sort}   
+         	    </if>    
+		 	<![CDATA[
 			)zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo}
 		]]>
 	
 	</select>
 
-			<select id="getcompanyList"  parameterType="com.wa.erp.BoardSearchDTO" resultType="com.wa.erp.BoardDTO">
+	<select id="getcompanyList"  parameterType="com.wa.erp.BoardSearchDTO" resultType="com.wa.erp.BoardDTO">
 		select
 			*
 		from ( select rownum "RNUM" , zxcvb.* from (
@@ -526,6 +533,74 @@ group by m.c_no
  			)zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} 
 		]]> 
 	</select>
+	
+<select id="getSalaryData" resultType="com.wa.erp.BoardDTO">
+        WITH RANGES AS (
+	        SELECT '2500-2999' AS SAL_AVG_RANGE FROM DUAL UNION ALL
+	        SELECT '3000-3499' FROM DUAL UNION ALL
+	        SELECT '3500-3999' FROM DUAL UNION ALL
+	        SELECT '4000-4499' FROM DUAL UNION ALL
+	        SELECT '4500-4999' FROM DUAL UNION ALL
+	        SELECT '5000-5499' FROM DUAL UNION ALL
+	        SELECT '5500-5999' FROM DUAL UNION ALL
+	        SELECT '6000이상' FROM DUAL
+	    ),
+	    DATA AS (
+	        SELECT 
+	            COUNT(C_NO) AS COUNT_C_NO,
+	            CASE 
+	                <![CDATA[
+	                WHEN SAL_AVG >= 2500 AND SAL_AVG < 3000 THEN '2500-2999'
+	                WHEN SAL_AVG >= 3000 AND SAL_AVG < 3500 THEN '3000-3499'
+	                WHEN SAL_AVG >= 3500 AND SAL_AVG < 4000 THEN '3500-3999'
+	                WHEN SAL_AVG >= 4000 AND SAL_AVG < 4500 THEN '4000-4499'
+	                WHEN SAL_AVG >= 4500 AND SAL_AVG < 5000 THEN '4500-4999'
+	                WHEN SAL_AVG >= 5000 AND SAL_AVG < 5500 THEN '5000-5499'
+	                WHEN SAL_AVG >= 5500 AND SAL_AVG < 6000 THEN '5500-5999'
+	                ELSE '6000 이상'
+	                ]]>
+	            END AS SAL_AVG_RANGE
+	        FROM 
+	            COMPANY_INFO
+	        GROUP BY 
+	            CASE 
+	                <![CDATA[
+	                WHEN SAL_AVG >= 2500 AND SAL_AVG < 3000 THEN '2500-2999'
+	                WHEN SAL_AVG >= 3000 AND SAL_AVG < 3500 THEN '3000-3499'
+	                WHEN SAL_AVG >= 3500 AND SAL_AVG < 4000 THEN '3500-3999'
+	                WHEN SAL_AVG >= 4000 AND SAL_AVG < 4500 THEN '4000-4499'
+	                WHEN SAL_AVG >= 4500 AND SAL_AVG < 5000 THEN '4500-4999'
+	                WHEN SAL_AVG >= 5000 AND SAL_AVG < 5500 THEN '5000-5499'
+	                WHEN SAL_AVG >= 5500 AND SAL_AVG < 6000 THEN '5500-5999'
+	                ELSE '6000 이상'
+	                ]]>
+	            END
+	    )
+	    SELECT 
+	        R.SAL_AVG_RANGE,
+	        COALESCE(D.COUNT_C_NO, 0) AS COUNT_C_NO
+	    FROM 
+	        RANGES R
+	    LEFT JOIN 
+	        DATA D ON R.SAL_AVG_RANGE = D.SAL_AVG_RANGE
+	    ORDER BY 
+	        R.SAL_AVG_RANGE
+</select>
+
+<select id="getFieldGonggoData" resultType="com.wa.erp.BoardDTO">
+		SELECT
+        COUNT(*) AS gonggoCnt,
+        c.BUSINESS_INDUSTRY AS field
+    from company_info c
+    
+    left join
+    
+        gonggo g
+    on
+        g.c_no = c.c_no
+    GROUP BY
+        c.BUSINESS_INDUSTRY
+</select>
 	<!--	
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		<select ~> 태그 안의 속성

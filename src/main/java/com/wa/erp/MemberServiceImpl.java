@@ -86,7 +86,6 @@ public class MemberServiceImpl implements MemberService{
 		 if( memberDTO.getWelfare_code()!=null ) {
 			int  insertComWelCnt = this.memberDAO.insertCompanyWelfare( memberDTO );
 			if(insertComWelCnt==0) {return 0; } }
-			int  insertWelfareCnt = this.memberDAO.insertCompanyWelfare( memberDTO );
 			
 		return insertCompanyCnt;
 	}

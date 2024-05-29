@@ -13,12 +13,21 @@
 	function handleCheckboxClick(event) {
 	    event.stopPropagation(); // 이벤트 버블링 방지
 	}
+<<<<<<< HEAD
 
 	function searchWithSort(sort){
 		$("[name='boardSearchForm']").find("[name='sort']").val(sort);
 	    $(".searchBtn").click();
 
 	}
+=======
+	
+	function searchWithSort(sort){
+	      $("[name='boardSearchForm']").find("[name='sort']").val(sort);
+	       $(".searchBtn").click();
+
+	   }
+>>>>>>> refs/heads/develop
 	
 	
 	//상세보기 화면으로 이동하는
@@ -76,10 +85,9 @@ input[type="checkbox"] {
   
 <body>
 
- <div id="container">
- 
-   <%@ include file="header.jsp" %>
+	<div id="container">
 
+<<<<<<< HEAD
    <%@ include file="boardSideCategori.jsp" %>
 	
     <div class="container"  id="wrap">
@@ -102,7 +110,11 @@ input[type="checkbox"] {
           <table style="border:1px solid black;margin-left:auto;margin-right:auto;">
          
     
+=======
+		<%@ include file="header.jsp"%>
+>>>>>>> refs/heads/develop
 
+<<<<<<< HEAD
               
               <tr>	
                   <th>번호</th>
@@ -135,6 +147,55 @@ input[type="checkbox"] {
                   <th>글 선택</th>
                   </c:if>
               </tr>
+=======
+		<%@ include file="boardSideCategori.jsp"%>
+
+		<div id="wrap">
+			<h1 style="text-align: center;">자유 게시판</h1>
+
+			<form name="boardSearchForm">
+				<div style="text-align: center; margin-bottom: 20px;">
+					<input type="hidden" name="boardname" class="boardname"
+						value="freeboard"> <input type="text" name="keyword"
+						class="keyword"> <input type="button" value="검색"
+						class="searchBtn" onclick="search('freedome')"></input> <input
+						type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
+					<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
+					<input type="hidden" name="sort" class="sort" value="">
+				</div>
+			</form>
+
+			<div class="freedomeListDiv">
+				<form action="submit.php" method="POST">
+					<table
+						style="border: 1px solid black; margin-left: auto; margin-right: auto;">
+
+
+
+
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>닉네임</th>
+							<th>작성일</th>
+							<c:if test="${sessionScope.member!='admin'}">
+								<th>조회수</th>
+							</c:if>
+							<!--                   <th>추천수</th> -->
+							<c:if test="${sessionScope.member == 'admin' }">
+								<c:if test="${param.sort!='read_count asc' and param.sort!='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count desc')">조회수</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count asc')">조회수▼</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count asc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('')">조회수▲</th>
+								</c:if>
+								<th>글 선택</th>
+							</c:if>
+						</tr>
+>>>>>>> refs/heads/develop
 
 						<c:if test="${sessionScope.member == 'admin' }">
 
@@ -148,7 +209,6 @@ input[type="checkbox"] {
 											<td bgcolor='pink'>관리자</td>
 											<td bgcolor='pink'>${board.reg_date}</td>
 											<td bgcolor='pink'>${board.read_count}</td>
-											<td bgcolor='pink'></td>
 											<td bgcolor='pink'>※</td>
 										</tr>
 									</c:if>
@@ -168,7 +228,6 @@ input[type="checkbox"] {
 											<td bgcolor='lightblue'>${board.reg_date}</td>
 											<td bgcolor='lightblue'>${board.read_count}</td>
 
-											<td bgcolor='lightblue'></td>
 											<td bgcolor='lightblue'>※</td>
 										</tr>
 									</c:if>
@@ -187,7 +246,6 @@ input[type="checkbox"] {
 									<td align="center">${board.nickname }</td>
 									<td align="center">${board.reg_date }</td>
 									<td align="center">${board.read_count }</td>
-									<td align="center">${board.rec_count }</td>
 									<c:if test="${sessionScope.member == 'admin' }">
 										<td><input type="checkbox" value="${board.b_no }"
 											onclick="handleCheckboxClick(event)"></td>
@@ -198,8 +256,8 @@ input[type="checkbox"] {
 							</c:forEach>
 						</c:if>
 
-												<c:if test="${sessionScope.member == 'person' || sessionScope.member == 'company'}">
-
+						<c:if
+							test="${sessionScope.member == 'person' || sessionScope.member == 'company' || sessionScope.member==null}">
 							<c:if test='${requestScope.boardMap.selectPageNo==1}'>
 								<c:forEach var="board" items="${requestScope.noticeList}"
 									varStatus="status">
@@ -210,7 +268,7 @@ input[type="checkbox"] {
 											<td bgcolor='pink'>관리자</td>
 											<td bgcolor='pink'>${board.reg_date}</td>
 											<td bgcolor='pink'>${board.read_count}</td>
-											<td bgcolor='pink'>※</td>
+											<!-- 											<td bgcolor='pink'>※</td> -->
 										</tr>
 									</c:if>
 								</c:forEach>
@@ -228,8 +286,7 @@ input[type="checkbox"] {
 											<td bgcolor='lightblue'>관리자</td>
 											<td bgcolor='lightblue'>${board.reg_date}</td>
 											<td bgcolor='lightblue'>${board.read_count}</td>
-
-											<td bgcolor='lightblue'>※</td>
+											<!-- 											<td bgcolor='lightblue'>※</td> -->
 										</tr>
 									</c:if>
 								</c:forEach>
@@ -247,7 +304,6 @@ input[type="checkbox"] {
 									<td align="center">${board.nickname }</td>
 									<td align="center">${board.reg_date }</td>
 									<td align="center">${board.read_count }</td>
-									<td align="center">${board.rec_count }</td>
 									<c:if test="${sessionScope.member == 'admin' }">
 										<td><input type="checkbox" value="${board.b_no }"
 											onclick="handleCheckboxClick(event)"></td>
@@ -258,93 +314,88 @@ input[type="checkbox"] {
 							</c:forEach>
 						</c:if>
 					</table>
-		 </form>
-          </div>
-					
-       					<center> 
-       					  <form name="noticeDetailForm" action="/noticeDetail.do"	method="post">
-						<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
-						<input type="hidden" name="n_no"  value="${board.n_no}">
-												
-		       </form>  
-<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-<!--- 게시판 페이징 번호 출력하기.  시작   -->
-<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+				</form>
+			</div>
 
-<span class="pagingNos">
-<c:if test="${requestScope.freedomeListCnt==0}">
-               		<tr>
-			              <center>
-			              	<b>
-			              	조회할 데이터가 없습니다.
-			              	</b>
-			              </center>
-			              </tr>
-			              </c:if>
-		<!--------------------------------------------->
-		<!-- [처음] [이전] 출력하기 -->
-		<!--------------------------------------------->
-		<span style="cursor:pointer" 
-				onClick="pageNoClick(1)">[처음]</span>
-		<span style="cursor:pointer" 
-				onClick="pageNoClick(${requestScope.boardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
-		
-		<!--------------------------------------------->
-		<!--  [반복문 C코어 태그]를 사용하여 페이지 번호 출력하기 -->
-		<!--------------------------------------------->
-		<c:forEach var="pageNo"  begin = "${requestScope.boardMap.begin_pageNo}"    
-								 end   = "${requestScope.boardMap.end_pageNo}">
-			<!--------------------------------------------->
-			<!--  만약에 [선택한 페이지 번호]와 [화면에 출력할 페이지 번호]가 같으면  -->
-			<!--------------------------------------------->
-			<c:if test="${requestScope.boardMap.selectPageNo==pageNo}">
+			<center>
+				<form name="noticeDetailForm" action="/noticeDetail.do"
+					method="post">
+					<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+					<input type="hidden" name="n_no" value="${board.n_no}">
+
+				</form>
+				<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+				<!--- 게시판 페이징 번호 출력하기.  시작   -->
+				<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+
+				<span class="pagingNos"> <c:if
+						test="${requestScope.freedomeListCnt==0}">
+						<tr>
+							<center>
+								<b> 조회할 데이터가 없습니다. </b>
+							</center>
+						</tr>
+					</c:if> <!---------------------------------------------> <!-- [처음] [이전] 출력하기 -->
+					<!---------------------------------------------> <span
+					style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> <span
+					style="cursor: pointer"
+					onClick="pageNoClick(${requestScope.boardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
+
+					<!---------------------------------------------> <!--  [반복문 C코어 태그]를 사용하여 페이지 번호 출력하기 -->
+					<!---------------------------------------------> <c:forEach
+						var="pageNo" begin="${requestScope.boardMap.begin_pageNo}"
+						end="${requestScope.boardMap.end_pageNo}">
+						<!--------------------------------------------->
+						<!--  만약에 [선택한 페이지 번호]와 [화면에 출력할 페이지 번호]가 같으면  -->
+						<!--------------------------------------------->
+						<c:if test="${requestScope.boardMap.selectPageNo==pageNo}">
 				${pageNo}
 			</c:if>
-			<!--------------------------------------------->
-			<!--  만약에 [선택한 페이지 번호]와 [화면에 출력할 페이지 번호]가 다르면  -->
-			<!--------------------------------------------->
-			<c:if test="${requestScope.boardMap.selectPageNo!=pageNo}">
-				<span style="cursor:pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+						<!--------------------------------------------->
+						<!--  만약에 [선택한 페이지 번호]와 [화면에 출력할 페이지 번호]가 다르면  -->
+						<!--------------------------------------------->
+						<c:if test="${requestScope.boardMap.selectPageNo!=pageNo}">
+							<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+						</c:if>
+					</c:forEach>&nbsp;&nbsp; <!---------------------------------------------> <!-- [다음] [마지막] 출력하기 -->
+					<!---------------------------------------------> <span
+					style="cursor: pointer"
+					onClick="pageNoClick(${requestScope.boardMap.selectPageNo}+1)">[다음]</span>
+					<span style="cursor: pointer"
+					onClick="pageNoClick(${requestScope.boardMap.last_pageNo})">[마지막]</span>
+					&nbsp;&nbsp;&nbsp; <!--------------------------------------------->
+					[${requestScope.freedomeListCnt}/${requestScope.freedomeListAllCnt}]개
+
+					<!---------------------------------------------> &nbsp;&nbsp;
+				</span>
+				<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+				<!--- 게시판 페이징 번호 출력하기.  끝   -->
+				<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+
+				<select name="rowCntPerPage" class="rowCntPerPage"
+					onChange="search('freedome')">
+					<option value="10">10
+					<option value="15">15
+					<option value="20">20
+				</select>행보기 &nbsp;&nbsp;&nbsp;
+			</center>
+			<c:if test="${sessionScope.member=='person'}">
+				<center>
+					<input type="button" value="등록"
+						onCLick="location.replace('/freedomeRegForm.do')">
+				</center>
 			</c:if>
-		</c:forEach>&nbsp;&nbsp;
-		<!--------------------------------------------->
-		<!-- [다음] [마지막] 출력하기 -->
-		<!--------------------------------------------->
-		<span style="cursor:pointer" 
-				onClick="pageNoClick(${requestScope.boardMap.selectPageNo}+1)">[다음]</span>
-		<span style="cursor:pointer" 
-				onClick="pageNoClick(${requestScope.boardMap.last_pageNo})">[마지막]</span>
-		&nbsp;&nbsp;&nbsp;		
-		<!--------------------------------------------->
-		[${requestScope.freedomeListCnt}/${requestScope.freedomeListAllCnt}]개 	
-		
-		<!--------------------------------------------->
-		&nbsp;&nbsp;
-</span>
-<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-<!--- 게시판 페이징 번호 출력하기.  끝   -->
-<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+			<c:if test="${sessionScope.member == 'admin' }">
+				<center>
+					<input type="button" value="선택 게시글 삭제"
+						onclick="deleteSelectedPosts('freeboard')">
+				</center>
+			</c:if>
 
-<select name="rowCntPerPage" class="rowCntPerPage" onChange="search('freedome')">
-	<option value="10">10
-	<option value="15">15
-	<option value="20">20
-</select>행보기 &nbsp;&nbsp;&nbsp;
-	</center>
+		</div>
+	</div>
 
-		<center>
-	          <input type="button" value="등록"  onCLick= "location.replace('/freedomeRegForm.do')">
-	                     <c:if test="${sessionScope.member == 'admin' }">
-				<td>	
-				<input type="button" value="선택 게시글 삭제" onclick="deleteSelectedPosts('freeboard')"> </td>
-                  </c:if>
-     </center>
-      
-  </div>
-					
-					</div>
-       
-       
+
 </body>
 	<%@include file="/WEB-INF/views/common.jsp" %>
     <%@ include file="footer.jsp" %>

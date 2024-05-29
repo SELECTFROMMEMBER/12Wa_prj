@@ -78,7 +78,9 @@
 		</table>
 		<br>
         <input type="button" onClick="location.replace('/prj.do')" value=" 목록으로 ">    
+         <c:if test="${sessionScope.p_no==boardDTO.p_no}">
         <input type="button" value="수정/삭제" onclick="document.prjUpDelForm.submit();">
+        </c:if>
         </center>
         
         <!-- 수정 삭제를 위한 히든 태그 선언 -->

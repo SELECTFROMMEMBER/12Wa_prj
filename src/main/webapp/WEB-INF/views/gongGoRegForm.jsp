@@ -622,7 +622,7 @@ function gonGoRegForm(){
                     <input type="text" class="seeker_age" name="seeker_age" class="seeker_age" size="7" value="dd">
                     ~
                     <input type="text" class="seeker_age" name="seeker_age" class="seeker_age" size="7" value="dd">
-                    <input type="checkbox" name="age_irrelevant" value="나이무관">나이무관
+                    <input type="checkbox" value="나이무관">나이무관
                      </td>
                 </tr>
                 <tr>

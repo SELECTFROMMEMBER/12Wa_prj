@@ -76,7 +76,7 @@
                    
                   </c:if>
           </table>
-                   	 <input type="hidden" value="comment_free" name="table" class="table"> 
+                   	 <input type="hidden" value="comment_trade" name="table" class="table"> 
                   	 <input type="hidden" value="${sessionScope.p_no }" name="p_no" class="p_no"> 
                   	 <input type="hidden" value="${boardDTO.b_no }" name="b_no" class="b_no">
                   	 <input type="hidden" name="commentSort" class="commentSort" value="">

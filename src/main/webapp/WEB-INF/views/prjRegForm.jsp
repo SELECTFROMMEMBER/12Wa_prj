@@ -12,9 +12,6 @@
 	  
 	  var formObj    = $("[name='prjRegForm']");
 	  
-	  
-	  alert(formObj.serialize( ));
-	  
 	  $.ajax(
 				{ 
 					//--------------------------------------

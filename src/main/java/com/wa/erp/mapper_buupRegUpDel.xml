@@ -77,7 +77,7 @@
 	    ,pwd
 	)values(
 	    (select nvl(max(b_no),0)+1 from part_time)
-	    ,3
+	    ,#{p_no}
 	    ,#{subject}
 	    ,#{hope_work}
 	    ,#{start_time}

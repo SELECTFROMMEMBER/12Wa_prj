@@ -73,5 +73,14 @@ public interface RegUpDelService {
 		int deleteBlockMember(BoardDTO boardDTO);
 		
 
+		
+		
+		//이력서 등록, 수정, 삭제
+		int  updateResume (BoardDTO boardDTO);
+		int  deleteResume (BoardDTO boardDTO);
+		
+		BoardDTO getResumeForUpDel(int resume_no);	
+		List<BoardDTO> getSkillList(int resume_no);
+	
 
 	}

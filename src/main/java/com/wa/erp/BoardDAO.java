@@ -144,7 +144,7 @@ public interface BoardDAO {
 		
 		
 		
-
+// 관리자 
 		int getMemberListAllCnt(BoardSearchDTO boardSearchDTO);
 
 		int getMemberListCnt(BoardSearchDTO boardSearchDTO);
@@ -156,6 +156,12 @@ public interface BoardDAO {
 		int getBlockMemberListAllCnt(BoardSearchDTO boardSearchDTO);
 
 		List<BoardDTO> getBlockMemberList(BoardSearchDTO boardSearchDTO);
+		
+		
+	//통계
+		List<BoardDTO> getSalaryData();
+
+		List<BoardDTO> getFieldGonggoData();
 
 
 

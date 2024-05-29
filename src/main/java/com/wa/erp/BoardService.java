@@ -118,6 +118,9 @@ public interface BoardService {
 
 		List<BoardDTO> getlikeCompany(int p_no);
 
+
+		
+		//관리자
 		int getMemberListCnt(BoardSearchDTO boardSearchDTO);
 
 		int getMemberListAllCnt(BoardSearchDTO boardSearchDTO);
@@ -131,5 +134,8 @@ public interface BoardService {
 		List<BoardDTO> getBlockMemberList(BoardSearchDTO boardSearchDTO);
 
 		
+//통계
+		List<BoardDTO> getSalaryData();
 
+		List<BoardDTO> getFieldGonggoData();
 }

@@ -87,6 +87,12 @@ input[type="checkbox"] {
 	     document.noticeDetailForm.submit();
 	 
 	}
+	
+	function searchWithSort(sort){
+	      $("[name='boardSearchForm']").find("[name='sort']").val(sort);
+	       $(".searchBtn").click();
+
+	   }
 	</script>
 
 </head>
@@ -109,8 +115,12 @@ input[type="checkbox"] {
 						value="1"> <input type="hidden" name="rowCntPerPage"
 						class="rowCntPerPage"> <input type="hidden"
 						name="boardname" class="boardname" value="newbieboard">
+<<<<<<< HEAD
 						 <input type="hidden" name="sort" class="sort" value="">
 						
+=======
+						<input type="hidden" name="sort" class="sort" value="">
+>>>>>>> refs/heads/develop
 				</div>
 			</form>
 
@@ -124,6 +134,7 @@ input[type="checkbox"] {
 							<th>제목</th>
 							<th>닉네임</th>
 							<th>작성일</th>
+<<<<<<< HEAD
 					         		  <c:if  test="${param.sort!='read_count asc' and param.sort!='read_count desc'}">         
                    <th style="cursor: pointer font-weight: bold;"onClick="searchWithSort('read_count desc')">조회수</th>
                   </c:if>
@@ -134,7 +145,22 @@ input[type="checkbox"] {
                   <th style="cursor: pointer font-weight: bold;"onClick="searchWithSort('')">조회수▲</th>
                   </c:if>
 							<th>추천수</th>
+=======
+							<c:if test="${sessionScope.member!='admin'}">
+								<th>조회수</th>
+							</c:if>
+							<!--                   <th>추천수</th> -->
+>>>>>>> refs/heads/develop
 							<c:if test="${sessionScope.member == 'admin' }">
+								<c:if test="${param.sort!='read_count asc' and param.sort!='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count desc')">조회수</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count asc')">조회수▼</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count asc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('')">조회수▲</th>
+								</c:if>
 								<th>글 선택</th>
 							</c:if>
 						</tr>
@@ -149,9 +175,9 @@ input[type="checkbox"] {
 										<td bgcolor='pink'>${board.subject}</td>
 										<td bgcolor='pink'>관리자</td>
 										<td bgcolor='pink'>${board.reg_date}</td>
-										<td bgcolor='pink'>${board.read_count}</td>
-										<td bgcolor='pink'></td>
-										<td bgcolor='pink'>※</td>
+<%-- 										<td bgcolor='pink'>${board.read_count}</td> --%>
+										<td bgcolor='pink'>${board.read_count }</td>
+										<td bgcolor='pink' >※</td>
 									</tr>
 								</c:if>
 							</c:forEach>
@@ -169,9 +195,9 @@ input[type="checkbox"] {
 										<td bgcolor='lightblue'>${board.subject}</td>
 										<td bgcolor='lightblue'>관리자</td>
 										<td bgcolor='lightblue'>${board.reg_date}</td>
-										<td bgcolor='lightblue'>${board.read_count}</td>
+<%-- 										<td bgcolor='lightblue'>${board.read_count}</td> --%>
 
-										<td bgcolor='lightblue'></td>
+										<td bgcolor='lightblue'>${board.read_count}</td>
 										<td bgcolor='lightblue'>※</td>
 									</tr>
 								</c:if>
@@ -191,7 +217,6 @@ input[type="checkbox"] {
 								<td align="center">${board.nickname }</td>
 								<td align="center">${board.reg_date }</td>
 								<td align="center">${board.read_count }</td>
-								<td align="center">${board.rec_count }</td>
 								<c:if test="${sessionScope.member == 'admin' }">
 									<td><input type="checkbox" value="${board.b_no }"
 										onclick="handleCheckboxClick(event)"></td>
@@ -199,65 +224,64 @@ input[type="checkbox"] {
 							</tr>
 						</c:forEach>
 </c:if>
-												<c:if test="${sessionScope.member == 'person' || sessionScope.member == 'company'}">
+						<c:if test="${sessionScope.member == 'person' || sessionScope.member == 'company' || sessionScope.member==null}">
+							<c:if test='${requestScope.boardMap.selectPageNo==1}'>
+								<c:forEach var="board" items="${requestScope.noticeList}"
+									varStatus="status">
+									<c:if test="${board.category eq 'board'}">
+										<tr onClick="gonoticeDetailForm(${board.n_no})">
+											<td bgcolor='pink'>※</td>
+											<td bgcolor='pink'>${board.subject}</td>
+											<td bgcolor='pink'>관리자</td>
+											<td bgcolor='pink'>${board.reg_date}</td>
+											<td bgcolor='pink'>${board.read_count}</td>
+											<!-- 										<td bgcolor='pink'>※</td> -->
+										</tr>
+									</c:if>
+								</c:forEach>
+							</c:if>
 
-						<c:if test='${requestScope.boardMap.selectPageNo==1}'>
-							<c:forEach var="board" items="${requestScope.noticeList}"
+
+
+
+							<c:if test='${requestScope.boardMap.selectPageNo==1}'>
+								<c:forEach var="board" items="${requestScope.noticeList}"
+									varStatus="status">
+									<c:if test="${board.category eq 'newbie'}">
+										<tr onClick="gonoticeDetailForm(${board.n_no})">
+											<td bgcolor='lightblue'>※</td>
+											<td bgcolor='lightblue'>${board.subject}</td>
+											<td bgcolor='lightblue'>관리자</td>
+											<td bgcolor='lightblue'>${board.reg_date}</td>
+											<td bgcolor='lightblue'>${board.read_count}</td>
+
+											<!-- 										<td bgcolor='lightblue'>※</td> -->
+										</tr>
+									</c:if>
+								</c:forEach>
+							</c:if>
+
+
+
+							<c:forEach var="board" items="${requestScope.newComerList }"
 								varStatus="status">
-								<c:if test="${board.category eq 'board'}">
-									<tr onClick="gonoticeDetailForm(${board.n_no})">
-										<td bgcolor='pink'>※</td>
-										<td bgcolor='pink'>${board.subject}</td>
-										<td bgcolor='pink'>관리자</td>
-										<td bgcolor='pink'>${board.reg_date}</td>
-										<td bgcolor='pink'>${board.read_count}</td>
-										<td bgcolor='pink'>※</td>
-									</tr>
-								</c:if>
+
+								<tr style="cursor: pointer"
+									onCLick="goBoardDetailForm(${board.b_no},'newComer', 'newbieboard','newbie','');">
+									<td align="center">
+										${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
+									<td align="center">${board.subject }</td>
+									<td align="center">${board.nickname }</td>
+									<td align="center">${board.reg_date }</td>
+									<td align="center">${board.read_count }</td>
+									<%-- 								<td align="center">${board.rec_count }</td> --%>
+									<c:if test="${sessionScope.member == 'admin' }">
+										<td><input type="checkbox" value="${board.b_no }"
+											onclick="handleCheckboxClick(event)"></td>
+									</c:if>
+								</tr>
 							</c:forEach>
 						</c:if>
-
-						
-						
-
-						<c:if test='${requestScope.boardMap.selectPageNo==1}'>
-							<c:forEach var="board" items="${requestScope.noticeList}"
-								varStatus="status">
-								<c:if test="${board.category eq 'newbie'}">
-									<tr onClick="gonoticeDetailForm(${board.n_no})">
-										<td bgcolor='lightblue'>※</td>
-										<td bgcolor='lightblue'>${board.subject}</td>
-										<td bgcolor='lightblue'>관리자</td>
-										<td bgcolor='lightblue'>${board.reg_date}</td>
-										<td bgcolor='lightblue'>${board.read_count}</td>
-
-										<td bgcolor='lightblue'>※</td>
-									</tr>
-								</c:if>
-							</c:forEach>
-						</c:if>
-
-
-
-						<c:forEach var="board" items="${requestScope.newComerList }"
-							varStatus="status">
-
-							<tr style="cursor: pointer"
-								onCLick="goBoardDetailForm(${board.b_no},'newComer', 'newbieboard','newbie','');">
-								<td align="center">
-									${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
-								<td align="center">${board.subject }</td>
-								<td align="center">${board.nickname }</td>
-								<td align="center">${board.reg_date }</td>
-								<td align="center">${board.read_count }</td>
-								<td align="center">${board.rec_count }</td>
-								<c:if test="${sessionScope.member == 'admin' }">
-									<td><input type="checkbox" value="${board.b_no }"
-										onclick="handleCheckboxClick(event)"></td>
-								</c:if>
-							</tr>
-						</c:forEach>
-			</c:if>
 					</table>
 				</div>
 				<center>
@@ -301,15 +325,32 @@ input[type="checkbox"] {
 					
 					</select>행보기 &nbsp;&nbsp;&nbsp;
 				</center>
-          <center>
-								<input type="button" value="등록" onCLick="location.replace('/newComerRegForm.do')">
-					<c:if test="${sessionScope.member == 'admin' }">
-						<td><input type="button" value="선택 게시글 삭제"
-							onclick="deleteSelectedPosts('newbieboard')"></td>
-					</c:if>
-				</center>
+				
+				<c:if test="${sessionScope.member=='person'}">
+					<center>
+						<input type="button" value="등록"
+							onCLick="location.replace('/newComerRegForm.do')">
+					</center>
+				</c:if>
+						<c:if test="${sessionScope.member == 'admin' }">
+							<center>
+							<input type="button" value="선택 게시글 삭제"
+								onclick="deleteSelectedPosts('newbieboard')"></td>
+							</center>
+						</c:if>
+
+			</form>
+<!-- ======= -->
+<!--           <center> -->
+<!-- 								<input type="button" value="등록" onCLick="location.replace('/newComerRegForm.do')"> -->
+<%-- 					<c:if test="${sessionScope.member == 'admin' }"> --%>
+<!-- 						<td><input type="button" value="선택 게시글 삭제" -->
+<!-- 							onclick="deleteSelectedPosts('newbieboard')"></td> -->
+<%-- 					</c:if> --%>
+<!-- 				</center> -->
       
-						</form>
+<!-- 						</form> -->
+<!-- >>>>>>> refs/heads/develop -->
   </div>
        <form name="noticeDetailForm" action="/noticeDetail.do"	method="post">
 						<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->

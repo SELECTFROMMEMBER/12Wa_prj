@@ -639,7 +639,9 @@
 			#{item}
 		</foreach>
 	</delete>
-
+	
+	
+<!--  관리자 페이지 -->
 <delete id="deletePersonMember"
 		parameterType="com.wa.erp.BoardDTO">
 		DELETE FROM person_mem
@@ -694,6 +696,323 @@
 			separator="," close=")">
 			#{item}
 		</foreach>
+		</delete>
+		<!-- 이력서 정보 수정, 삭제  -->
+	
+		
+<!--  이력서에 단일 정보로만 들어가는 데이터 검색 -->
+<select id="getResume" parameterType="com.wa.erp.BoardDTO"  resultType="com.wa.erp.BoardDTO">
+     
+	 SELECT
+	        r.resume_no,
+	        p.p_no,
+	        p.name ,
+	        p.addr ,
+	        p.phone,
+	        a.name1,
+	        a.type1,
+	        a.organizer1,
+	        a.award_no1,
+	        a.name2,
+	        a.type2,
+	        a.name3,
+	        a.type3,
+	        a.name4,
+	        a.type4,
+	        ca.career1,
+	        ca.career2,
+	        ca.career3,
+	        ca.career4,
+	        ca.career5,
+	        l.license_name1,
+	        l.license_name2,
+	        l.license_name3,
+	        l.license_name4,
+	        l.license_name5,
+	        p.email,
+	        c.field_name,
+	        p.sex,
+	        CASE
+	            WHEN SUBSTR(p.jumin_num, 7, 1) = '1' THEN '19'
+	            WHEN SUBSTR(p.jumin_num, 7, 1) = '2' THEN '19'
+	            ELSE '20'
+	        END || SUBSTR(p.jumin_num, 1, 2) || '-' || SUBSTR(p.jumin_num, 3, 2) || '-' || SUBSTR(p.jumin_num, 5, 2) AS birth,
+	        TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(
+	            CASE
+	                WHEN SUBSTR(p.jumin_num, 7, 1) = '1' THEN '19'
+	                WHEN SUBSTR(p.jumin_num, 7, 1) = '2' THEN '19'
+	                ELSE '20'
+	            END || SUBSTR(p.jumin_num, 1, 2)
+	        ) AS age,
+	        p.is_job,
+	        r.married,
+	        r.military,
+	        r.hope_salary,
+	        r.introduce,
+	        e.school_name,
+	        e.education,
+	        to_char(e.enter_date,'YYYY-MM-DD') as enter_date, 
+	        to_char(e.graduation_date,'YYYY-MM-DD') as graduation_date
+	    FROM
+	        resume r
+	
+	    JOIN
+	        person_mem p ON p.p_no = r.p_no
+	    JOIN
+	        code_field c ON p.field_code = c.field_code
+	    LEFT JOIN
+	        awards a ON r.resume_no = a.resume_no
+	    LEFT JOIN
+	        career ca ON r.resume_no = ca.resume_no
+	    LEFT JOIN
+	        person_license l on r.resume_no=l.resume_no
+	     LEFT JOIN
+	        education e on r.resume_no=e.resume_no
+	    
+	    WHERE
+	      r.resume_no =  #{resume_no}
+
+	     
+</select>
+
+
+<select id="getSkillList" parameterType="int" resultType="String">
+		select
+		 
+		    c.skill_name
+ 
+		from
+		    person_skill ps, code_skill c, resume r
+		
+		where
+		     r.resume_no = #{resume_no}
+		and
+		     ps.skill_code = c.skill_code
+		and
+		     r.resume_no = ps.resume_no
+		    
+</select>
+
+<!--  수정할 이력서 개수  -->
+<select  id="getResumeCnt"  parameterType="int"  resultType="int">
+		 select count(*) from resume where resume_no = #{resume_no}
+</select>
+
+
+
+<!--  이력서 테이블 컬럼만 업데이트 수정구문  -->
+<update id="updateResume" parameterType="com.wa.erp.BoardDTO">
+    update 
+        resume
+    set
+        married          = #{married},
+        military           = #{military},
+        introduce       = #{introduce},
+        hope_salary = #{hope_salary}
+    where 
+        resume_no = #{resume_no}
+</update> 
+
+
+ <!-- 수상경력 업데이트      name1= 대회이름,  organizer1=개최자 , award_no1= 상장번호 type1= 수상명  --> 
+ 
+<update id="updateAwards" parameterType="com.wa.erp.BoardDTO">
+    update 
+        awards
+    set
+        name1         = #{name1},
+        type1           = #{type1},
+        organizer1  = #{organizer1},
+        award_no1 = #{award_no1}
+        
+        <if test="name2 != null and name2 != ''">
+            ,name2 = #{name2}
+        </if>
+        <if test="organizer2 != null and organizer2 != ''">
+            ,organizer2 = #{organizer2}
+        </if>
+        <if test="type2 != null and type2 != ''">
+            ,type2 = #{type2}
+        </if>
+        <choose>
+            <when test="award_no2 == 0">
+                ,award_no2 = null
+            </when>
+            <otherwise>
+                ,award_no2 = #{award_no2}
+            </otherwise>
+        </choose>
+        
+        <if test="name3 != null and name3 != ''">
+            ,name3 = #{name3}
+        </if>
+        <if test="organizer3 != null and organizer3 != ''">
+            ,organizer3 = #{organizer3}
+        </if>
+        <if test="type3 != null and type3 != ''">
+            ,type3 = #{type3}
+        </if>
+        <choose>
+            <when test="award_no3 == 0">
+                ,award_no3 = null
+            </when>
+            <otherwise>
+                ,award_no3 = #{award_no3}
+            </otherwise>
+        </choose>
+        
+        <if test="name4 != null and name4 != ''">
+            ,name4 = #{name4}
+        </if>
+        <if test="organizer4 != null and organizer4 != ''">
+            ,organizer4 = #{organizer4}
+        </if>
+        <if test="type4 != null and type4 != ''">
+            ,type4 = #{type4}
+        </if>
+        <choose>
+            <when test="award_no4 == 0">
+                ,award_no4 = null
+            </when>
+            <otherwise>
+                ,award_no4 = #{award_no4}
+            </otherwise>
+        </choose>
+        
+    where 
+        resume_no = #{resume_no}
+</update>
+
+
+
+<!--  최종학력 업데이트  -->
+ 
+<update id="updateEducation" parameterType="com.wa.erp.BoardDTO">
+    update education
+    set
+        school_name = #{school_name},
+        education        = #{education},
+        enter_date       = #{enter_date},
+        graduation_date = #{graduation_date}
+    where 
+        resume_no = #{resume_no}
+</update>
+
+
+<!-- 경력 업데이트  -->
+
+<update id="updateCareer" parameterType="com.wa.erp.BoardDTO">
+    update career
+    set
+        career1 = #{career1}
+        <if test="career2 != null and career2 != ''">
+            ,career2 = #{career2}
+        </if>
+        <if test="career3 != null and career3 != ''">
+           , career3 = #{career3}
+        </if>
+        <if test="career4 != null and career4 != ''">
+           ,career4 = #{career4}
+        </if>
+        <if test="career5 != null and career5 != ''">
+           , career5 = #{career5}
+        </if>
+    where 
+       resume_no = #{resume_no}
+</update>
+
+
+
+<!--  보유자격증 업데이트  -->
+
+<update id="updatePerson_license" parameterType="com.wa.erp.BoardDTO">
+    update person_license
+    set
+        license_name1 = #{license_name1}
+        <if test="license_name2 != null and license_name2 != ''">
+           , license_name2 = #{license_name2}
+        </if>
+        <if test="license_name3 != null and license_name3 != ''">
+            ,license_name3 = #{license_name3}
+        </if>
+        <if test="license_name4 != null and license_name4 != ''">
+           , license_name4 = #{license_name4}
+        </if>
+        <if test="license_name5 != null and license_name5 != ''">
+           , license_name5 = #{license_name5}
+        </if>
+    where 
+       resume_no = #{resume_no}
+</update>
+
+
+
+
+<!--  보유스킬 삭제하고 다시 넣기  -->
+<delete id="deletePersonSkill" parameterType="com.wa.erp.BoardDTO">
+   delete 
+        from 
+           person_skill
+     where 
+         resume_no = #{resume_no}
+</delete>
+
+
+<insert id="insertSkill_Code1" parameterType="com.wa.erp.BoardDTO">
+    insert into 
+          person_skill (resume_no, skill_code)
+    <foreach collection="skill_code" item="tmp" open="(" close=")" separator="union all">
+        select
+            #{resume_no},
+            #{tmp}
+        from dual
+    </foreach>
+</insert>
+
+
+<delete id="deleteResume" parameterType="com.wa.erp.BoardDTO">
+    delete from 
+        resume
+    where 
+        resume_no = #{resume_no}
+</delete>
+
+<delete id="deleteAwards" parameterType="com.wa.erp.BoardDTO">
+    delete from 
+        awards
+    where 
+        resume_no = #{resume_no}
+</delete>
+
+<delete id="deletePerson_license" parameterType="com.wa.erp.BoardDTO">
+    delete from 
+        person_license
+    where 
+        resume_no = #{resume_no}
+</delete>
+
+
+<delete id="deleteEducation" parameterType="com.wa.erp.BoardDTO">
+    delete from 
+        education
+    where 
+        resume_no = #{resume_no}
+</delete>
+
+<delete id="deleteCareer" parameterType="com.wa.erp.BoardDTO">
+    delete from 
+        career
+    where 
+        resume_no = #{resume_no}
+</delete>
+
+  <delete id="deletePrivacy" parameterType="com.wa.erp.MypageDTO">
+	delete
+		from person_mem
+	where
+		p_no = #{p_no}
+		and
+		pwd = #{pwd}
 	</delete>
 </mapper>
  

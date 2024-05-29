@@ -142,8 +142,9 @@
 
 
 	 <span style= cursor:pointer  onClick="location.replace('/timeShare.do')">[목록으로]</span>
+	 <c:if test="${sessionScope.p_no==timeShareDTO.p_no}">
      <input type="button" value="수정/삭제" onclick="document.timeShareUpDelForm.submit();">
-
+	</c:if>
 
 	<form name="timeShareDetailForm" action="/timeShareDetailForm.do" method="post">
 		<input type="hidden" name="b_no" value="${requestScope.timeShareDTO.b_no}">

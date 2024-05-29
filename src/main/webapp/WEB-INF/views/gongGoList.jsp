@@ -247,8 +247,6 @@
             
              <%-- ${requestScope.gonggoListCnt - status.index } --%>
                  기업: ${gonggo.name} <br>
-                 학력: ${gonggo.graduation}<br>
-                 경력: ${gonggo.career}<br>
                  주소: ${gonggo.work_place}<br>
                  업종: ${gonggo.business_industry}	
          <%--         ${requestScope.BoardDTO.role}
@@ -290,9 +288,9 @@
                         
                 </c:if>
  	  
- 	
+ 		<c:if test="${sessionScope.member=='company'}">
  		<input type="button" value="등록" onClick="location.replace('/gongGoRegForm.do')">
- 						
+ 		</c:if>
  		<form name="gonggoDetailForm" action="/gonggoDetailForm.do" method="post">
  			<input type="hidden" name="g_no" class="g_no">
  		</form>

@@ -48,7 +48,6 @@
 	function gonggoSupportForm() {
 	
 		var formObj = $("[name='getgonggoSupportForm']");
-		alert(formObj.serialize())
 
 		$.ajax({
 
@@ -105,7 +104,7 @@
 				<tr>
 					<c:if test="${requestScope.GonggoDTO.seeker_age!='~' }">
 						<td>나이 : ${requestScope.GonggoDTO.seeker_age}
-							${requestScope.GonggoDTO.age_irrelevant}</td>
+							</td>
 
 					</c:if>
 					<c:if test="${requestScope.GonggoDTO.seeker_age=='~'}">
@@ -375,7 +374,9 @@
   	
   	</table>
   	<c:if test="${sessionScope.member=='person'}">
+  	<center>
   		<input type="button" value="입사지원하기" onClick="gonggoSupportForm();"> 
+  	</center>
   	</c:if>
   	<c:if test="${sessionScope.c_no == GonggoDTO.c_no}">
   		<input type="button" value="수정/삭제"

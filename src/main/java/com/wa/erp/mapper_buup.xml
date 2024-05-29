@@ -42,7 +42,7 @@
        	
 		</if>	
          
-          <if test="keyword!=null and keyword.length()>0">
+	     <if test="keyword!=null and keyword.length()>0">
 		 		and ( 
 					upper(name) like upper('%${keyword}%')
 					or
@@ -51,6 +51,8 @@
 					upper(subject) like upper('%${keyword}%')
 					or
 					upper(addr) like upper('%${keyword}%')
+					or
+					upper(hope_work) like upper('%${keyword}%')
 					)
 		   </if>
 		   
@@ -58,9 +60,26 @@
 	         and(
 	         upper(addr) like upper('%${work_place}%')
 	         )
-	
 	      </if>
-		 	
+	      
+	<if test="BuupsearchType != null and BuupsearchType != ''" >
+	    <if test="BuupsearchType == 'subject'">
+	    and  upper(subject) like upper('%${keyword}%')
+	    </if>
+	    <if test="BuupsearchType == 'name'">
+	    and    upper(name) like upper('%${keyword}%')
+	    </if>
+	    <if test="BuupsearchType == 'content'">
+	     and    upper(content) like upper('%${keyword}%')
+	    </if>
+	    <if test="BuupsearchType == 'phone'">
+	     and    upper(phone) like upper('%${keyword}%')
+	    </if>
+	    <if test="BuupsearchType == 'hope_work'">
+	    and     upper(hope_work) like upper('%${keyword}%')
+	    </if>
+	</if>
+
 		  <if test="sort==null or sort.length()==0">
            order by b_no desc 
           </if>
@@ -117,8 +136,6 @@
            r.resume_no=l.resume_no
 	</select>
 	
-	
-	
 	<!-- 부업 리스트 개수 -->
 	<select id="getbuupListCnt" parameterType="com.wa.erp.BuupSearchDTO"   
 			resultType="int">
@@ -151,7 +168,7 @@
        	]]>			
 	    </if>
       	      
-		 <if test="keyword!=null and keyword.length()>0">
+		     <if test="keyword!=null and keyword.length()>0">
 		 		and ( 
 					upper(name) like upper('%${keyword}%')
 					or
@@ -160,15 +177,35 @@
 					upper(subject) like upper('%${keyword}%')
 					or
 					upper(addr) like upper('%${keyword}%')
+					or
+					upper(hope_work) like upper('%${keyword}%')
 					)
 		   </if>
 		   
 		   <if test="work_place !=null">
 	         and(
 	         upper(addr) like upper('%${work_place}%')
-	         )
-	
+	         )	
 	      </if>
+	      
+	<if test="BuupsearchType != null and BuupsearchType != ''" >
+	    <if test="BuupsearchType == 'subject'">
+	    and  upper(subject) like upper('%${keyword}%')
+	    </if>
+	    <if test="BuupsearchType == 'name'">
+	    and    upper(name) like upper('%${keyword}%')
+	    </if>
+	    <if test="BuupsearchType == 'content'">
+	     and    upper(content) like upper('%${keyword}%')
+	    </if>
+	    <if test="BuupsearchType == 'phone'">
+	     and    upper(phone) like upper('%${keyword}%')
+	    </if>
+	    <if test="BuupsearchType == 'hope_work'">
+	    and     upper(hope_work) like upper('%${keyword}%')
+	    </if>
+	</if>
+
 		 	
 		  <if test="sort==null or sort.length()==0">
            order by b_no desc 

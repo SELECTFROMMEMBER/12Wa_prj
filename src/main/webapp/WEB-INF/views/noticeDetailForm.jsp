@@ -27,7 +27,6 @@
 
     function search() {
         var commentFormObj = $("[name='commentRegForm']");
-        alert(commentFormObj.serialize());
         return;
         $.ajax({
             url: "/freedomeDetailForm.do",

@@ -33,6 +33,11 @@ function gonoticeDetailForm(n_no){
      document.noticeDetailForm.submit();
  
 }
+function searchWithSort(sort){
+    $("[name='boardSearchForm']").find("[name='sort']").val(sort);
+     $(".searchBtn").click();
+
+ }
   </script>
 </head>
 <body>
@@ -53,6 +58,7 @@ function gonoticeDetailForm(n_no){
             <input type="button" value="검색"   class="searchBtn" onclick="search('qna')"></input>
             <input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
+			<input type="hidden" name="sort" class="sort" value="">
         </div>
      </form>
       
@@ -66,9 +72,20 @@ function gonoticeDetailForm(n_no){
 							<th>제목</th>
 							<th>닉네임</th>
 							<th>작성일</th>
-							<th>조회수</th>
-							<th>추천수</th>
+							<c:if test="${sessionScope.member!='admin'}">
+								<th>조회수</th>
+							</c:if>
+							<!--                   <th>추천수</th> -->
 							<c:if test="${sessionScope.member == 'admin' }">
+								<c:if test="${param.sort!='read_count asc' and param.sort!='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count desc')">조회수</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count desc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('read_count asc')">조회수▼</th>
+								</c:if>
+								<c:if test="${param.sort=='read_count asc'}">
+									<th style="cursor: pointer font-weight: bold;" onClick="searchWithSort('')">조회수▲</th>
+								</c:if>
 								<th>글 선택</th>
 							</c:if>
 						</tr>
@@ -85,7 +102,6 @@ function gonoticeDetailForm(n_no){
 										<td bgcolor='pink'>관리자</td>
 										<td bgcolor='pink'>${board.reg_date}</td>
 										<td bgcolor='pink'>${board.read_count}</td>
-										<td bgcolor='pink'></td>
 										<td bgcolor='pink'>※</td>
 									</tr>
 								</c:if>
@@ -102,8 +118,6 @@ function gonoticeDetailForm(n_no){
 										<td bgcolor='lightblue'>관리자</td>
 										<td bgcolor='lightblue'>${board.reg_date}</td>
 										<td bgcolor='lightblue'>${board.read_count}</td>
-
-										<td bgcolor='lightblue'></td>
 										<td bgcolor='lightblue'>※</td>
 									</tr>
 								</c:if>
@@ -124,7 +138,6 @@ function gonoticeDetailForm(n_no){
 								<td align="center">${board.nickname }</td>
 								<td align="center">${board.reg_date }</td>
 								<td align="center">${board.read_count }</td>
-								<td align="center">${board.rec_count }</td>
 								<c:if test="${sessionScope.member == 'admin' }">
 									<td><input type="checkbox" value="${board.b_no }"
 										onclick="handleCheckboxClick(event)"></td>
@@ -132,64 +145,64 @@ function gonoticeDetailForm(n_no){
 							</tr>
 						</c:forEach>
 					</c:if>
-					
-					
-					
-												<c:if test="${sessionScope.member == 'person' || sessionScope.member == 'company'}">
-				
-									<c:if test='${requestScope.boardMap.selectPageNo==1}'>
-							<c:forEach var="board" items="${requestScope.noticeList}"
+
+
+
+						<c:if
+							test="${sessionScope.member == 'person' || sessionScope.member == 'company' || sessionScope.member==null}">
+							<c:if test='${requestScope.boardMap.selectPageNo==1}'>
+								<c:forEach var="board" items="${requestScope.noticeList}"
+									varStatus="status">
+									<c:if test="${board.category eq 'board'}">
+										<tr onClick="gonoticeDetailForm(${board.n_no})">
+											<td bgcolor='pink'>※</td>
+											<td bgcolor='pink'>${board.subject}</td>
+											<td bgcolor='pink'>관리자</td>
+											<td bgcolor='pink'>${board.reg_date}</td>
+											<td bgcolor='pink'>${board.read_count}</td>
+											<!-- 										<td bgcolor='pink'>※</td> -->
+										</tr>
+									</c:if>
+								</c:forEach>
+							</c:if>
+
+							<c:if test='${requestScope.boardMap.selectPageNo==1}'>
+								<c:forEach var="board" items="${requestScope.noticeList}"
+									varStatus="status">
+									<c:if test="${board.category eq 'qna'}">
+										<tr onClick="gonoticeDetailForm(${board.n_no})">
+											<td bgcolor='lightblue'>※</td>
+											<td bgcolor='lightblue'>${board.subject}</td>
+											<td bgcolor='lightblue'>관리자</td>
+											<td bgcolor='lightblue'>${board.reg_date}</td>
+											<td bgcolor='lightblue'>${board.read_count}</td>
+											<!-- 										<td bgcolor='lightblue'>※</td> -->
+										</tr>
+									</c:if>
+								</c:forEach>
+							</c:if>
+
+
+
+
+							<c:forEach var="board" items="${requestScope.qnaList }"
 								varStatus="status">
-								<c:if test="${board.category eq 'board'}">
-									<tr onClick="gonoticeDetailForm(${board.n_no})">
-										<td bgcolor='pink'>※</td>
-										<td bgcolor='pink'>${board.subject}</td>
-										<td bgcolor='pink'>관리자</td>
-										<td bgcolor='pink'>${board.reg_date}</td>
-										<td bgcolor='pink'>${board.read_count}</td>
-										<td bgcolor='pink'>※</td>
-									</tr>
-								</c:if>
+
+
+								<tr style="cursor: pointer"
+									onClick="goBoardDetailForm(${board.b_no},'qna', 'qnaboard', 'qna','');">
+									<td align="center">
+										${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
+									<td align="center">${board.subject }</td>
+									<td align="center">${board.nickname }</td>
+									<td align="center">${board.reg_date }</td>
+									<td align="center">${board.read_count }</td>
+									<c:if test="${sessionScope.member == 'admin' }">
+										<td><input type="checkbox" value="${board.b_no }"
+											onclick="handleCheckboxClick(event)"></td>
+									</c:if>
+								</tr>
 							</c:forEach>
-						</c:if>
-
-						<c:if test='${requestScope.boardMap.selectPageNo==1}'>
-							<c:forEach var="board" items="${requestScope.noticeList}"
-								varStatus="status">
-								<c:if test="${board.category eq 'qna'}">
-									<tr onClick="gonoticeDetailForm(${board.n_no})">
-										<td bgcolor='lightblue'>※</td>
-										<td bgcolor='lightblue'>${board.subject}</td>
-										<td bgcolor='lightblue'>관리자</td>
-										<td bgcolor='lightblue'>${board.reg_date}</td>
-										<td bgcolor='lightblue'>${board.read_count}</td>
-										<td bgcolor='lightblue'>※</td>
-									</tr>
-								</c:if>
-							</c:forEach>
-						</c:if>
-
-						
-						
-						
-						<c:forEach var="board" items="${requestScope.qnaList }"
-							varStatus="status">
-
-							
-								<tr style="cursor: pointer" onClick="goBoardDetailForm(${board.b_no},'qna', 'qnaboard', 'qna','');">
-	<td align="center">
-									${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
-								<td align="center">${board.subject }</td>
-								<td align="center">${board.nickname }</td>
-								<td align="center">${board.reg_date }</td>
-								<td align="center">${board.read_count }</td>
-								<td align="center">${board.rec_count }</td>
-								<c:if test="${sessionScope.member == 'admin' }">
-									<td><input type="checkbox" value="${board.b_no }"
-										onclick="handleCheckboxClick(event)"></td>
-								</c:if>
-							</tr>
-						</c:forEach>
 						</c:if>
 					</table>
       	</div>
@@ -236,14 +249,17 @@ function gonoticeDetailForm(n_no){
 						<option value="20">20
 					</select>행보기 &nbsp;&nbsp;&nbsp;
 				</center>
-				<center>
-          <input type="button" value="등록" onCLick= "location.replace('/qnaRegForm.do')">
+				<c:if test="${sessionScope.member=='person'}">
+					<center>
+						<input type="button" value="등록"
+							onCLick="location.replace('/qnaRegForm.do')">
+					</center>
+				</c:if>
           					<c:if test="${sessionScope.member == 'admin' }">
-						<td><input type="button" value="선택 게시글 삭제"
-							onclick="deleteSelectedPosts('qnaboard')"></td>
+						<center><input type="button" value="선택 게시글 삭제"
+							onclick="deleteSelectedPosts('qnaboard')"></center>
 					</c:if>
-     </center>
-      </form>
+			</form>
   </div>
   		
    </div>

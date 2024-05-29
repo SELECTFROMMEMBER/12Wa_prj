@@ -1060,7 +1060,7 @@ public class RegUpDelController {
 				
 				//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 				//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-				// /timeShareUpProc.do 접속 시 호출되는 메소드 선언
+				// /PrivacyUpProc.do 접속 시 호출되는 메소드 선언
 				// <참고> boardUpDelForm.jsp 에서 수정 버튼 클릭했을 때 접속할 때 호출되는 메소드
 				//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 					@RequestMapping( 
@@ -1095,6 +1095,115 @@ public class RegUpDelController {
 						return resultMap;
 					    }
 					
+
+					
+					//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+					//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+					// /PrivacyDelProc.do 접속 시 호출되는 메소드 선언
+					//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+					@RequestMapping( 
+							value="/PrivacyDelProc.do" 
+							,method=RequestMethod.POST
+							,produces="application/json;charset=UTF-8"
+					)
+					@ResponseBody
+					public Map<String,String> PrivacyDelProc( 
+							MypageDTO mypageDTO
+					){
+					Map<String,String> resultMap = new HashMap<String,String>();
+					
+					int PrivacyDelCnt = this.regUpDelService.deletePrivacy(mypageDTO);
+
+					resultMap.put( "result", PrivacyDelCnt+"" );
+					
+					return resultMap;
+					}
+				
+				
+					//============================================================
+					// 이력서 수정,삭제
+					//============================================================
+					@RequestMapping( value ="/resumeUpDelForm.do")
+					   public ModelAndView resumeUpDelForm( 
+					   
+						@RequestParam(value="p_no") int p_no	
+						,@RequestParam(value="resume_no") int resume_no	
+					    ){
+				       List<BoardDTO> skillList = this.regUpDelService.getSkillList(resume_no);
+				        BoardDTO boardDTO = this.regUpDelService.getResumeForUpDel(resume_no);
+						//System.out.println(skillList);
+				        //System.out.println(skillList);
+
+						ModelAndView mav = new ModelAndView( );
+						mav.addObject("skillList",skillList);
+						mav.addObject("boardDTO", boardDTO);
+						mav.setViewName("resumeUpDelForm.jsp");
+			
+						return mav;
+					}
+			
+					//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+					//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+					// /ResumeUpProc.do 접속 시 호출되는 메소드 선언
+					// <참고> resumeUpDelForm.jsp 에서 수정 버튼 클릭했을 때 접속할 때 호출되는 메소드   (이력서 수정)
+					//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+					@RequestMapping( 
+						value="/resumeUpProc.do" 
+						,method=RequestMethod.POST
+						,produces="application/json;charset=UTF-8"
+				    	)
+					   @ResponseBody
+					    public Map<String,String> resumeUpProc( 
+						
+						BoardDTO boardDTO
+					    ){
+						//------------------------------------------------
+						// 이력서 수정 결과물을 저장할 HashMap 객체 생성하기.
+						//------------------------------------------------
+						Map<String,String> resultMap = new HashMap<String,String>();
+
+						//-------------------------------------------
+						// [regUpDelService 객체]의 updateResume 메소드 호출로 
+						// 이력서 수정하고 [이력서 적용행의 개수] 얻기
+						//-------------------------------------------
+						int ResumeUpCnt = this.regUpDelService.updateResume(boardDTO);
+						//-------------------------------------------
+						// HashMap 객체에 게시판 수정 행의 개수 저장하기
+						//-------------------------------------------
+						resultMap.put( "result", ResumeUpCnt+"" );
+
+						//-------------------------------------------
+						// HashMap 객체의 메위주 리턴하기
+						//-------------------------------------------
+						return resultMap;
+					    }
+
+					
+						//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+						//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+						// /ResumeDelProc.do 접속 시 호출되는 메소드 선언      (회원탈퇴)
+						//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+						@RequestMapping( 
+						value="/resumeDelProc.do" 
+						,method=RequestMethod.POST
+						,produces="application/json;charset=UTF-8"
+						)
+						@ResponseBody
+						public Map<String,String> resumeDelProc( 
+						
+						BoardDTO boardDTO
+						){
+						Map<String,String> resultMap = new HashMap<String,String>();
+						
+						int ResumeDelCnt = this.regUpDelService.deleteResume(boardDTO);
+    
+						resultMap.put( "result", ResumeDelCnt+"" );
+						
+						return resultMap;
+						}
+
+				
+
 		
 					@RequestMapping( 
 						    value="/deletePersonMemberProc.do", 

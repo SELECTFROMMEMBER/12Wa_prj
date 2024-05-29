@@ -902,6 +902,8 @@ public class BoardController {
 					BoardSearchDTO boardSearchDTO
 
 					) {
+				List<BoardDTO> getSalaryData = this.boardService.getSalaryData();
+				List<BoardDTO> getFieldData = this.boardService.getFieldGonggoData();
 				int noticeListCnt = this.boardService.getnoticeListCnt( boardSearchDTO );
 				Map<String,Integer> boardMap = Util.getPagingMap(
 						boardSearchDTO.getSelectPageNo()	//선택한 페이지 번호
@@ -912,8 +914,30 @@ public class BoardController {
 				boardSearchDTO.setBegin_rowNo(   (int)boardMap.get("begin_rowNo")   ); 
 				boardSearchDTO.setEnd_rowNo(     (int)boardMap.get("end_rowNo")     );		//검색결과 개수
 				List<BoardDTO> noticeList = this.boardService.getMainNoticeList(boardSearchDTO);
+				
+				List<Integer> SalaryList = new ArrayList<>();
+				List<String> Range = new ArrayList<>();
+				List<Integer> gonggoCnt = new ArrayList<>();
+				List<String> Field = new ArrayList<>();
+				
+				for (BoardDTO boardDTO : getSalaryData) {
+					SalaryList.add(boardDTO.getCount_c_no());
+					Range.add("'"+boardDTO.getSal_avg_range()+"'");	
+				}
+				for(int i=0; i<getFieldData.size(); i++) {
+					BoardDTO boardDTO= getFieldData.get(i);
+					gonggoCnt.add(boardDTO.getGonggoCnt());
+					Field.add("'"+boardDTO.getField()+"'");
+				}
 
+				System.out.print(Range);
+				
 				ModelAndView mav = new ModelAndView();
+				mav.addObject("SalaryData",SalaryList);
+				mav.addObject("Range",Range);
+				mav.addObject("gonggoCnt",gonggoCnt);
+				mav.addObject("Field",Field);
+				
 				mav.addObject("noticeList", noticeList);
 				mav.setViewName("main.jsp");
 				return mav;
