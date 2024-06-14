@@ -900,10 +900,13 @@ public class BoardController {
 			@RequestMapping( value ="/12Wa.do")
 			public ModelAndView Wa12(
 					BoardSearchDTO boardSearchDTO
-
+					, HttpSession session
 					) {
+				//아무나 접속
 				List<BoardDTO> getSalaryData = this.boardService.getSalaryData();
 				List<BoardDTO> getFieldData = this.boardService.getFieldGonggoData();
+				List<BoardDTO> getRegionCounts = this.boardService.getRegionCounts();
+				
 				int noticeListCnt = this.boardService.getnoticeListCnt( boardSearchDTO );
 				Map<String,Integer> boardMap = Util.getPagingMap(
 						boardSearchDTO.getSelectPageNo()	//선택한 페이지 번호
@@ -914,30 +917,94 @@ public class BoardController {
 				boardSearchDTO.setBegin_rowNo(   (int)boardMap.get("begin_rowNo")   ); 
 				boardSearchDTO.setEnd_rowNo(     (int)boardMap.get("end_rowNo")     );		//검색결과 개수
 				List<BoardDTO> noticeList = this.boardService.getMainNoticeList(boardSearchDTO);
+				List<BoardDTO> popularCom = this.boardService.getpopularCom();
 				
 				List<Integer> SalaryList = new ArrayList<>();
 				List<String> Range = new ArrayList<>();
 				List<Integer> gonggoCnt = new ArrayList<>();
+				List<Integer> companyCnt = new ArrayList<>();
 				List<String> Field = new ArrayList<>();
+				
 				
 				for (BoardDTO boardDTO : getSalaryData) {
 					SalaryList.add(boardDTO.getCount_c_no());
 					Range.add("'"+boardDTO.getSal_avg_range()+"'");	
 				}
+
 				for(int i=0; i<getFieldData.size(); i++) {
 					BoardDTO boardDTO= getFieldData.get(i);
-					gonggoCnt.add(boardDTO.getGonggoCnt());
-					Field.add("'"+boardDTO.getField()+"'");
+					gonggoCnt.add(boardDTO.getGonggo_count());
+					companyCnt.add(boardDTO.getCompany_count());
+					Field.add("'"+boardDTO.getField_name()+"'");
 				}
-
-				System.out.print(Range);
 				
 				ModelAndView mav = new ModelAndView();
+				//기업 로그인 시
+				if("company".equals(session.getAttribute("member"))) {
+					List<BoardDTO> getHope_Salary = this.boardService.getHope_Salary();
+					List<BoardDTO> getHope_Field = this.boardService.getHope_Field();
+					List<BoardDTO> getPer_RegionCnt = this.boardService.getPer_Region();
+					
+					List<Integer> Hope_Cnt = new ArrayList<>();
+					List<String> Salary_Range = new ArrayList<>();
+					List<Integer> Hope_PerCnt = new ArrayList<>();
+					List<Integer> Apply_Cnt = new ArrayList<>();
+					List<String> Hope_Field = new ArrayList<>();
+					
+					for(int i=0; i<getHope_Salary.size(); i++) {
+						BoardDTO boardDTO= getHope_Salary.get(i);
+						Hope_Cnt.add(boardDTO.getHope_cnt());
+						Salary_Range.add("'"+boardDTO.getSalary_range()+"'");
+					}
+					for(int i=0; i<getHope_Field.size(); i++) {
+						BoardDTO boardDTO= getHope_Field.get(i);
+						Hope_PerCnt.add(boardDTO.getHope_cnt());
+						Apply_Cnt.add(boardDTO.getApply_cnt());					
+						Hope_Field.add("'"+boardDTO.getField_name()+"'");
+					}
+					
+					mav.addObject("Hope_Cnt",Hope_Cnt);
+					mav.addObject("Salary_Range",Salary_Range);
+					mav.addObject("Hope_PerCnt",Hope_PerCnt);
+					mav.addObject("Apply_Cnt",Apply_Cnt);
+					mav.addObject("Hope_Field",Hope_Field);
+					mav.addObject("getPer_RegionCnt",getPer_RegionCnt);
+				}
+				
+				//관리자 로그인시
+				if("admin".equals(session.getAttribute("member"))) {
+					BoardDTO getSexRatio = this.boardService.getSexRatio();
+					BoardDTO getMemberRatio = this.boardService.getMemberRatio();
+					List<BoardDTO> getMemberPerMonthCnt = this.boardService.getMemberPerMonthCnt();
+
+					List<String> month = new ArrayList<>();
+		            List<Integer> company_count = new ArrayList<>();
+		            List<Integer> person_count = new ArrayList<>();
+		            
+		            for(int i=0; i<getMemberPerMonthCnt.size(); i++) {
+		                  BoardDTO boardDTO= getMemberPerMonthCnt.get(i);
+		                  month.add("'"+boardDTO.getMonth()+"'");
+		                  company_count.add(boardDTO.getCompany_count());
+		                  person_count.add(boardDTO.getPerson_count());
+		               }
+
+
+					
+					mav.addObject("getSexRatio",getSexRatio);
+					mav.addObject("getMemberRatio",getMemberRatio);
+					mav.addObject("month",month);
+		            mav.addObject("company_count",company_count);
+		            mav.addObject("person_count",person_count);
+
+				}
+				
 				mav.addObject("SalaryData",SalaryList);
 				mav.addObject("Range",Range);
 				mav.addObject("gonggoCnt",gonggoCnt);
+				mav.addObject("companyCnt",companyCnt);
 				mav.addObject("Field",Field);
-				
+				mav.addObject("RegionCount",getRegionCounts);				
+				mav.addObject("popularCom", popularCom);
 				mav.addObject("noticeList", noticeList);
 				mav.setViewName("main.jsp");
 				return mav;

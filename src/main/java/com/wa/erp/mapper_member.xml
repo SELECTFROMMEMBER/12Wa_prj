@@ -61,7 +61,7 @@
 			c_no
 			,url
 			,volume
-			,business_industry
+			,field_code
 			,birth
 			,sales
 			,addr
@@ -72,7 +72,7 @@
 			#{mem_c_no}
 			,#{url}
 			,#{volume}
-			,#{business_industry}
+			,#{field_code}
 			,TO_CHAR(#{birth}, 'YYYY-MM-DD')
 			,#{sales}
 			,#{addr1}||' '||#{addr2}||' '||#{addr3}

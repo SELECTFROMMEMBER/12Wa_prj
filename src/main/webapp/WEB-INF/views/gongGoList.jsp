@@ -189,7 +189,7 @@
          
           
            
- 	            <input type="text" class="keyword" name="keyword" placeholder="검색어를 입력하세요">
+ 	            <input type="text" class="keyword" name="keyword" placeholder="검색어를 입력하세요">&nbsp;
  	            <input type="button"   value="검색" class="searchBtn" onClick="searchForm()"></input>
  	            
  	            
@@ -203,18 +203,37 @@
 
 
  <br>
+ <br>
  <center>
 
 
    	<!-- 게시판 목록 출력하기. 시작 -->
  	  <div class="gongGoListDiv">
  	
- 	<table class="gongGoTable" border="0" align="center" style="border-collapse:collapse" cellpadding="10">	
+ 	<table class="gongGoTable" border="0" align="center" style="border-collapse:collapse" cellpadding="10" >	
  	
  	<tr>
  	    <th>기업</th>
  	
  		</th>
+ 		<c:if test="${param.sort!='work_place asc' and param.sort!='work_place desc'}" >
+ 		<th width="220" style="cursor:pointer"onClick="searchWithSort('work_place desc')">주소</th>
+ 	</c:if>
+ 	<c:if test="${param.sort=='work_place desc'}">
+ 		<th width="220" style="cursor:pointer"onClick="searchWithSort('work_place asc')">주소▲</th>
+ 	</c:if>
+ 	<c:if test="${param.sort=='work_place asc'}">
+ 		<th width="220" style="cursor:pointer"onClick="searchWithSort('')">주소▼</th>
+ 	  </c:if>
+ 		<c:if test="${param.sort!='business_industry asc' and param.sort!='business_industry desc'}" >
+ 		<th width="220" style="cursor:pointer"onClick="searchWithSort('business_industry desc')">업종</th>
+ 	</c:if>
+ 	<c:if test="${param.sort=='business_industry desc'}">
+ 		<th width="220" style="cursor:pointer"onClick="searchWithSort('business_industry asc')">업종▲</th>
+ 	</c:if>
+ 	<c:if test="${param.sort=='business_industry asc'}">
+ 		<th width="220" style="cursor:pointer"onClick="searchWithSort('')">업종▼</th>
+ 	  </c:if>
  		<!-- <th width="100">등록일</th> -->
  	<c:if test="${param.sort!='gonggoreg_date asc' and param.sort!='gonggoreg_date desc'}" >
  		<th width="120" style="cursor:pointer"onClick="searchWithSort('gonggoreg_date desc')">등록일</th>
@@ -247,15 +266,21 @@
             
              <%-- ${requestScope.gonggoListCnt - status.index } --%>
                  기업: ${gonggo.name} <br>
-                 주소: ${gonggo.work_place}<br>
-                 업종: ${gonggo.business_industry}	
+                 학력: ${gonggo.graduation}<br>
+                 경력: ${gonggo.career}<br>
+                 
          <%--         ${requestScope.BoardDTO.role}
                  ${requestScope.BoardDTO.graduation} --%>
          
            </div>    
          </div>
      </td>
-            
+      <td>
+            ${gonggo.work_place}	
+            </td>
+            <td>
+            ${gonggo.business_industry}	
+            </td>
              <td>${gonggo.gonggoreg_date }</td>
                 <td>
                 <c:if test ="${gonggo.due_date > 0 }" >
@@ -289,8 +314,11 @@
                 </c:if>
  	  
  		<c:if test="${sessionScope.member=='company'}">
+ 		<br>
  		<input type="button" value="등록" onClick="location.replace('/gongGoRegForm.do')">
+ 		
  		</c:if>
+ 		
  		<form name="gonggoDetailForm" action="/gonggoDetailForm.do" method="post">
  			<input type="hidden" name="g_no" class="g_no">
  		</form>
@@ -309,6 +337,7 @@
   <!--------------------------------------------->
     <!-- [처음] [이전] 출력하기 -->
     <!--------------------------------------------->
+    <br>
    <span style="cursor:pointer" 
 				onClick="pageNoClick(1)">[처음]</span>
 		<span style="cursor:pointer" 
@@ -353,7 +382,7 @@
        <option value="10">10
        <option value="15">15
        <option value="20">20
-    </select>행보기 &nbsp;&nbsp;&nbsp;
+    </select>&nbsp;&nbsp;&nbsp;행보기 <br>
  	  </div> 
   	</div>
   		<script src="js/slideshow.js"></script>

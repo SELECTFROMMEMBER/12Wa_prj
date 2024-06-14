@@ -21,8 +21,9 @@
   	$(".role").val("캥거루");
 
   	$(".graduation:eq(1)").prop("checked",true);
-  	$(".seeker_sex:eq(1)").prop("checked",true);
-  	$(".seeker_age").val("캥거루");
+//   	$(".seeker_sex:eq(1)").prop("checked",true);
+  	$(".seeker_age1").val("25");
+  	$(".seeker_age2").val("22");
   	$(".salary").val("2000");
   	$(".content2").val("2000");
   	
@@ -37,6 +38,8 @@
   }
   </script>
  <script>
+
+ 
  //  ---------------------------- 연봉 히든태그 ------------------------
    function toggleOtherSalary() {
             var selectBox = document.getElementById("salary");
@@ -154,7 +157,7 @@
 
 
 /////////////////////필수/우대///////////////////////
-function add_row_plisu() {
+function add_row_plus() {
 	
     // 테이블의 ID를 이용하여 테이블 요소를 가져옵니다.
     var table = document.getElementById("benefit_row");
@@ -304,17 +307,12 @@ function add_row_seorew() {
     deleteButton.type = "button";
     deleteButton.value = "삭제";
     deleteButton.onclick = delete_row_seorew;
-    cell2.appendChild(deleteButton);
-    
-    
+    cell2.appendChild(deleteButton);        
 }
-
 function delete_row_seorew(event) {
 	
     var row = event.target.parentNode.parentNode;
     row.parentNode.removeChild(row);
-    
-	
 }
 
 // 첫 번째 셀렉트박스 비활성화 해제
@@ -322,72 +320,220 @@ window.onload = function() {
     var firstSelect = document.getElementById("process_code1");
     firstSelect.disabled = false;
 };
-
-
-
      
 // 공고 등록
 function gonGoRegForm(){
+	
 	var formObj = $("[name='gongGo']");
-// 	// 세부분야 네임 값
-// 	var field_detail1Obj = $("input[name='field_detail1']")
-// 	var field_detail2Obj = $("input[name='field_detail2']").val()
-// 	var field_detail3Obj = $("input[name='field_detail3']").val()
-// 	// 담당자 성함
-// 	var manager_nameObj = formObj.find(".manager_name");
-	
-// 	 var dept_code1Obj = formObj.find(".dept_code1");
-// 	var position_code1Obj = formObj.find(".position_code1");
-// 	var field_detail1Obj = formObj.find(".field_detail1");
-// 	var content1Obj = formObj.find(".content1");
-	
-// 	var field_detail2Obj = formObj.find(".field_detail2");
-// 	var field_detail1_text1Obj = formObj.find("#field_detail1_text1");
-	
-// 	 var dept_code2Obj = formObj.find(".dept_code2");
-// 	var position_code2Obj = formObj.find(".position_code2");
-// 	var content2Obj = formObj.find(".content2");
-	
-// 	 var dept_code3Obj = formObj.find(".dept_code3");
-// 	var position_code3Obj = formObj.find(".position_code3");
-// 	var content3Obj = formObj.find(".content3");
-	
-	
-	
-// 		if( new RegExp(/^[가-힣]{2,15}$/).test(manager_nameObj.val())==false ){
-// 			alert("작성자는 2~15자 한글이어야합니다.");
-// 			manager_nameObj.val("");
-// 			return false;
-// 		}
 
-// 		if(dept_code1Obj.val() === "" || position_code1Obj.val() === "" || ( field_detail1Obj.val() != "," && textBox1 == "") || content1Obj.val() === ""){
-// 			alert("부서,직책,분야,업무내용을 작성해주세요1");
-// 			return false;
-// 		}
+	//담당자 성함
+	var manager_nameObj = formObj.find(".manager_name");
+//부서/직책/분야/내용
+	 var dept_code1Obj = formObj.find(".dept_code1");
+	var position_code1Obj = formObj.find(".position_code1");
+	var field_detail1Obj = formObj.find(".field_detail1");	
+	var fidel_detail1_textObj = formObj.find("#field_detail1_text1");
+	var content1Obj = formObj.find(".content1");
+	
+	 var dept_code2Obj = formObj.find(".dept_code2");
+		var position_code2Obj = formObj.find(".position_code2");
+		var field_detail2Obj = formObj.find(".field_detail2");	
+		var fidel_detail2_textObj = formObj.find("#field_detail_text2");
+		var content2Obj = formObj.find(".content2");
+		
+		 var dept_code3Obj = formObj.find(".dept_code3");
+			var position_code3Obj = formObj.find(".position_code3");
+			var field_detail3Obj = formObj.find(".field_detail3");	
+			var fidel_detail3_textObj = formObj.find("#field_detail_text3");
+			var content3Obj = formObj.find(".content3");
+		// 주소
+		var work_place1Obj = formObj.find(".work_place1");
+		var work_place2Obj = formObj.find(".work_place2");
+		var work_place3Obj = formObj.find(".work_place3");
+		//경력여부
+		var careerObj = formObj.find(".career");
+		// 필수/우대조건
+		 var choice1Obj =  formObj.find('input[name=choice1]');  
+		 var benefit_code1Obj = formObj.find("select[name='benefit_code1']");
+		 var choice2Obj =  formObj.find('input[name=choice2]');  
+		 var benefit_code2Obj = formObj.find("select[name='benefit_code2']");
+		 var choice3Obj =  formObj.find('input[name=choice3]');  
+		 var benefit_code3Obj = formObj.find("select[name='benefit_code3']");
+		 var choice4Obj =  formObj.find('input[name=choice4]');  
+		 var benefit_code4Obj = formObj.find("select[name='benefit_code4']");
+		 var choice5Obj =  formObj.find('input[name=choice5]');  
+		 var benefit_code5Obj = formObj.find("select[name='benefit_code5']");
+		 //최종학력
+		 var graduationObj = formObj.find("select[name='graduation']");
+		 //지원자 성별
+		 var seeker_sexObj = formObj.find(".seeker_sex");
+		 //나이
+		 var seeker_age1Obj = formObj.find(".seeker_age1");
+		 var seeker_age2Obj = formObj.find(".seeker_age2");
+		 var age_irrelevantObj = formObj.find("#age_irrelevant");
+// 		  //전형방법
+		  var process_code1Obj = formObj.find("select[name='process_code1']");
+		  var process_code2Obj = formObj.find("select[name='process_code2']");
+		  var process_code3Obj = formObj.find("select[name='process_code3']");
+		  var process_code4Obj = formObj.find("select[name='process_code4']");
+		  var process_code5Obj = formObj.find("select[name='process_code5']");
+		  var process_code6Obj = formObj.find("select[name='process_code6']");
+		  var process_code7Obj = formObj.find("select[name='process_code7']");
+ 		//  공고등록 날짜
+ 		var opendateObj = formObj.find(".opendate");
+ 		var closedateObj = formObj.find(".closedate");
 
-//  		if( /* field_detail1Obj .val() == "" || */  field_detail1_text1Obj.val() == ""){
-// 			alert("부서,직책,분야,업무내용을 작성해주세요1");
-//  			return false;
-// 		} 
  		
-//  		if( /* field_detail1Obj .val() == "" || */  field_detail2_text1Obj.val() == ""){
-// 			alert("부서,직책,분야,업무내용을 작성해주세요2");
-//  			return false;
-// 		} 
-	/* 	if(dept_code2Obj.val() === "" || position_code2Obj.val() === "" || field_detail2Obj === "" || content2Obj.val() === ""){
-			alert("부서,직책,분야,업무내용을 작성해주세요2");
+		
+		 
+		if( new RegExp(/^[가-힣]{2,15}$/).test(manager_nameObj.val())==false ){
+			alert("담당자 성함은 2~15자 한글이어야합니다.");
+			manager_nameObj.val("");
 			return false;
-		}		
-		if(dept_code3Obj.val() === "" || position_code3Obj.val() === "" || field_detail3Obj === "" || content3Obj.val() === ""){
+		}
+ 		if(dept_code1Obj.val() === "" || position_code1Obj.val() === ""  || content1Obj.val() === ""){
+ 			 			alert("부서,직책,분야,업무내용을 작성해주세요1");
+ 			return false;
+ 		}
+	if(field_detail1Obj.val() == ',' && fidel_detail1_textObj.val() == '' || field_detail1Obj.val() == ''){
+		alert("부서,직책,분야,업무내용을 작성해주세요1")
+		return false;
+	}
+ 		if(dept_code2Obj.val() === "" || position_code2Obj.val() === ""  || content2Obj.val() === ""){
+ 			 			alert("부서,직책,분야,업무내용을 작성해주세요2");
+ 			return false;
+ 		}
+	if(field_detail2Obj.val() == ',' && fidel_detail2_textObj.val() == '' || field_detail2Obj.val() == ''){
+		alert("부서,직책,분야,업무내용을 작성해주세요2")
+		return false;
+	}
+	if(dept_code3Obj.val() === "" || position_code3Obj.val() === ""  || content3Obj.val() === ""){
 			alert("부서,직책,분야,업무내용을 작성해주세요3");
-			return false;
-		}		 */
-		
+return false;
+}
+if(field_detail3Obj.val() == ',' && fidel_detail3_textObj.val() == '' || field_detail3Obj.val() == ''){
+alert("부서,직책,분야,업무내용을 작성해주세요3")
+return false;
+}
  		
+  		if(work_place1Obj.val() == '시/도 선택' || work_place2Obj.val()=='구/군 선택'|| work_place3Obj.val() ==''){
+  			alert("주소를 입력해 주세요")
+  			return false;
+  		}
 	
-		
-		
-	$.ajax(
+  		if(careerObj.is(':checked') == false){
+  		    alert("경력 여부를 선택해 주세요");
+  		    return false;
+ 		}
+	
+	if(choice1Obj.is(':checked') == true && benefit_code1Obj.val() == ''){
+		alert("필수/우대 조건을 선택해 주세요1")
+		return false;
+	}
+	if(choice1Obj.is(':checked') == false && benefit_code1Obj.val() != ''){
+		alert("필수/우대 조건을 선택해 주세요1")
+		return false;
+	}
+	
+	if(choice2Obj.is(':checked') == true && benefit_code2Obj.val() == ''){
+		alert("필수/우대 조건을 선택해 주세요2")
+		return false;
+	}
+// 	if(benefit_code2Obj.val() != ''&&  choice2Obj.is(':checked') == false  ){
+// 		alert("필수/우대 조건을 선택해 주세요2")
+// 		return false;
+// 	}
+	
+	if(choice3Obj.is(':checked') == true && benefit_code3Obj.val() == ''){
+		alert("필수/우대 조건을 선택해 주세요3")
+		return false;
+	}
+// 	if(choice3Obj.is(':checked') == false && benefit_code3Obj.val() != ''){
+// 		alert("필수/우대 조건을 선택해 주세요3")
+// 		return false;
+// 	}
+	
+	if(choice4Obj.is(':checked') == true && benefit_code4Obj.val() == ''){
+		alert("필수/우대 조건을 선택해 주세요4")
+		return false;
+	}
+// 	if(choice4Obj.is(':checked') == false && benefit_code4Obj.val() != ''){
+// 		alert("필수/우대 조건을 선택해 주세요4")
+// 		return false;
+// 	}
+	
+	if(choice5Obj.is(':checked') == true && benefit_code5Obj.val() == ''){
+		alert("필수/우대 조건을 선택해 주세요5")
+		return false;
+	}
+// 	if(choice5Obj.is(':checked') == false && benefit_code5Obj.val() != ''){
+// 		alert("필수/우대 조건을 선택해 주세요5")
+// 		return false;
+// 	}
+	
+	
+	if(graduationObj.val()==''){
+		alert("최종학력을 선택해주세요")
+		return false;
+	}
+	if(seeker_sexObj.is(':checked') == false){
+		    alert("지원자 성별을 선택해 주세요");
+		    return false;
+		}
+	if(new RegExp(/^[0-9]{1,2}$/).test(seeker_age1Obj.val()) == false && age_irrelevantObj.is(':checked')== false ){
+		alert("지원자의 나이는 2자리까지만 입력해주세요1");
+		return false;
+	} 
+	if(new RegExp(/^[0-9]{1,2}$/).test(seeker_age2Obj.val()) == false && age_irrelevantObj.is(':checked') == false){
+		alert("지원자의 나이는 2자리까지만 입력해주세요2");
+		return false;
+		} 
+	
+	if((seeker_age1Obj.val() > seeker_age2Obj.val()) && age_irrelevantObj.is(':checked') == false){
+		alert("나이를 정확히 입력해주세요")
+		return false;
+	}
+
+	if(age_irrelevantObj.is(':checked') == true && seeker_age1Obj.val() != ''&& seeker_age2Obj.val() != ''){
+		alert("나이를 적고 나이무관을 선택하면 나이무관이 선택됩니다.");
+	}
+	  alert(closedateObj.val())
+	if(opendateObj.val() > closedateObj.val()){
+		alert("공고 시작일은 마지막일보다 작아야 합니다.")
+		return false;
+	}
+	
+	if(process_code1Obj.val() != '1'){
+		alert("1 - 첫번째에 서류전형을 선택해주세요")
+		process_code1Obj.val('1');
+		return false;
+	}
+	if(process_code2Obj. val() == '1'){
+		alert("2 - 중복으로 서류전형을 선택할 수 없습니다.")
+		process_code2Obj.val('2');
+		return false;
+	}
+	if ( process_code2Obj. val() == '3' || process_code2Obj. val() == '4' ){
+		alert("2 - 면접은 1차면접부터 선택해주세요.")
+		process_code2Obj.val('2');
+		return false;
+	}
+	if (process_code3Obj. val() == '4' || process_code3Obj. val() == '1' || process_code3Obj. val() == '2'){
+		alert("3 - 2차면접부터 선택해주세요")
+		process_code3Obj. val('3');
+		return false;
+	}
+
+		if(age_irrelevantObj.is(':checked')  == true){
+			seeker_age1Obj.remove();
+			seeker_age2Obj.remove();
+			$("#age_irrelevant").attr("name","seeker_age");
+
+		}
+
+
+
+	$.ajax( 
 			{ 
 				
 				url    : "/gongGoReg.do"
@@ -476,8 +622,8 @@ function gonGoRegForm(){
                           <option value="전략기획">전략기획</option>
                         <option value="경영지원">경영지원</option>
                         <option value="인사">인사</option>
-                        <option value="회계">회계</option>
-                        <option value="사무보조">사무보조</option>
+                        <option value="회계" >회계</option>
+                        <option value="사무보조" >사무보조</option>
                         <option value="영업">영업</option>
                         <option value="고객상담">고객상담</option>
                         <option value="마케팅·MD">마케팅·MD</option>
@@ -529,16 +675,18 @@ function gonGoRegForm(){
               <tr>
                 <td>주소</td>
                 <td>
-                  <select  name="work_place1" value="work_place" id="sido1"></select>
-                  <select   name="work_place2" value="work_place" id="gugun1"></select>&nbsp;
-                  <input type="text" name="work_place3" id="work_place" value="나머지 상세주소" onfocus="if(this.value=='나머지 상세주소') this.value='';"></td>
+                  <select  name="work_place1" value="work_place" id="sido1" class="work_place1"></select>
+                  <select   name="work_place2" value="work_place" id="gugun1" class="work_place2"></select>&nbsp;
+                  <input type="text" name="work_place3" id="work_place" value="나머지 상세주소" onfocus="if(this.value=='나머지 상세주소') this.value='';"
+                	  class="work_place3"
+                  ></td>
 			 </tr>
               
              	
 				<tr>
                   <td>경력여부</td>
                   <td>
-                  <input type="radio" name="career" id="career" class="career" value="신입" checked> 신입
+                  <input type="radio" name="career" id="career" class="career" value="신입" > 신입
                   <input type="radio" name="career" id="career" class="career" value="경력"> 경력
                   <input type="radio" name="career" id="career" class="career" value="경력무관"> 경력무관
                   </td>
@@ -555,10 +703,10 @@ function gonGoRegForm(){
     <tr>
         <td>필수/우대 조건</td>
         <td>
-       
-            <input type="radio" name="choice1" value="필수" class="choice1" id="choice1" checked > 필수
+      
+            <input type="radio" name="choice1" value="필수" class="choice1" id="choice1"  > 필수
             <input type="radio" name="choice1" value="우대" class="choice1" id="choice1"> 우대
-            <select name="benefit_code1" id="benefit_code" class="benefit_code1">
+            <select name="benefit_code1" id="benefit_code" class="benefit_code1" >
             	<option value="">필수/우대조건 선택</option> 
                 <option value="1">운전면허</option>
                 <option value="2">지게차운전기능사</option>
@@ -578,7 +726,7 @@ function gonGoRegForm(){
             </select>
              
             
-             <input type="button" onclick="add_row_plisu();" value="추가"> 
+             <input type="button" onclick="add_row_plus();" value="추가"> 
 
              <!-- 행 전체삭제 -->
              <!-- <input type="button" value="삭제" onclick="delete_row(this)"> -->
@@ -612,35 +760,37 @@ function gonGoRegForm(){
                     <td>
                     <input type="radio" class="seeker_sex" name="seeker_sex" value="남"> 남
                     <input type="radio" class="seeker_sex" name="seeker_sex" value="여"> 여
-                    <input type="radio" class="seeker_sex" name="seeker_sex" value="성별무관" checked> 성별무관
+                    <input type="radio" class="seeker_sex" name="seeker_sex" value="성별무관" > 성별무관
                      </td>
                 </tr>
                 
                 <tr>
                     <td>나이</td>
                     <td>
-                    <input type="text" class="seeker_age" name="seeker_age" class="seeker_age" size="7" value="dd">
+                    <input type="text"  name="seeker_age" class="seeker_age1" size="7" >
                     ~
-                    <input type="text" class="seeker_age" name="seeker_age" class="seeker_age" size="7" value="dd">
-                    <input type="checkbox" value="나이무관">나이무관
+                    <input type="text"  name="seeker_age" class="seeker_age2" size="7" >
+                    <input type="checkbox" value="나이무관"  id="age_irrelevant">나이무관
                      </td>
                 </tr>
                 <tr>
                 <td>연봉</td>
                 <td>
-                <select id="salary" class="salary" name="salary" onchange="toggleOtherSalary()">
-            <option value="1000">2000만원 이하</option>
-            <option value="2000">2000~3000만원</option>  
-            <option value="3000">3000~4000만원</option>                        
-            <option value="4000">4000~5000만원</option>     
-            <option value="5000">5000~6000만원</option>
-            <option value="6000">6000~7000만원</option>
-            <option value="7000">7000~8000만원</option>
-            <option value="8000">8000~9000만원</option>
+               <input type="text" id="salary" name="salary" placeholder="(선택) 직접기입" > 
+                
+            <!--     <select id="salary" class="salary" name="salary" onchange="toggleOtherSalary()">
+            <option value="1000">1000만원</option>
+            <option value="2000">2000만원</option>  
+            <option value="3000">3000만원</option>                        
+            <option value="4000">4000만원</option>     
+            <option value="5000">5000만원</option>
+            <option value="6000">6000만원</option>
+            <option value="7000">7000만원</option>
+            <option value="8000">8000만원</option>
             <option value="10000">1억 이상</option>                       
             <option value="0">직접 입력</option>
         </select>
-        <input type="text" id="other_salary" name="other_salary" placeholder="(선택) 직접기입" class="hidden">
+        <input type="text" id="other_salary" name="other_salary" placeholder="(선택) 직접기입" class="hidden"> -->
                    
                   
                    
@@ -656,7 +806,7 @@ function gonGoRegForm(){
 						class="opendate"
 						 name="opendate" value="2000-01-01" min="1970-01-01" max="2040-12-31" />
 						 <label for="closedate">공고마지막날짜:</label> 
-						<input type="date" id="closedate" name="closedate" value="2000-01-01" min="1970-01-01" max="2040-12-31" />
+						<input type="date" id="closedate" class="closedate" name="closedate" value="2000-01-01" min="1970-01-01" max="2040-12-31" />
                 </td>
             </tr>
            
@@ -717,6 +867,7 @@ function gonGoRegForm(){
           </table>
          
      		<input type="hidden" name="c_no" value="${sessionScope.c_no}">
+     	
  		
           
           

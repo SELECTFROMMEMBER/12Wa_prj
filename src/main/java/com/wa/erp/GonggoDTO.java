@@ -21,7 +21,6 @@ public class GonggoDTO {
 	private String trade_type;
 	private int price;
 
-
 	private String indus;
 	private int sales;
 	private int sal_avg;
@@ -31,6 +30,8 @@ public class GonggoDTO {
 	private String preferred_work;
 	private String start_time;
 	private String end_time;
+	
+	
 
 	private int star;
 	private double star_avg;
@@ -91,6 +92,7 @@ public class GonggoDTO {
 	private String work_place3;
 	private String business_industry;
 	private String other_salary;
+	
 
 	private String dept_name;
 	private String dept_name2;
@@ -129,7 +131,7 @@ public class GonggoDTO {
 	private String seeker_age1;
 	private String seeker_age2;
 
-	private int salary;
+	private String  salary;
 	private String attendencetime;
 	private String leaveworktime;
 	private Date opendate;
@@ -189,7 +191,6 @@ public class GonggoDTO {
 	private int order_no7;
 
 	private String gonggoreg_date;
-	private String age_irrelevant;
 	
 	private String ph_d_candidate;
 	private String career;
@@ -1099,11 +1100,13 @@ public class GonggoDTO {
 		this.seeker_age2 = seeker_age2;
 	}
 
-	public int getSalary() {
+
+
+	public String getSalary() {
 		return salary;
 	}
 
-	public void setSalary(int salary) {
+	public void setSalary(String salary) {
 		this.salary = salary;
 	}
 
@@ -1483,13 +1486,6 @@ public class GonggoDTO {
 		this.gonggoreg_date = gonggoreg_date;
 	}
 
-	public String getAge_irrelevant() {
-		return age_irrelevant;
-	}
-
-	public void setAge_irrelevant(String age_irrelevant) {
-		this.age_irrelevant = age_irrelevant;
-	}
 
 	public String getPh_d_candidate() {
 		return ph_d_candidate;

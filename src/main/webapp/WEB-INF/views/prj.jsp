@@ -10,7 +10,46 @@
 <html>
 
 <head>
+<style>
+	    /* Form container */
+    .form-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
+    /* Text input field */
+    .keyword {
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+        width: 200px; /* Adjust width as needed */
+    }
+
+    /* Search button */
+    .searchBtn {
+        padding: 5px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    /* Search button hover effect */
+    .searchBtn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Select box */
+    select {
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+    }
+    
+</style>
 <script>
 	
 	   //현재 채용가능 글만 보기 함수

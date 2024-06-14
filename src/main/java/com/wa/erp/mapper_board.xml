@@ -98,8 +98,8 @@
                   )
      	 </if>
 		
-		 <if test="selectedIndustry!=null and selectedIndustry.length()>0">
-		 and business_industry = #{selectedIndustry}
+		 <if test="selectfield_code!=0">
+		 and field_code= #{selectfield_code}
 		 </if>
 		
 		 <if test="keyword!=null and keyword.length()>0">
@@ -170,8 +170,8 @@
                   )
      	 </if>
 		
-		 <if test="selectedIndustry!=null and selectedIndustry.length()>0">
-		 and business_industry = #{selectedIndustry}
+		 <if test="selectfield_code!=0">
+		 and field_code = #{selectfield_code}
 		 </if>
 		
 		 <if test="keyword!=null and keyword.length()>0">
@@ -583,18 +583,22 @@ group by m.c_no
 </select>
 
 <select id="getFieldGonggoData" resultType="com.wa.erp.BoardDTO">
-		SELECT
-        COUNT(*) AS gonggoCnt,
-        c.BUSINESS_INDUSTRY AS field
-    from company_info c
-    
-    left join
-    
-        gonggo g
-    on
-        g.c_no = c.c_no
-    GROUP BY
-        c.BUSINESS_INDUSTRY
+	SELECT
+	    c.field_name,
+	    COUNT(DISTINCT i.c_no) AS company_count,
+	    COUNT(DISTINCT g.c_no) AS gonggo_count
+	FROM
+	    code_field c
+	LEFT JOIN
+	    company_info i ON c.field_code = i.field_code
+	LEFT JOIN
+	    company_mem m ON i.c_no = m.c_no
+	LEFT JOIN
+	    gonggo g ON m.c_no = g.c_no
+	GROUP BY
+	    c.field_code, c.field_name
+	ORDER BY
+	    c.field_code
 </select>
 	<!--	
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -775,5 +779,164 @@ FROM (
 	where
 		 is_block='block'
 </select>
+
+<select id="getpopularCom" resultType="com.wa.erp.BoardDTO">
+	select 
+    * 
+    from
+    (
+        select 
+            rownum "RNUM",zxcv.*  
+        from
+            (select
+            	c.c_no,
+                c.name
+             from
+                company_mem c, company_info i
+             where
+                c.c_no = i.c_no
+              order by
+                i.rec_count desc) zxcv
+             ) 
+    where 
+    <![CDATA[
+        RNUM >= 1 and RNUM <=5
+	]]>
+</select>
+
+<select id="getRegionCounts" resultType="com.wa.erp.BoardDTO">
+	SELECT
+	    SUM(CASE WHEN SUBSTR(addr, 1, 2) = '서울' THEN 1 ELSE 0 END) AS count_seoul,
+	    SUM(CASE WHEN SUBSTR(addr, 1, 2) = '부산' THEN 1 ELSE 0 END) AS count_busan,
+	    SUM(CASE WHEN SUBSTR(addr, 1, 2) = '인천' THEN 1 ELSE 0 END) AS count_incheon,
+	    SUM(CASE WHEN SUBSTR(addr, 1, 2) = '경기' THEN 1 ELSE 0 END) AS count_gyeonggi,
+	    SUM(CASE WHEN SUBSTR(addr, 1, 2) = '강원' THEN 1 ELSE 0 END) AS count_gangwon
+	FROM
+	    company_info
+</select>
+
+<select id="getHope_Salary"  resultType="com.wa.erp.BoardDTO">
+WITH SALARY_RANGES AS (
+    SELECT '2000-2499' AS SALARY_RANGE FROM DUAL UNION ALL
+    SELECT '2500-2999' FROM DUAL UNION ALL
+    SELECT '3000-3499' FROM DUAL UNION ALL
+    SELECT '3500-3999' FROM DUAL UNION ALL
+    SELECT '4000-4499' FROM DUAL UNION ALL
+    SELECT '4500-4999' FROM DUAL UNION ALL
+    SELECT '5000-5499' FROM DUAL UNION ALL
+    SELECT '5500-5999' FROM DUAL UNION ALL
+    SELECT '6000 이상' FROM DUAL
+),
+SALARY_DATA AS (
+    SELECT 
+        CASE
+            WHEN hope_salary BETWEEN 2000 AND 2499 THEN '2000-2499'
+            WHEN hope_salary BETWEEN 2500 AND 2999 THEN '2500-2999'
+            WHEN hope_salary BETWEEN 3000 AND 3499 THEN '3000-3499'
+            WHEN hope_salary BETWEEN 3500 AND 3999 THEN '3500-3999'
+            WHEN hope_salary BETWEEN 4000 AND 4499 THEN '4000-4499'
+            WHEN hope_salary BETWEEN 4500 AND 4999 THEN '4500-4999'
+            WHEN hope_salary BETWEEN 5000 AND 5499 THEN '5000-5499'
+            WHEN hope_salary BETWEEN 5500 AND 5999 THEN '5500-5999'
+            ELSE '6000 이상'
+        END AS SALARY_RANGE,
+        COUNT(*) AS COUNT_HOPE_SALARY
+    FROM 
+        resume
+    GROUP BY 
+        CASE
+            WHEN hope_salary BETWEEN 2000 AND 2499 THEN '2000-2499'
+            WHEN hope_salary BETWEEN 2500 AND 2999 THEN '2500-2999'
+            WHEN hope_salary BETWEEN 3000 AND 3499 THEN '3000-3499'
+            WHEN hope_salary BETWEEN 3500 AND 3999 THEN '3500-3999'
+            WHEN hope_salary BETWEEN 4000 AND 4499 THEN '4000-4499'
+            WHEN hope_salary BETWEEN 4500 AND 4999 THEN '4500-4999'
+            WHEN hope_salary BETWEEN 5000 AND 5499 THEN '5000-5499'
+            WHEN hope_salary BETWEEN 5500 AND 5999 THEN '5500-5999'
+            ELSE '6000 이상'
+        END
+)
+SELECT 
+    SR.SALARY_RANGE,
+    COALESCE(SD.COUNT_HOPE_SALARY, 0) AS HOPE_CNT
+FROM 
+    SALARY_RANGES SR
+LEFT JOIN 
+    SALARY_DATA SD ON SR.SALARY_RANGE = SD.SALARY_RANGE
+ORDER BY 
+    SR.SALARY_RANGE
+</select>
+
+<select id="getHope_Field" resultType="com.wa.erp.BoardDTO">
+   select
+	    count(distinct a.c_no) as apply_cnt,  
+	    count(distinct p.p_no) as hope_cnt,
+	    c.field_name as field_name,
+	    c.field_code as field_code
+	from
+	    code_field c
+	left join
+	    company_info i
+	    on c.field_code = i.field_code
+	left join
+	    pertocom a
+	    on i.c_no = a.c_no
+	left join
+	    person_mem p
+	    on c.field_code = p.field_code  
+	group by 
+	    c.field_name,
+	    c.field_code
+	order by
+	    c.field_code
+</select>
+
+<select id="getPer_Region" resultType="com.wa.erp.BoardDTO">
+	    SELECT
+	    SUM(CASE WHEN SUBSTR(addr, 1, 2) = '서울' THEN 1 ELSE 0 END) AS count_seoul,
+	    SUM(CASE WHEN SUBSTR(addr, 1, 2) = '부산' THEN 1 ELSE 0 END) AS count_busan,
+	    SUM(CASE WHEN SUBSTR(addr, 1, 2) = '인천' THEN 1 ELSE 0 END) AS count_incheon,
+	    SUM(CASE WHEN SUBSTR(addr, 1, 2) = '경기' THEN 1 ELSE 0 END) AS count_gyeonggi,
+	    SUM(CASE WHEN SUBSTR(addr, 1, 2) = '강원' THEN 1 ELSE 0 END) AS count_gangwon
+	FROM
+	    person_mem
+</select>
+
+<select id="getSexRatio"   resultType="com.wa.erp.BoardDTO">
+	 select                          
+            (select count(*) from person_mem where sex='남')   as male 
+            ,(select count(*) from person_mem where sex='여')  as female
+        from
+            dual
+</select>
+
+<select id="getMemberRatio" resultType="com.wa.erp.BoardDTO">
+	select
+		(select count(*) from person_mem) as person
+		,(select count(*) from company_mem) as company
+	from
+		dual
+</select>
+
+<select id="getMemberPerMonthCnt" resultType="com.wa.erp.BoardDTO">
+	SELECT 
+	    COALESCE(cm.month, pm.month) AS month,
+	    cm.count AS company_count,
+	    pm.count AS person_count
+	FROM
+	    (SELECT to_char(reg_date, 'YYYY-MM') AS month,
+	            COUNT(*) AS count
+	     FROM company_mem
+	     GROUP BY to_char(reg_date, 'YYYY-MM')) cm
+	FULL OUTER JOIN
+	    (SELECT to_char(reg_date, 'YYYY-MM') AS month,
+	            COUNT(*) AS count
+	     FROM person_mem
+	     GROUP BY to_char(reg_date, 'YYYY-MM')) pm
+	ON cm.month = pm.month
+	ORDER BY COALESCE(cm.month, pm.month)
+	
+</select>
+
 </mapper>
  

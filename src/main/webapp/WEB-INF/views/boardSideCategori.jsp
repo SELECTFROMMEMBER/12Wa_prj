@@ -6,10 +6,47 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+    <style>
+        .sidebar-container {
+            position: absolute; 
+            top: 100px; 
+            width: 145px;
+            float: left; 
+            z-index: 3;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-container li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #fff;
+            color: #007bff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-align: left; /* 왼쪽 정렬 */
+            font-weight: bold; /* 글씨 굵게 */
+            font-size: 12px; /* 글씨 크기 작게 */
+        }
+
+        .sidebar-container li:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-	<div
-		style="position: absolute; top; 100 px; left; 150 px width: 145px; float: left; z-index: 3;">
+	<div class="sidebar-container">
 		<br>
 		<br>
 		<li onClick="pushboardname('freeboard','freedome')">자유 게시판</li>

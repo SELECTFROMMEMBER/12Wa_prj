@@ -53,7 +53,7 @@ $(document).ready(function() {
             // 세 번째 셀렉트 박스의 옵션 변경
             $('#multisort3 option[value!=""]').remove();
             if (value !== ',sal_avg desc' && $('#multisort1').val()!=='sal_avg desc') {
-                $('#multisort3').append('<option value=",sal_avg desc">평균 연봉▼/option>');
+                $('#multisort3').append('<option value=",sal_avg desc">평균 연봉▼</option>');
             }
             if (value !== ',sales desc' && $('#multisort1').val()!=='sales desc') {
                 $('#multisort3').append('<option value=",sales desc">매출▼</option>');
@@ -76,22 +76,27 @@ searchWithMultiSort()  ;
         });
 });
 </script>
+
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        .container {
-            text-align: center;
-        }
-        .welfare-options {
-            display: inline-block;
-            text-align: left;
-            margin: 0 auto;
-            columns: 4; /* 두 개의 열로 나누어 정렬 */
-            column-gap: 20px; /* 열 간격 */
-        }
-        .welfare-options label {
-            display: block;
-            margin: 5px 0;
-        }
+       .container {
+		    background-color: #fff;
+		    border-radius: 10px;
+		}
+		
+		.welfare-box {
+			margin:0 auto;
+		    padding: 5px;
+		    border: 1px solid #ccc;
+		    border-radius: 5px;
+		}
+		
+		/* 라벨 스타일링 */
+		.welfare-options {
+		    display: grid;
+		    grid-template-columns: repeat(4, 1fr);
+		    grid-column-gap: 10px;
+		}
     </style>
 <style>
 
@@ -105,18 +110,6 @@ searchWithMultiSort()  ;
        gap: 10px; 
      } 
 
-<<<<<<< HEAD
-     .star { 
-       background: linear-gradient(to right, #EAB838, #EAB838 50%, #E0E2E7 50%); 
-       color: transparent; 
-       -webkit-background-clip: text; 
-     } 
-     .star-container .star-grade { 
-       font-weight: 700; 
-     }
-</style>
-<style>
-=======
     .star {
       background: linear-gradient(to right, #EAB838, #EAB838 50%, #E0E2E7 50%);
       color: transparent;
@@ -127,22 +120,21 @@ searchWithMultiSort()  ;
       font-weight: 700;
     }
 
-	        .container {
-            text-align: center;
-        }
-        .welfare-options {
-            display: inline-block;
-            text-align: left;
-            margin: 0 auto;
-            columns: 4; /* 두 개의 열로 나누어 정렬 */
-            column-gap: 20px; /* 열 간격 */
-        }
-        .welfare-options label {
-            display: block;
-            margin: 5px 0;
-        }
-
->>>>>>> refs/heads/develop
+/* 	        .container { */
+/*             text-align: center; */
+/*         } */
+/*         .welfare-options { */
+/*             display: inline-block; */
+/*             text-align: left; */
+/*             margin: 0 auto; */
+/*             columns: 4; /* 두 개의 열로 나누어 정렬 */ 
+/*             column-gap: 20px; /* 열 간격 */ 
+/*         } */
+/*         .welfare-options label { */
+/*             display: block; */
+/*             margin: 5px 0; */
+/* 		} */
+		
   #firstSelect {
     text-align: center; /* 텍스트를 수평 가운데 정렬합니다. */
   }
@@ -164,7 +156,7 @@ searchWithMultiSort()  ;
 </style>
 
 
-    <title>기업 정보</title>
+
  <style>
         .company-info {
             margin: 20px auto;
@@ -185,6 +177,45 @@ searchWithMultiSort()  ;
         .company-info .row {
             margin-bottom: 5px;
         }
+       /* 전체 컨테이너 스타일링 */
+
+
+/* 라벨 스타일링 */
+form[name="boardSearchForm"] label {
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+/* 셀렉트 박스 스타일링 */
+form[name="boardSearchForm"] select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+/* 키워드 입력 필드 스타일링 */
+form[name="boardSearchForm"] input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+/* 버튼 스타일링 */
+form[name="boardSearchForm"] input[type="button"] {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* 버튼 호버 효과 */
+form[name="boardSearchForm"] input[type="button"]:hover {
+    background-color: #0056b3;
+}
     </style>
 <script>
 
@@ -274,7 +305,7 @@ function searchReset(){
    var boardSearchFormObj = $("[name='boardSearchForm']");
    boardSearchFormObj.find(".keyword").val("");
     $("[name='boardSearchForm']").find("[name='sort']").val("");
-    $("[name='boardSearchForm']").find("[name='selectedIndustry']").val("");
+    $("[name='boardSearchForm']").find("[name='selectfield_code']").val("");
     $("[name='boardSearchForm']").find("[name='sido']").val("시/도 선택");
     $("[name='boardSearchForm']").find("[name='gugun']").val("구/군 선택");
     document.getElementById('1').checked = false;
@@ -299,29 +330,9 @@ function searchReset(){
     $(".searchBtn").click();
 }
 
-$("#1").checked = false;
-$("#2").checked = false;
-$("#3").checked = false;
-$("#4").checked = false;
-$("#5").checked = false;
-$("#6").checked = false;
-$("#7").checked = false;
-$("#8").checked = false;
-$("#9").checked = false;
-$("#10").checked = false;
-$("#11").checked = false;
-$("#12").checked = false;
-$("#13").checked = false;
-$("#14").checked = false;
-$("#15").checked = false;
-$("#16").checked = false;
 
-
-
-
-
-function searchWithIndustry(selectedIndustry){
-    $("[name='boardSearchForm']").find("[name='selectedIndustry']").val(selectedIndustry);
+function searchWithIndustry(selectfield_code){
+    $("[name='boardSearchForm']").find("[name='selectfield_code']").val(selectfield_code);
    $(".searchBtn").click();
 }
 
@@ -384,53 +395,49 @@ function searchWithMultiSort(){
                <input type="button" value="검색" class="searchBtn" onclick="search()"></input>
                 <input type="button" value="초기화" class="resetBtn" onclick="searchReset()">
                    <select name="rowCntPerPage" class="rowCntPerPage" onChange="search()" >
-		<option value="10">10</option>
-		<option value="20">20</option>
-		<option value="30">30</option>
-    </select>행보기 &nbsp;&nbsp;&nbsp;
+					<option value="10">10</option>
+					<option value="20">20</option>
+					<option value="30">30</option>
+			    </select>행보기 &nbsp;&nbsp;&nbsp;
 
         
 
 				<br>
-            <p align="center">
-               업종<select name="selectedIndustry" class="selectedIndustry"
+            <div align="center" style="margin-top:5px;">
+               업종<select name="selectfield_code" class="selectedIndustry"
                   onChange="search()">
-                  <option value="">업종을 선택해주세요.</option>
-                  <option value="화장품 및 뷰티 제품 제조업">화장품 및 뷰티 제품 제조업
-                  <option value="식품 및 음료 소매업">식품 및 음료 소매업
-                  <option value="건설/건축 서비스">건설/건축 서비스
-                  <option value="의료/보건 서비스">의료/보건 서비스
-                  <option value="여행/관광 업종">여행/관광 업종
-                  <option value="환경 보호/재활용 산업">환경 보호/재활용 산업
-                  <option value="생활용품/가전제품 도매업">생활용품/가전제품 도매업
-                  <option value="금융 및 보험 서비스">금융 및 보험 서비스
-                  <option value="자동차 부품 제조업">자동차 부품 제조업
-                  <option value="출판/인쇄 업종">출판/인쇄 업종
-                  <option value="교육 기술 서비스">교육 기술 서비스
-                  <option value="농업 및 농산물 가공 산업">농업 및 농산물 가공 산업
-                  <option value="전자상거래/온라인 판매">전자상거래/온라인 판매
-                  <option value="음악/예술 엔터테인먼트 산업">음악/예술 엔터테인먼트 산업
-                  <option value="생명 공학/의료 기기 산업">생명 공학/의료 기기 산업
-                  <option value="통신/네트워크 서비스">통신/네트워크 서비스
-                  <option value="스포츠/운동 기술 산업">스포츠/운동 기술 산업
-                  <option value="에너지/청정 기술 산업">에너지/청정 기술 산업
-                  <option value="인테리어 디자인/가구 제조업">인테리어 디자인/가구 제조업
-                  <option value="컴퓨터/소프트웨어 서비스">컴퓨터/소프트웨어 서비스
-                  <option value="식물/원예 관련 서비스">식물/원예 관련 서비스
-                  <option value="코스메틱/미용 서비스">코스메틱/미용 서비스
-                  <option value="공예품/수공예품 제조업">공예품/수공예품 제조업
-                  <option value="동물 의료 서비스">동물 의료 서비스
-                  <option value="부동산 개발/투자">부동산 개발/투자
-                  <option value="국제 무역/물류 서비스">국제 무역/물류 서비스
-                  <option value="자원 관리/환경 컨설팅">자원 관리/환경 컨설팅
-                  <option value="자료/정보 서비스">자료/정보 서비스
-                  <option value="패션/의류 디자인 업종">패션/의류 디자인 업종
+                  
+                  				<option value="0">업종 선택</option>
+                  				<option value="1">경영·사무</option>
+								<option value="2">영업·고객상담</option>
+								<option value="3">IT·인터넷</option>
+								<option value="4">디자인</option>
+								<option value="5">미디어</option>
+								<option value="6">건설</option>
+								<option value="7">교육</option>
+								<option value="8">의료</option>
+								<option value="9">생산</option>
+								<option value="10">금융</option>
+								<option value="11">법률</option>
+								<option value="12">마케팅</option>
+								<option value="13">공공서비스</option>
+								<option value="14">연구·개발</option>
+								<option value="15">물류·운송</option>
+								<option value="16">예술·문화</option>
+								<option value="17">환경</option>
+								<option value="18">자원·에너지</option>
+								<option value="19">숙박·요식업</option>
+								<option value="20">스포츠·레저</option>
+								<option value="21">제조·생산</option>
+								<option value="22">농업·수산업</option>
+								<option value="23">해양·항공</option>
                </select>
-            </p>
+            </div>
             <br>
 
             <div class="container">
 		        <b>사내 복지</b><br>
+		        <div class="welfare-box" style="width:1000px; text-align:left; padding-left:100px;" >
 		        <div class="welfare-options">
 		            <label><input type="checkbox" name="welfare" value="4대보험가입" id="1"> 4대보험가입</label>
 		            <label><input type="checkbox" name="welfare" value="연금가입" id="2"> 연금가입</label>
@@ -449,6 +456,7 @@ function searchWithMultiSort(){
 		            <label><input type="checkbox" name="welfare" value="유연근무제" id="15"> 유연근무제</label>
 		            <label><input type="checkbox" name="welfare" value="각종 행사" id="16"> 각종 행사</label>
 		        </div>
+		       </div>  
 		    </div>
              <div>
              <br>
@@ -487,33 +495,6 @@ function searchWithMultiSort(){
          	
          <br>
                   <div class="boardListDiv" id="container">
-         
-         <c:if  test="${param.sort!='sal_avg asc' and param.sort!='sal_avg desc'}">
-            <p style="cursor: pointer" onClick="searchWithSort('sal_avg desc')">연봉</p>
-         </c:if>
-
-         <c:if test="${param.sort=='sal_avg desc'}">
-            <p style="cursor: pointer" onClick="searchWithSort('sal_avg asc')">연봉▼</p>
-         </c:if>
-
-         <c:if test="${param.sort=='sal_avg asc'}">
-            <p style="cursor: pointer" onClick="searchWithSort('')">연봉▲</p>
-         </c:if>
-
-         <c:if test="${param.sort!='sales asc' and param.sort!='sales desc'}">
-            <p style="cursor: pointer" onClick="searchWithSort('sales desc')">매출</p>
-         </c:if>
-
-         <c:if test="${param.sort=='sales desc'}">
-            <p style="cursor: pointer" onClick="searchWithSort('sales asc')">매출▼</p>
-         </c:if>
-
-         <c:if test="${param.sort=='sales asc'}">
-            <p style="cursor: pointer" onClick="searchWithSort('')">매출▲</p>
-         </c:if>
-
-
-         <br>
 
 				
 					<table
@@ -522,7 +503,26 @@ function searchWithMultiSort(){
 
 
 				<tr>
+					<th>번 호</th>
 					<th>기업 정보</th>
+						<c:if  test="${param.sort!='sal_avg asc' and param.sort!='sal_avg desc'}">
+				            <th style="cursor: pointer" onClick="searchWithSort('sal_avg desc')">연봉</th>
+				         </c:if>
+				         <c:if test="${param.sort=='sal_avg desc'}">
+				            <th style="cursor: pointer" onClick="searchWithSort('sal_avg asc')">연봉▼</th>
+				         </c:if>
+				         <c:if test="${param.sort=='sal_avg asc'}">
+				            <th style="cursor: pointer" onClick="searchWithSort('')">연봉▲</th>
+				         </c:if>
+				         <c:if test="${param.sort!='sales asc' and param.sort!='sales desc'}">
+				            <th style="cursor: pointer" onClick="searchWithSort('sales desc')">매출</th>
+				         </c:if>
+				         <c:if test="${param.sort=='sales desc'}">
+				            <th style="cursor: pointer" onClick="searchWithSort('sales asc')">매출▼</th>
+				         </c:if>
+				         <c:if test="${param.sort=='sales asc'}">
+				            <th style="cursor: pointer" onClick="searchWithSort('')">매출▲</th>
+				         </c:if>
 						<c:if test="${param.sort!='7 asc' and param.sort!='7 desc'}">
             				<th style="cursor: pointer font-weight: bold;"onClick="searchWithSort('7 desc')">별점</th>
          				</c:if>
@@ -549,32 +549,32 @@ function searchWithMultiSort(){
                      
                      <tr style="cursor: pointer"
                         onClick="gocompanyListDetailForm(${board.c_no});">
+                        <td>    ${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
                         <td>
                            <div style="display: flex; align-items: center;">
                               <img width="80" src="images/photo-1.jpg" style="margin-right: 10px;">
                               <input type="hidden" value="	${requestScope.boardMap.begin_serialNo_desc - status.index}">
                         	  &nbsp;&nbsp;&nbsp;&lt기업명&gt	&nbsp;${board.name}<br>
                               &nbsp;&nbsp;&nbsp; &lt업종&gt &nbsp;&nbsp;&nbsp;${board.indus}<br>
-                              &nbsp;&nbsp;&nbsp; &lt매출&gt &nbsp;&nbsp;&nbsp;${board.sales} 천만원<br>
-                              &nbsp;&nbsp;&nbsp; &lt연봉&gt &nbsp;&nbsp;&nbsp;${board.sal_avg} 만원<br>
                               &nbsp;&nbsp;&nbsp; &lt주소&gt &nbsp;&nbsp;&nbsp;${board.addr}<br>
                            </div>
                           </td>
-
-            <td align="center">
-                <div class="star-container">
-                    <div class="star" id="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <span class="star-grade" id="star-grade">${board.star_avg}</span>
-                </div>
-            </td>
-					<td><c:choose>
-							<c:when test="${likeNoList.contains(board.c_no)}">
-								<i class="fas fa-heart"></i>
-							</c:when>
-							<c:otherwise>
-								<i class="far fa-heart"></i>
-							</c:otherwise>
-						</c:choose> ${board.rec_count}</td>
+						<td>${board.sal_avg} 만원</td>
+						<td>${board.sales} 천만원</td>
+			            <td align="center">
+			                <div class="star-container">
+			                    <div class="star" id="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+			                    <span class="star-grade" id="star-grade">${board.star_avg}</span>
+			                </div>
+			            </td>
+						<td><c:choose>
+								<c:when test="${likeNoList.contains(board.c_no)}">
+									<i class="fas fa-heart"></i>
+								</c:when>
+								<c:otherwise>
+									<i class="far fa-heart"></i>
+								</c:otherwise>
+							</c:choose> ${board.rec_count}</td>
 				</tr>
 
 			</c:forEach>

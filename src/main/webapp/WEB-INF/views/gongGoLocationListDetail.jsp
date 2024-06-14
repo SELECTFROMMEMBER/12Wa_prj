@@ -44,10 +44,12 @@
   </style>
 	<script>
 
+
 	
 	function gonggoSupportForm() {
 	
 		var formObj = $("[name='getgonggoSupportForm']");
+	
 
 		$.ajax({
 
@@ -102,14 +104,18 @@
 						${requestScope.GonggoDTO.ph_d_candidate}</td>
 				</tr>
 				<tr>
-					<c:if test="${requestScope.GonggoDTO.seeker_age!='~' }">
-						<td>나이 : ${requestScope.GonggoDTO.seeker_age}
-							</td>
+					
+						<td>나이 : 
+					<c:if test="${requestScope.GonggoDTO.seeker_age1=='나이'}">
+					 	나이 무관
+					 	</c:if>
+					<c:if test="${requestScope.GonggoDTO.seeker_age1!='나이'}">
+					 	${requestScope.GonggoDTO.seeker_age1} ~ ${requestScope.GonggoDTO.seeker_age2}
+					 	</c:if>
+						</td>
 
-					</c:if>
-					<c:if test="${requestScope.GonggoDTO.seeker_age=='~'}">
-						<td>나이 : 조회할 데이터가 없습니다.</td>
-					</c:if>
+				
+
 				</tr>
 				<tr>
 					<td>필수조건 : ${requestScope.GonggoDTO.benefit_name_essential1}
@@ -136,12 +142,20 @@
 					<td>성 별 : ${requestScope.GonggoDTO.seeker_sex}</td>
 				</tr>
 				<tr>
-					<td>급여 : <c:if test="${requestScope.GonggoDTO.salary != 0}">
-                    ${requestScope.GonggoDTO.salary}만원
-                    </c:if> <c:if
+					<td>급여 :
+					<script>
+					if(new RegExp(/^[0-9]{1,4}$/).test(seeker_ageObj1.val()) == false && age_irrelevantObj.is(':checked')== false ){
+						alert("지원자의 나이는 2자리까지만 입력해주세요1");
+						return false;
+					} 
+					</script>
+					  ${requestScope.GonggoDTO.salary}
+					<%--  <c:if test="${requestScope.GonggoDTO.salary != 0}">
+                    ${requestScope.GonggoDTO.salary}
+                    </c:if> --%> <%-- <c:if
 							test="${not empty requestScope.GonggoDTO.other_salary }">
                     ${requestScope.GonggoDTO.other_salary}만원
-                    </c:if>
+                    </c:if> --%>
 					</td>
 
 				</tr>
@@ -356,7 +370,14 @@
   	<table>
 			  	 
 			    <tr>
-			        <td rowspan="4">남은기간 : ${requestScope.GonggoDTO.gonggoreg_date}일  
+			        <td rowspan="4">남은기간 : 
+			        <c:if test ="${requestScope.GonggoDTO.gonggoreg_date <= 0 }" >
+			        마감
+			        </c:if>
+			          <c:if test ="${requestScope.GonggoDTO.gonggoreg_date > 0 }" >
+			        ${requestScope.GonggoDTO.gonggoreg_date}일 
+			        </c:if>
+			         
 			        <br>시작일	:  ${requestScope.GonggoDTO.opendate}<br>
 			        마감일	:	${requestScope.GonggoDTO.closedate}
 			        </td>

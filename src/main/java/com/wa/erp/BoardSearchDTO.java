@@ -10,7 +10,7 @@ public class BoardSearchDTO {
 	private String keyword;
 	private String tradetype;
 	private String boardname;
-	private String selectedIndustry;
+	private int selectfield_code;
 	private String category;
 	private String member_type;
 
@@ -275,12 +275,6 @@ public class BoardSearchDTO {
 	public void setAvg_star(String avg_star) {
 		this.avg_star = avg_star;
 	}
-	public String getSelectedIndustry() {
-		return selectedIndustry;
-	}
-	public void setSelectedIndustry(String selectedIndustry) {
-		this.selectedIndustry = selectedIndustry;
-	}
 	public int getC_no() {
 		return c_no;
 	}
@@ -402,6 +396,13 @@ public class BoardSearchDTO {
 	public void setGonggoStatus(String gonggoStatus) {
 		this.gonggoStatus = gonggoStatus;
 	}
+	public int getSelectfield_code() {
+		return selectfield_code;
+	}
+	public void setSelectfield_code(int selectfield_code) {
+		this.selectfield_code = selectfield_code;
+	}
+	
 	
 	
 //	public String getMinYear() {

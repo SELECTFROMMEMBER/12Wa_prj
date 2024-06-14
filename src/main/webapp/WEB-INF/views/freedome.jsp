@@ -71,6 +71,34 @@ input[type="checkbox"] {
     vertical-align: middle; /* 수직 가운데 정렬을 위한 추가 속성 */
     margin: 0; /* 체크박스 사이의 여백 제거 */
 }
+        /* Form container */
+        .form-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Text input field */
+        .keyword {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        /* Search button */
+        .searchBtn {
+            padding: 5px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Search button hover effect */
+        .searchBtn:hover {
+            background-color: #0056b3;
+        }
 </style>
 </head>
   
@@ -100,14 +128,14 @@ input[type="checkbox"] {
          <div class="freedomeListDiv">
             <form action="submit.php" method="POST">
                <table
-                  style="border: 1px solid black; margin-left: auto; margin-right: auto;">
+                  style="border: 1px solid black; margin-left: auto; margin-right: 90px;" >
 
 
 
 
                   <tr>
                      <th>번호</th>
-                     <th>제목</th>
+                     <th >제목</th>
                      <th>닉네임</th>
                      <th>작성일</th>
                      <c:if test="${sessionScope.member!='admin'}">
@@ -327,7 +355,7 @@ input[type="checkbox"] {
    </div>
 
 
-</body>
    <%@include file="/WEB-INF/views/common.jsp" %>
     <%@ include file="footer.jsp" %>
+</body>
 </html>

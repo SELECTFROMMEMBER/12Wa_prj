@@ -7,6 +7,46 @@
 <html>
 
 <head>
+    <style>
+        /* Form container */
+        .form-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Text input field */
+        .keyword {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            width: 200px; /* Adjust width as needed */
+        }
+
+        /* Search button */
+        .searchBtn {
+            padding: 5px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Search button hover effect */
+        .searchBtn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Select box */
+        select {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+    </style>
 <script>
 
 //현재 채용가능 글만 보기 함수
@@ -185,7 +225,7 @@ function searchWithSort(sort){
                  
         	<input type="text" name="keyword" class="keyword"  placeholder="검색어를 입력해주세요.">
 
-        	<input type="button" value="검색"  class="searchBtn" onclick="search();"  style="padding: 5px 5px;">	    
+        	<input type="button" value="검색"  class="searchBtn" onclick="search1();"  style="padding: 5px 5px;">	    
 			<input type="hidden" name="sort"  class="sort" >
 			<input type="hidden" name="selectPageNo"  class="selectPageNo"  value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">

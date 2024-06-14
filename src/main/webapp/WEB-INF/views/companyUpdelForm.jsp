@@ -123,37 +123,31 @@
                </tr>
                <tr>
                   <td>대표 업종</td>
-                  <td><select id="business_industry" name="business_industry"
+                  <td><select id="field_code" name="field_code"
                      required>
-                        <option value="화장품 및 뷰티 제품 제조업">화장품 및 뷰티 제품 제조업
-                        <option value="식품 및 음료 소매업">식품 및 음료 소매업
-                        <option value="건설/건축 서비스">건설/건축 서비스
-                        <option value="의료/보건 서비스">의료/보건 서비스
-                        <option value="여행/관광 업종">여행/관광 업종
-                        <option value="환경 보호/재활용 산업">환경 보호/재활용 산업
-                        <option value="생활용품/가전제품 도매업">생활용품/가전제품 도매업
-                        <option value="금융 및 보험 서비스">금융 및 보험 서비스
-                        <option value="자동차 부품 제조업">자동차 부품 제조업
-                        <option value="출판/인쇄 업종">출판/인쇄 업종
-                        <option value="교육 기술 서비스">교육 기술 서비스
-                        <option value="농업 및 농산물 가공 산업">농업 및 농산물 가공 산업
-                        <option value="전자상거래/온라인 판매">전자상거래/온라인 판매
-                        <option value="음악/예술 엔터테인먼트 산업">음악/예술 엔터테인먼트 산업
-                        <option value="생명 공학/의료 기기 산업">생명 공학/의료 기기 산업
-                        <option value="통신/네트워크 서비스">통신/네트워크 서비스
-                        <option value="스포츠/운동 기술 산업">스포츠/운동 기술 산업
-                        <option value="에너지/청정 기술 산업">에너지/청정 기술 산업
-                        <option value="인테리어 디자인/가구 제조업">인테리어 디자인/가구 제조업
-                        <option value="컴퓨터/소프트웨어 서비스">컴퓨터/소프트웨어 서비스
-                        <option value="식물/원예 관련 서비스">식물/원예 관련 서비스
-                        <option value="코스메틱/미용 서비스">코스메틱/미용 서비스
-                        <option value="공예품/수공예품 제조업">공예품/수공예품 제조업
-                        <option value="동물 의료 서비스">동물 의료 서비스
-                        <option value="부동산 개발/투자">부동산 개발/투자
-                        <option value="국제 무역/물류 서비스">국제 무역/물류 서비스
-                        <option value="자원 관리/환경 컨설팅">자원 관리/환경 컨설팅
-                        <option value="자료/정보 서비스">자료/정보 서비스
-                        <option value="패션/의류 디자인 업종">패션/의류 디자인 업종
+                        <option value="1">경영·사무</option>
+								<option value="2">영업·고객상담</option>
+								<option value="3">IT·인터넷</option>
+								<option value="4">디자인</option>
+								<option value="5">미디어</option>
+								<option value="6">건설</option>
+								<option value="7">교육</option>
+								<option value="8">의료</option>
+								<option value="9">생산</option>
+								<option value="10">금융</option>
+								<option value="11">법률</option>
+								<option value="12">마케팅</option>
+								<option value="13">공공서비스</option>
+								<option value="14">연구·개발</option>
+								<option value="15">물류·운송</option>
+								<option value="16">예술·문화</option>
+								<option value="17">환경</option>
+								<option value="18">자원·에너지</option>
+								<option value="19">숙박·요식업</option>
+								<option value="20">스포츠·레저</option>
+								<option value="21">제조·생산</option>
+								<option value="22">농업·수산업</option>
+								<option value="23">해양·항공</option>
                            <!-- 필요한 업종 옵션을 추가하세요 -->
                   </select></td>
                </tr>

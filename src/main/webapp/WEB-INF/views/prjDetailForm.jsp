@@ -72,14 +72,14 @@
         </tr>
         <tr>  
 	        <th>업로드 된 파일</th>
-	        <td></td>
+	        <td>${boardDTO.p_no}</td>
   		</tr>
   		
 		</table>
 		<br>
         <input type="button" onClick="location.replace('/prj.do')" value=" 목록으로 ">    
          <c:if test="${sessionScope.p_no==boardDTO.p_no}">
-        <input type="button" value="수정/삭제" onclick="document.prjUpDelForm.submit();">
+        	<input type="button" value="수정/삭제" onclick="document.prjUpDelForm.submit();">
         </c:if>
         </center>
         

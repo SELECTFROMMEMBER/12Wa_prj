@@ -43,7 +43,6 @@ public class MemberDTO {
 	private String nickname;
 	private String sex;
 	private int age;
-	
 	private String rec_count;
 	
 	

@@ -593,17 +593,72 @@ public class BoardServiceImpl implements BoardService{
 			return blockMemberList;
 		}
 
-	
+		@Override
 		public List<BoardDTO> getSalaryData() {
 			List<BoardDTO> SalaryData = this.boardDAO.getSalaryData();
 			
 	        return SalaryData;
 		}
-		
+		@Override
 		public List<BoardDTO> getFieldGonggoData(){
 			List<BoardDTO> FieldData = this.boardDAO.getFieldGonggoData();
 			
 			return FieldData;
 		}
+		@Override
+		public List<BoardDTO> getpopularCom(){
+			List<BoardDTO> popularCom = this.boardDAO.getpopularCom();
+			
+			return popularCom;
+		}
+		@Override
+		public List<BoardDTO> getRegionCounts(){
+			List<BoardDTO> getRegionCounts = this.boardDAO.getRegionCounts();
+			
+			return getRegionCounts;
+		}
+		
+		@Override
+		public List<BoardDTO> getHope_Salary(){
+			List<BoardDTO> getHope_Salary = this.boardDAO.getHope_Salary();
+			
+			return getHope_Salary;
+		}
+
+		@Override
+		public List<BoardDTO> getHope_Field(){
+			List<BoardDTO> getHope_Field = this.boardDAO.getHope_Field();
+			
+			return getHope_Field;
+		}
+
+		@Override
+		public List<BoardDTO> getPer_Region(){
+			List<BoardDTO> getPer_Region = this.boardDAO.getPer_Region();
+			
+			return getPer_Region;
+		}
+
+		@Override
+		public BoardDTO getSexRatio(){
+			BoardDTO getSexRatio = this.boardDAO.getSexRatio();
+			
+			return getSexRatio;
+		}
+
+		@Override
+		public BoardDTO getMemberRatio(){
+			BoardDTO getMemberRatio = this.boardDAO.getMemberRatio();
+			
+			return getMemberRatio;
+		}
+
+		@Override
+		public List<BoardDTO> getMemberPerMonthCnt(){
+			List<BoardDTO> getMemberPerMonthCnt = this.boardDAO.getMemberPerMonthCnt();
+			
+			return getMemberPerMonthCnt;
+		}
+
 		
 }

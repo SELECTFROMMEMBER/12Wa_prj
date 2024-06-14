@@ -34,7 +34,7 @@
                <td>제목</td>
                <td>
 					<!-------------------------------------------------------->
-					<input type="text" name="subject" class="subject" size="10" maxlength="15" 
+					<input type="text" name="subject" class="subject" size="20" maxlength="15" 
 									value="${requestScope.boardDTO.subject}">
 					<!-------------------------------------------------------->
 				</td>  
@@ -44,8 +44,8 @@
                 <td>내용</td>
                <td>
 					<!-------------------------------------------------------->
-					<input type="text" name="content" class="content" size="10" maxlength="15" 
-									value="${requestScope.boardDTO.content}">
+					<textarea type="text" name="content" class="content" style="width: 800px;"
+       						  rows="10" cols="50">${requestScope.boardDTO.content}</textarea>
 					<!-------------------------------------------------------->
 				</td>  
 			</tr>

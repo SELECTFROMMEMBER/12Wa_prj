@@ -326,15 +326,16 @@ function reviewEdit(r_no){
 		<center>
 			<h1 style="text-align: center;">기업 정보 상세페이지</h1>
 			<br>
-				<c:if test="${sessionScope.member=='person' }">
-				 <c:choose>
-                   <c:when test="${likeNoList.contains(boardDTO.c_no)}">
-                    </c:when>
-                    <c:otherwise>
-                    </c:otherwise>
-                  </c:choose>
-				</c:if>
-
+			<c:if test="${sessionScope.member=='person' }">
+				<c:choose>
+					<c:when test="${likeNoList.contains(boardDTO.c_no)}">
+						<button id="likecompany" onclick="del_like_company()">관심기업해제</button>
+					</c:when>
+					<c:otherwise>
+						<button id="likecompany" onclick="like_company()">관심기업등록</button>
+					</c:otherwise>
+				</c:choose>
+			</c:if>
 
 			<div class="table-container">
 				<table bordercolor="gray" border="1" cellpadding="7"

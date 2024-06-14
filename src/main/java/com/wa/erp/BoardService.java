@@ -138,4 +138,21 @@ public interface BoardService {
 		List<BoardDTO> getSalaryData();
 
 		List<BoardDTO> getFieldGonggoData();
+
+		List<BoardDTO> getpopularCom();
+
+		List<BoardDTO> getRegionCounts();
+
+		List<BoardDTO> getHope_Salary();
+
+		List<BoardDTO> getHope_Field();
+		
+		List<BoardDTO> getPer_Region();
+
+		BoardDTO getSexRatio();
+
+		BoardDTO getMemberRatio();
+
+		List<BoardDTO> getMemberPerMonthCnt();
+		
 }

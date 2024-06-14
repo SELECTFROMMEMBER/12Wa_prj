@@ -130,17 +130,30 @@ function checkmemberRegForm(){
                <tr>
                 <td>관심분야:</td>
                 <td><select name='field_code'>
-                      <option value="1"> 경영·사무 </option>
-                      <option value="2"> 영업·고객상담 </option>
-                      <option value="3"> IT·인터넷 </option>
-                      <option value="4"> 디자인 </option>
-                      <option value="5"> 미디어 </option>
-                      <option value="6"> 건설 </option>
-                      <option value="7"> 교육 </option>
-                      <option value="8"> 의료 </option>
-                      <option value="9"> 생산 </option>
-                      </select>
-            </tr> 
+								<option value="1">경영·사무</option>
+								<option value="2">영업·고객상담</option>
+								<option value="3">IT·인터넷</option>
+								<option value="4">디자인</option>
+								<option value="5">미디어</option>
+								<option value="6">건설</option>
+								<option value="7">교육</option>
+								<option value="8">의료</option>
+								<option value="9">생산</option>
+								<option value="10">금융</option>
+								<option value="11">법률</option>
+								<option value="12">마케팅</option>
+								<option value="13">공공서비스</option>
+								<option value="14">연구·개발</option>
+								<option value="15">물류·운송</option>
+								<option value="16">예술·문화</option>
+								<option value="17">환경</option>
+								<option value="18">자원·에너지</option>
+								<option value="19">숙박·요식업</option>
+								<option value="20">스포츠·레저</option>
+								<option value="21">제조·생산</option>
+								<option value="22">농업·수산업</option>
+								<option value="23">해양·항공</option>
+						</select></tr> 
               
             
           </table>

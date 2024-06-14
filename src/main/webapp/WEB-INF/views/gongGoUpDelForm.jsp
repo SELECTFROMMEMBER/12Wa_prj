@@ -53,8 +53,10 @@ img {
 <script>
 
    var formObj = $("[name='gonggoUpDelForm']");
-   
-   
+
+
+
+	
 
 // 세부분야 테이블 초기화1
 function clearTable1() {
@@ -111,13 +113,13 @@ function clearTable1() {
        }
    }
    }
-   function showTable2(){
-      var result = confirm("테이블을 추가하시겠습니까?");
-         if(result){
-      $("#Table_Clear2").show();
-         }
-   
-   }
+	function showTable2(){
+		var result = confirm("테이블을 추가하시겠습니까?");
+		   if(result){
+		$("#Table_Clear2").show();
+		   }
+	
+	}
    
    // 세부분야 테이블 초기화3
    function clearTable3() {
@@ -149,13 +151,13 @@ function clearTable1() {
        }
    }
    
-   function showTable3(){
-      var result = confirm("테이블을 추가하시겠습니까?");
-      if(result){
-         $("#Table_Clear3").show();   
-      }
-      
-   }
+	function showTable3(){
+		var result = confirm("테이블을 추가하시겠습니까?");
+		if(result){
+			$("#Table_Clear3").show();	
+		}
+		
+	}
 
 //연봉 히든숨기기 ---------------------------
    function toggleOtherSalary() {
@@ -185,9 +187,6 @@ function clearTable1() {
         });
     }
 
-   
-    
-   
    // ----------------------------------세부분야 히든 숨기기-----------------------------------------
    
    var field_detailIndex = 2;
@@ -198,7 +197,7 @@ function toggleTextbox(selectElement) {
     var selectedValue = selectBox.val();
 
     // 직접입력 옵션을 선택한 경우에만 숨겨진 텍스트 필드를 토글합니다.
-    if (selectedValue === "") {
+    if (selectedValue === ",") {
         customInput.removeClass('hidden');
     } else {
         customInput.addClass('hidden');
@@ -241,6 +240,206 @@ $(document).ready(function() {
    function checkGonggoUpForm() {
 
       var formObj = $("[name='gonggoUpDelForm']");
+
+
+  	// 	// 담당자 성함
+  	var manager_nameObj = formObj.find(".manager_name");
+  // // 부서/직책/분야/내용
+  	 var dept_code1Obj = formObj.find(".dept_code1");
+  	var position_code1Obj = formObj.find(".position_code1");
+  	var field_detail1Obj = formObj.find(".field_detail1");	
+  	var fidel_detail1_textObj = formObj.find("#text_field_detail1");
+  	var content1Obj = formObj.find(".content1");
+  	
+  	 var dept_code2Obj = formObj.find(".dept_code2");
+  		var position_code2Obj = formObj.find(".position_code2");
+  		var field_detail2Obj = formObj.find(".field_detail2");	
+  		var fidel_detail2_textObj = formObj.find("#text_field_detail2");
+  		var content2Obj = formObj.find(".content2");
+  		
+  		 var dept_code3Obj = formObj.find(".dept_code3");
+  			var position_code3Obj = formObj.find(".position_code3");
+  			var field_detail3Obj = formObj.find(".field_detail3");	
+  			var fidel_detail3_textObj = formObj.find("#text_field_detail3");
+  			var content3Obj = formObj.find(".content3");
+//   		//경력여부
+  		var careerObj = formObj.find(".career");
+
+//   		 //최종학력
+  		 var graduationObj = formObj.find("select[name='graduation']");
+//   		 //지원자 성별
+  		 var seeker_sexObj = formObj.find(".seeker_sex");
+//   		 //나이
+	
+  		 var seeker_ageObj1 = formObj.find(".seeker_age1");
+  		 var seeker_ageObj2 = formObj.find(".seeker_age2");
+  		 var age_irrelevantObj = formObj.find("#age_irrelevant");
+   		 //필수 우대조건
+   		var choice1Obj =  formObj.find('input[name=choice1]');  
+  		 var benefit_code1Obj = formObj.find("select[name='benefit_code1']");
+  		 var choice2Obj =  formObj.find('input[name=choice2]');  
+  		 var benefit_code2Obj = formObj.find("select[name='benefit_code2']");
+  		 var choice3Obj =  formObj.find('input[name=choice3]');  
+  		 var benefit_code3Obj = formObj.find("select[name='benefit_code3']");
+  		 var choice4Obj =  formObj.find('input[name=choice4]');  
+  		 var benefit_code4Obj = formObj.find("select[name='benefit_code4']");
+  		 var choice5Obj =  formObj.find('input[name=choice5]');  
+  		 var benefit_code5Obj = formObj.find("select[name='benefit_code5']");
+
+
+		 
+
+		 
+		if( new RegExp(/^[가-힣]{2,15}$/).test(manager_nameObj.val())==false ){
+			alert("담당자 성함은 2~15자 한글이어야합니다.");
+			manager_nameObj.val("");
+			return false;
+		}
+	
+ 		if(dept_code1Obj.val() != "0" && position_code1Obj.val() === "0" && content1Obj.val() == ''){
+ 			 			alert("부서,직책,분야,업무내용을 작성해주세요1");
+ 			return false;
+ 		}
+ 		if(dept_code1Obj.val() == "0" && position_code1Obj.val() != "0" && content1Obj.val() == ''){
+ 			 			alert("부서,직책,분야,업무내용을 작성해주세요1");
+ 			return false;
+ 		}
+ 		if(dept_code1Obj.val() == "0" && position_code1Obj.val() == "0" && content1Obj.val() != ''){
+ 			 			alert("부서,직책,분야,업무내용을 작성해주세요1");
+ 			return false;
+ 		}
+	if(field_detail1Obj.val() == ',' && fidel_detail1_textObj.val() == ''){
+		alert("부서,직책,분야,업무내용을 작성해주세요11")
+		return false;
+	}
+	if(field_detail1Obj.val() == ',' && dept_code1Obj.val() != "0"){
+		alert("부서,직책,분야,업무내용을 작성해주세요11")
+		return false;
+	}
+	
+
+ 		if(dept_code2Obj.val() != "0" && position_code2Obj.val() === "0" && content2Obj.val() == ''){
+ 			 			alert("부서,직책,분야,업무내용을 작성해주세요2");
+ 			return false;
+ 		}
+ 		if(dept_code2Obj.val() == "0" && position_code2Obj.val() != "0" && content2Obj.val() == ''){
+ 			 			alert("부서,직책,분야,업무내용을 작성해주세요2");
+ 			return false;
+ 		}
+ 		if(dept_code2Obj.val() == "0" && position_code2Obj.val() == "0" && content2Obj.val() != ''){
+ 			 			alert("부서,직책,분야,업무내용을 작성해주세요2");
+ 			return false;
+ 		}
+	if(field_detail2Obj.val() == ',' && fidel_detail2_textObj.val() == ''){
+		alert("부서,직책,분야,업무내용을 작성해주세요22")
+		return false;
+	}
+	if(field_detail2Obj.val() == ',' && dept_code2Obj.val() != "0"){
+		alert("부서,직책,분야,업무내용을 작성해주세요22")
+		return false;
+	}
+	
+
+	if(dept_code3Obj.val() != "0" && position_code3Obj.val() === "0" && content3Obj.val() == ''){
+			alert("부서,직책,분야,업무내용을 작성해주세요3");
+return false;
+}
+if(dept_code3Obj.val() == "0" && position_code3Obj.val() != "0" && content3Obj.val() == ''){
+			alert("부서,직책,분야,업무내용을 작성해주세요3");
+return false;
+}
+if(dept_code3Obj.val() == "0" && position_code3Obj.val() == "0" && content3Obj.val() != ''){
+			alert("부서,직책,분야,업무내용을 작성해주세요3");
+return false;
+}
+if(field_detail3Obj.val() == ',' && fidel_detail3_textObj.val() == ''){
+alert("부서,직책,분야,업무내용을 작성해주세요33")
+return false;
+}
+if(field_detail3Obj.val() == ',' && dept_code3Obj.val() != "0"){
+	alert("부서,직책,분야,업무내용을 작성해주세요33")
+	return false;
+}
+
+
+
+	
+
+
+ 		
+
+	
+  		if(careerObj.is(':checked') == false){
+  		    alert("경력 여부를 선택해 주세요");
+  		    return false;
+ 		}
+  
+
+	if(graduationObj.val()==''){
+		alert("최종학력을 선택해주세요")
+	}
+	if(seeker_sexObj.is(':checked') == false){
+		    alert("지원자 성별을 선택해 주세요");
+		    return false;
+		}
+
+
+
+	
+	if(new RegExp(/^[0-9]{1,2}$/).test(seeker_ageObj1.val()) == false && age_irrelevantObj.is(':checked')== false ){
+		alert("지원자의 나이는 2자리까지만 입력해주세요1");
+		return false;
+	} 
+	if(new RegExp(/^[0-9]{1,2}$/).test(seeker_ageObj2.val()) == false && age_irrelevantObj.is(':checked') == false){
+		alert("지원자의 나이는 2자리까지만 입력해주세요2");
+		return false;
+		} 
+	
+	if((seeker_ageObj1.val() > seeker_ageObj2.val()) && age_irrelevantObj.is(':checked') == false){
+		alert("나이를 정확히 입력해주세요")
+		return false;
+	}
+
+	if(age_irrelevantObj.is(':checked') == true && seeker_ageObj1.val() != ''&& seeker_ageObj2.val() != ''){
+		alert("나이를 적고 나이무관을 선택하면 나이무관이 선택됩니다.");
+	}
+
+
+	if(choice2Obj.is(':checked') == true && benefit_code2Obj.val() == '0'){
+		alert("필수/우대 조건을 선택해 주세요2")
+		return false;
+	}
+	if(choice2Obj.is(':checked') == false && benefit_code2Obj.val() != '0'){
+		alert("필수/우대 조건을 선택해 주세요2")
+		return false;
+	}
+	if(choice3Obj.is(':checked') == true && benefit_code3Obj.val() == '0'){
+		alert("필수/우대 조건을 선택해 주세요3")
+		return false;
+	}
+	if(choice3Obj.is(':checked') == false && benefit_code3Obj.val() != '0'){
+		alert("필수/우대 조건을 선택해 주세요3")
+		return false;
+	}
+	if(choice4Obj.is(':checked') == true && benefit_code4Obj.val() == '0'){
+		alert("필수/우대 조건을 선택해 주세요4")
+		return false;
+	}
+	if(choice4Obj.is(':checked') == false && benefit_code4Obj.val() != '0'){
+		alert("필수/우대 조건을 선택해 주세요4")
+		return false;
+	}
+	if(choice5Obj.is(':checked') == true && benefit_code5Obj.val() == '0'){
+		alert("필수/우대 조건을 선택해 주세요5")
+		return false;
+	}
+	if(choice5Obj.is(':checked') == false && benefit_code5Obj.val() != '0'){
+		alert("필수/우대 조건을 선택해 주세요5")
+		return false;
+	}
+
+
+    
       
       var field_detail1 = formObj.find("#field_detail1")
       var text_field_detail1 = formObj.find("#text_field_detail1")
@@ -269,9 +468,17 @@ $(document).ready(function() {
       if(   text_field_detail3.val() != ""){
          field_detail3.removeAttr("name");
       }
+
+      alert(formObj.serialize())
       
-      alert(formObj.serialize());
-      return
+      if(age_irrelevantObj.is(':checked') == true){
+    		seeker_ageObj1.remove();
+    		seeker_ageObj2.remove();
+    		$("#age_irrelevant").attr("name","seeker_age");
+
+    	}
+   
+   alert("11")
       $.ajax({
 
          url : "/gonggoUpProc.do"
@@ -383,15 +590,25 @@ $(document).ready(function() {
                   </td>
                </tr>
                <tr>
-                  <td>나이 : <input type="text" class="seeker_age"
-                     name="seeker_age" class="seeker_age" size="7"
-                     value="${requestScope.gonggoDTO.seeker_age1}"> ~ <input
-                     type="text" class="seeker_age" name="seeker_age"
-                     class="seeker_age" size="7" value="${requestScope.gonggoDTO.seeker_age2}"> 
+                  <td>나이 : <input type="text" class="seeker_age1"
+                     name="seeker_age" size="7" onChange="abc()"
+                     <c:if test="${requestScope.gonggoDTO.seeker_age1!='나이'}">
+                      value=${requestScope.gonggoDTO.seeker_age1}
+                     </c:if>
+                    > ~ <input
+                     type="text" class="seeker_age2" name="seeker_age"
+                     size="7"
+                      <c:if test="${requestScope.gonggoDTO.seeker_age1!='나이'}">
+                      value=${requestScope.gonggoDTO.seeker_age2}
+                     </c:if>
+                      > 
                      <input type="checkbox"
-                     name="age_irrelevant"
-                     value="나이무관" ${requestScope.gonggoDTO.seeker_age2 == '무관' ? 'checked' : ''}>나이무관
-                     <%--  value="true" ${requestScope.gonggoDTO.age_irrelevant ? 'checked' : ''}>나이무관 --%>
+                     value="나이무관"  id="age_irrelevant"
+                     <c:if test="${requestScope.gonggoDTO.seeker_age1=='나이'}">
+                      checked
+                     </c:if>
+                     >나이무관
+                    <%-- <%--   value="true" ${requestScope.gonggoDTO.age_irrelevant ? 'checked' : ''}>나이무관 --%> 
                   
 
 
@@ -546,8 +763,11 @@ $(document).ready(function() {
                   </td>
                </tr>
                <tr>
-                  <td>급여 : <select id="salary" class="salary" name="salary" onchange="toggleOtherSalary()">
-                        <option value="1000" ${requestScope.gonggoDTO.salary == '1000' ? 'selected' : ''}>2000만원 이하</option>
+                  <td>급여 : <input type="text" id="salary" class="salary" name="salary" value="${requestScope.gonggoDTO.salary}">    
+
+                  
+                  <%-- <select id="salary" class="salary" name="salary" onchange="toggleOtherSalary()">
+                        <option value="1000" ${requestScope.gonggoDTO.salary == '1000' ? 'selected' : ''}>1000만원 이하</option>
                         <option value="2000" ${requestScope.gonggoDTO.salary == '2000' ? 'selected' : ''}>2000~3000만원</option>
                         <option value="3000" ${requestScope.gonggoDTO.salary == '3000' ? 'selected' : ''}>3000~4000만원</option>
                         <option value="4000" ${requestScope.gonggoDTO.salary == '4000' ? 'selected' : ''}>4000~5000만원</option>
@@ -559,7 +779,7 @@ $(document).ready(function() {
                         <option value="0" ${requestScope.gonggoDTO.salary == '0' ? 'selected' : ''}>직접 입력</option>
                         </select>
                         <input type="text" id="other_salary" name="other_salary"
-                        value="${requestScope.gonggoDTO.other_salary}" class="hidden">
+                        value="${requestScope.gonggoDTO.other_salary}" class="hidden"> --%>
                         
                      
                   
@@ -596,7 +816,7 @@ $(document).ready(function() {
                <th colspan="2">상세내용</th>
             </tr>
             <tr>
-               <th rowspan="4">  <select name="dept_code1">
+               <th rowspan="4">  <select name="dept_code1" class="dept_code1">
                <option value="0"  ${requestScope.gonggoDTO.dept_code1 == '0' ? 'selected' : ''}>선택</option>
                         <option value="1"  ${requestScope.gonggoDTO.dept_code1 == '1' ? 'selected' : ''}>기획부</option>
                         <option value="2"  ${requestScope.gonggoDTO.dept_code1 == '2' ? 'selected' : ''}>관리부</option>
@@ -612,7 +832,7 @@ $(document).ready(function() {
             
                <td>세부분야</td>
                <td> <div class="row">
-                  <select name="field_detail1" onchange="toggleTextbox(this)" id="field_detail1">
+                  <select name="field_detail1" onchange="toggleTextbox(this)" id="field_detail1" class="field_detail1">
                   <c:if test="${empty requestScope.gonggoDTO.field_detail1}">    
                  <option value= "" >선택</option>
                   </c:if>    
@@ -662,11 +882,11 @@ $(document).ready(function() {
                 <option value="설비·검사·품질" ${requestScope.gonggoDTO.field_detail1 == '설비·검사·품질' ? 'selected' : ''}>설비·검사·품질</option>
                 <option value="공정·생산관리" ${requestScope.gonggoDTO.field_detail1 == '공정·생산관리' ? 'selected' : ''}>공정·생산관리</option>
                 <option value="창고·물류·유통" ${requestScope.gonggoDTO.field_detail1 == '창고·물류·유통' ? 'selected' : ''}>창고·물류·유통</option>
-                <option value="">직접입력</option>
+                <option value=",">직접입력</option>
             </select>
  
                <input type="text" id="text_field_detail1" name="field_detail1" class="hidden" placeholder="${requestScope.gonggoDTO.field_detail1 }"
-             
+             										
                
                 />
                
@@ -680,8 +900,8 @@ $(document).ready(function() {
             </tr>
             <tr>
                <td>직급</td>
-               <td><select name="position_code1">
-                <option value="0"  ${requestScope.gonggoDTO.position_code1 == '0' ? 'selected' : ''}>선택</option>
+               <td><select name="position_code1" class="position_code1">
+            		    <option value="0"  ${requestScope.gonggoDTO.position_code1 == '0' ? 'selected' : ''}>선택</option>
                         <option value="1"  ${requestScope.gonggoDTO.position_code1 == '1' ? 'selected' : ''}>사원</option>
                         <option value="2" ${requestScope.gonggoDTO.position_code1 == '2' ? 'selected' : ''}>대리</option>
                         <option value="3" ${requestScope.gonggoDTO.position_code1 == '3' ? 'selected' : ''}>과장</option>
@@ -700,19 +920,19 @@ $(document).ready(function() {
          </table>
          <span type="button" onclick="clearTable1()">초기화</span>
          <br>
-         <c:if test="${empty content2}">
+      
          
       
          <!-- -------------------------------------------------- -->
          <table align="center" bordercolor="gray" border="1" cellpadding="7" id="Table_Clear2"
-         style="${empty requestScope.gonggoDTO.content2 ? 'display:none;' : ''}">
+        style="${empty requestScope.gonggoDTO.content2 ? 'display:none;' : ''}">
             <tr>
                <th colspan="1">담당부서</th>
                <th colspan="2">상세내용</th>
             </tr>
             <tr>
                <th rowspan="4"> 
-                <select name="dept_code2">
+                <select name="dept_code2" class="dept_code2">
                 <option value="0" ${requestScope.gonggoDTO.dept_code2 == '0' ? 'selected' : ''}>선택</option>
                         <option value="1" ${requestScope.gonggoDTO.dept_code2 == '1' ? 'selected' : ''}>기획부</option>
                         <option value="2" ${requestScope.gonggoDTO.dept_code2 == '2' ? 'selected' : ''}>관리부</option>
@@ -727,7 +947,7 @@ $(document).ready(function() {
             <tr>
                <td>세부분야</td>
                <td><div class="row">
-            <select id="field_detail2" name="field_detail2" onchange="toggleTextbox(this)" id="field_detail2">
+            <select id="field_detail2" name="field_detail2" onchange="toggleTextbox(this)" id="field_detail2"  class="field_detail2">
                <c:if test="${not empty requestScope.gonggoDTO.field_detail2}">                       
                 <option value= "${requestScope.gonggoDTO.field_detail2}" >${requestScope.gonggoDTO.field_detail2}</option>
                 </c:if>
@@ -777,10 +997,10 @@ $(document).ready(function() {
                 <option value="설비·검사·품질" ${requestScope.gonggoDTO.field_detail2 == '설비·검사·품질' ? 'selected' : ''}>설비·검사·품질</option>
                 <option value="공정·생산관리" ${requestScope.gonggoDTO.field_detail2 == '공정·생산관리' ? 'selected' : ''}>공정·생산관리</option>
                 <option value="창고·물류·유통" ${requestScope.gonggoDTO.field_detail2 == '창고·물류·유통' ? 'selected' : ''}>창고·물류·유통</option>
-                <option value="">직접입력</option>
+                <option value=",">직접입력</option>
             </select>
 <%--               <c:if test="${requestScope.gonggoDTO.field_detail2 == ','}"> --%>
-          
+          										
             <input type="text" id="text_field_detail2" name="field_detail2" class="hidden"
             placeholder="${requestScope.gonggoDTO.field_detail2 }" 
            />
@@ -793,7 +1013,7 @@ $(document).ready(function() {
             </tr>
             <tr>
                <td>직급</td>
-               <td><select name="position_code2">
+               <td><select name="position_code2" class="position_code2">
                    <option value="0" ${requestScope.gonggoDTO.position_code2 == '0' ? 'selected' : ''}>선택</option>
                         <option value="1" ${requestScope.gonggoDTO.position_code2 == '1' ? 'selected' : ''}>사원</option>
                         <option value="2" ${requestScope.gonggoDTO.position_code2 == '2' ? 'selected' : ''}>대리</option>
@@ -812,20 +1032,20 @@ $(document).ready(function() {
             </tr>
          </table>
          <span type="button" onclick="clearTable2()">삭제</span>
-         <span type="button" onclick="showTable2()">추가</span>
-         </c:if>
+			<span type="button" onclick="showTable2()">추가</span>
+    
          <!-- -------------------------------------------------- -->
          </table>
          <br>
-         <c:if test="${gonggoDTO.field_detail3!='null'}"> 
+         
          <table align="center" bordercolor="gray" border="1" cellpadding="7" id="Table_Clear3"
-         style="${empty requestScope.gonggoDTO.content3 ? 'display:none;' : ''}">
+       style="${empty requestScope.gonggoDTO.content3 ? 'display:none;' : ''}">
             <tr>
                <th colspan="1">담당부서</th>
                <th colspan="2">상세내용</th>
             </tr>
             <tr>
-               <th rowspan="4">  <select name="dept_code3">
+               <th rowspan="4">  <select name="dept_code3" class="dept_code3">
                   <option value="0"  ${requestScope.gonggoDTO.dept_code3 == '0' ? 'selected' : ''}>선택</option>
                         <option value="1"  ${requestScope.gonggoDTO.dept_code3 == '1' ? 'selected' : ''}>기획부</option>
                         <option value="2"  ${requestScope.gonggoDTO.dept_code3 == '2' ? 'selected' : ''}>관리부</option>
@@ -841,7 +1061,7 @@ $(document).ready(function() {
                <td>세부분야</td>
                <td>
                <div class="row">
-            <select id="field_detail3" name="field_detail3" onchange="toggleTextbox(this)" id="field_detail3">
+            <select id="field_detail3" name="field_detail3" onchange="toggleTextbox(this)" id="field_detail3" class="field_detail3">
                <c:if test="${not empty requestScope.gonggoDTO.field_detail3}">                       
                 <option value= "${requestScope.gonggoDTO.field_detail3}" >${requestScope.gonggoDTO.field_detail3}</option>
                 </c:if>
@@ -891,7 +1111,7 @@ $(document).ready(function() {
                 <option value="설비·검사·품질" ${requestScope.gonggoDTO.field_detail3 == '설비·검사·품질' ? 'selected' : ''}>설비·검사·품질</option>
                 <option value="공정·생산관리" ${requestScope.gonggoDTO.field_detail3 == '공정·생산관리' ? 'selected' : ''}>공정·생산관리</option>
                 <option value="창고·물류·유통" ${requestScope.gonggoDTO.field_detail3 == '창고·물류·유통' ? 'selected' : ''}>창고·물류·유통</option>
-                <option value="">직접입력</option>
+                <option value=",">직접입력</option>
             </select>
 <%--               <c:if test="${ empty requestScope.gonggoDTO.field_detail3}"> --%>
           
@@ -903,7 +1123,7 @@ $(document).ready(function() {
             </tr>
             <tr>
                <td>직급 </td>
-               <td><select name="position_code3">
+               <td><select name="position_code3" class="position_code3">
                 <option value="0" ${requestScope.gonggoDTO.position_code3 == '0' ? 'selected' : ''}>선택</option>
                         <option value="1" ${requestScope.gonggoDTO.position_code3 == '1' ? 'selected' : ''}>사원</option>
                         <option value="2" ${requestScope.gonggoDTO.position_code3 == '2' ? 'selected' : ''}>대리</option>
@@ -919,12 +1139,12 @@ $(document).ready(function() {
             <tr>
                <td>업무내용</td>
                <td><input type="text" id="content3" class="content3" name="content3" value="${requestScope.gonggoDTO.content3}"></td>
-                                    
+               							
             </tr>
          </table> 
-         </c:if>
-            <span type="button" onclick="clearTable3()">삭제</span>         
-         <span type="button" onclick="showTable3()">추가</span>
+        
+         	<span type="button" onclick="clearTable3()">삭제</span>			
+			<span type="button" onclick="showTable3()">추가</span>
 
          <br> 채용절차        
     <table align="center">
@@ -1016,7 +1236,8 @@ $(document).ready(function() {
                   <input type="date" id="closedate" name="closedate" value=${requestScope.gonggoDTO.closedate} min="1970-01-01" max="2040-12-31" />
             <!-- 마감날 - sysdate 추후에 추가해서 남은 시간 넣기 -->
 
-            <td>담당자 이름 : <input type="text" name="manager_name" value=${requestScope.gonggoDTO.manager_name}></td>
+            <td>담당자 이름 : <input type="text" name="manager_name" 
+            class="manager_name"	value=${requestScope.gonggoDTO.manager_name}></td>
             
          </tr>
    

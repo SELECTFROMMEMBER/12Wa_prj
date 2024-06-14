@@ -138,7 +138,7 @@
 	<form name="gongMoUpDelForm" >
    <table align="center"border="1"cellpadding="7"style="border-collapse:collapse">
    		<br>
-        <h1 style="text-align: center;">공모전 상세</h1>
+        <h1 style="text-align: center;">공모전 수정/삭제</h1>
         <br>  
         <tr>
             <th>제목</th>

@@ -7,15 +7,56 @@
 
 <head>
 <style>
-        .fieldset-container {
-            display: flex;
-                        justify-content: center;
-            align-items: center;
-        }
+    /* Form container */
+    .form-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        fieldset {
-            margin-right: 20px; /* fieldset 간격 조정 */
-        }
+    /* Fieldset container */
+    .fieldset-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width:1200px;
+        margin:0 auto;
+    }
+
+    /* Fieldset */
+    fieldset {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        flex: 0 0 calc(50% - 20px); /* Adjust width as needed */
+        max-width: 250px; /* Limit maximum width */
+    }
+
+    /* Legend */
+    legend {
+        font-weight: bold;
+    }
+
+    /* Radio and checkbox labels */
+    label {
+        margin-right: 10px;
+    }
+
+    /* Search button */
+    .searchBtn, .resetBtn {
+        padding: 8px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        margin: 0 10px;
+    }
+
+    /* Search button hover effect */
+    .searchBtn:hover, .resetBtn:hover {
+        background-color: #0056b3;
+    }
     </style>
 <script>
 function search(){
@@ -217,7 +258,7 @@ function pageNoClick(clickPageNo){
 			<h1 style="text-align: center;">이력서 열람</h1>
 
 			<form name="boardSearchForm" >
-				<div style="text-align: center; margin-bottom: 20px;">
+				<div style="text-align: center;">
 			
 					 <br>
 								<h2>인재 검색</h2>
@@ -304,21 +345,20 @@ function pageNoClick(clickPageNo){
                    
             <fieldset>
             <legend>보유 스킬</legend> 
-                   <label><input type="checkbox" name="skill_name" value="JAVA" id="1"> JAVA</label>
-	               <label><input type="checkbox" name="skill_name" value="Servlet/JSP" id="2"> Servlet/JSP</label>
-	               <label><input type="checkbox" name="skill_name" value="XML" id="3"> XML</label>
-	               <label><input type="checkbox" name="skill_name" value="DataBase" id="4"> DataBase</label>
-	                 <br>
-	               <label><input type="checkbox" name="skill_name" value="MVC" id="5"> MVC</label>
-	               <label><input type="checkbox" name="skill_name" value="Spring" id="6"> Spring</label>
-	              
-	               <label><input type="checkbox" name="skill_name" value="Front-End" id="7"> Front-End</label>
-	               <label><input type="checkbox" name="skill_name" value="Excel" id="8"> Excel</label>
-	                    <br>
-	               <label><input type="checkbox" name="skill_name" value="PPT" id="9"> PPT</label>
-	               <label><input type="checkbox" name="skill_name" value="OS" id="10"> OS</label>
-	               <label><input type="checkbox" name="skill_name" value="CAD" id="11"> CAD</label>
-	               <label><input type="checkbox" name="skill_name" value="3D PRINTING" id="12"> 3D PRINTING</label>           
+                   <div style="display: flex; flex-wrap: wrap;">
+				        <label style="margin-right: 20px;"><input type="checkbox" name="skill_name" value="JAVA" id="1"> JAVA</label>
+				        <label style="margin-right: 20px;"><input type="checkbox" name="skill_name" value="Servlet/JSP" id="2"> Servlet/JSP</label>
+				        <label style="margin-right: 20px;"><input type="checkbox" name="skill_name" value="XML" id="3"> XML</label>
+				        <label style="margin-right: 20px;"><input type="checkbox" name="skill_name" value="DataBase" id="4"> DataBase</label>
+				        <label style="margin-right: 20px;"><input type="checkbox" name="skill_name" value="MVC" id="5"> MVC</label>
+				        <label style="margin-right: 20px;"><input type="checkbox" name="skill_name" value="Spring" id="6"> Spring</label>
+				        <label style="margin-right: 20px;"><input type="checkbox" name="skill_name" value="Front-End" id="7"> Front-End</label>
+				        <label style="margin-right: 20px;"><input type="checkbox" name="skill_name" value="Excel" id="8"> Excel</label>
+				        <label style="margin-right: 20px;"><input type="checkbox" name="skill_name" value="PPT" id="9"> PPT</label>
+				        <label style="margin-right: 20px;"><input type="checkbox" name="skill_name" value="OS" id="10"> OS</label>
+				        <label style="margin-right: 20px;"><input type="checkbox" name="skill_name" value="CAD" id="11"> CAD</label>
+				        <label><input type="checkbox" name="skill_name" value="3D PRINTING" id="12"> 3D PRINTING</label>
+				    </div>
             </fieldset>
      
             
@@ -352,12 +392,13 @@ function pageNoClick(clickPageNo){
 				<form action="submit.php" method="POST">
 					<table
 						style="border: 1px solid black; margin-left: auto; margin-right: auto;">
-
+							<th>번호</th>
+							<th>회원 정보</th>
 						
 						
 					       <c:forEach var="board" items="${requestScope.resumeList }"  varStatus="status">
 					              <tr style="cursor:pointer" onClick= "goresumeListDetailForm(${board.p_no},${board.resume_no});">
-					       
+					       				<td> ${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
 										<td>
 									<div style="display: flex; align-items: center;">
 										<img width="80" src="images/photo-1.jpg"

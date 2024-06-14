@@ -308,7 +308,7 @@ function scout(resume_no, c_no, p_no) {
 <c:if test='${not empty boardDTO.license_name2}'>
     <tr>
         <td>${boardDTO.license_name2} </td>
-    </tr>>
+    </tr>
 </c:if>
 
 <c:if test='${not empty boardDTO.license_name3}'>

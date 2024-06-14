@@ -121,7 +121,8 @@
 	<!-- 프로젝트 상세글 불러오기 -->
 	<select id="getPrj" parameterType="int" resultType="com.wa.erp.BoardDTO">
     	select
-    		 prj_no
+    		m.p_no
+    		 ,prj_no
     		,subject
     		,to_char(p.reg_date, 'YYYY-MM-DD') as "reg_date"
     		,field_name

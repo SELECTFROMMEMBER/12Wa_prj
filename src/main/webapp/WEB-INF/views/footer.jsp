@@ -8,7 +8,6 @@
 </head>
 <body>   
 </body>
-<%@include file="/WEB-INF/views/common.jsp" %>
 <div id="container">
 <footer>    
       <div id="bottomMenu">

@@ -100,6 +100,25 @@ public class BoardDTO {
 	private String id;
 	private String member_type;
 	private String is_block;
+	private int rnum;
+	private int count_seoul;
+	private int count_busan;
+	private int count_incheon;
+	private int count_gyeonggi;
+	private int count_gangwon;
+	private String salary_range;
+	private int hope_cnt;
+	private int apply_cnt;
+	private int male;
+	private int female;
+	private int person;
+	private int company;
+	private String month;
+	private int person_count;
+	
+	
+	
+	
 	public String getIs_block() {
 		return is_block;
 	}
@@ -132,8 +151,8 @@ public class BoardDTO {
 	}
 	private int count_c_no;
 	private String sal_avg_range;
-	private int gonggoCnt;
-	private String field;
+	private int gonggo_count;
+	private int company_count;
 	
 		public String getBoardname() {
 		return boardname;
@@ -177,6 +196,10 @@ public class BoardDTO {
 		
 		private List<String> welfare_code;
 		private String welfare_code2;
+		
+		
+		
+		
 		
 		public List<String> getWelfare_code() {
 			return welfare_code;
@@ -845,18 +868,109 @@ public class BoardDTO {
 		public void setSal_avg_range(String sal_avg_range) {
 			this.sal_avg_range = sal_avg_range;
 		}
-		public int getGonggoCnt() {
-			return gonggoCnt;
+		public int getGonggo_count() {
+			return gonggo_count;
 		}
-		public void setGonggoCnt(int gonggoCnt) {
-			this.gonggoCnt = gonggoCnt;
+		public void setGonggo_count(int gonggo_count) {
+			this.gonggo_count = gonggo_count;
 		}
-		public String getField() {
-			return field;
+		public int getCompany_count() {
+			return company_count;
 		}
-		public void setField(String field) {
-			this.field = field;
+		public void setCompany_count(int company_count) {
+			this.company_count = company_count;
 		}
+		public int getRnum() {
+			return rnum;
+		}
+		public void setRnum(int rnum) {
+			this.rnum = rnum;
+		}
+		public int getCount_seoul() {
+			return count_seoul;
+		}
+		public void setCount_seoul(int count_seoul) {
+			this.count_seoul = count_seoul;
+		}
+		public int getCount_busan() {
+			return count_busan;
+		}
+		public void setCount_busan(int count_busan) {
+			this.count_busan = count_busan;
+		}
+		public int getCount_incheon() {
+			return count_incheon;
+		}
+		public void setCount_incheon(int count_incheon) {
+			this.count_incheon = count_incheon;
+		}
+		public int getCount_gyeonggi() {
+			return count_gyeonggi;
+		}
+		public void setCount_gyeonggi(int count_gyeonggi) {
+			this.count_gyeonggi = count_gyeonggi;
+		}
+		public int getCount_gangwon() {
+			return count_gangwon;
+		}
+		public void setCount_gangwon(int count_gangwon) {
+			this.count_gangwon = count_gangwon;
+		}
+		public String getSalary_range() {
+			return salary_range;
+		}
+		public void setSalary_range(String salary_range) {
+			this.salary_range = salary_range;
+		}
+		public int getHope_cnt() {
+			return hope_cnt;
+		}
+		public void setHope_cnt(int hope_cnt) {
+			this.hope_cnt = hope_cnt;
+		}
+		public int getApply_cnt() {
+			return apply_cnt;
+		}
+		public void setApply_cnt(int apply_cnt) {
+			this.apply_cnt = apply_cnt;
+		}
+		public int getMale() {
+			return male;
+		}
+		public void setMale(int male) {
+			this.male = male;
+		}
+		public int getFemale() {
+			return female;
+		}
+		public void setFemale(int female) {
+			this.female = female;
+		}
+		public int getPerson() {
+			return person;
+		}
+		public void setPerson(int person) {
+			this.person = person;
+		}
+		public int getCompany() {
+			return company;
+		}
+		public void setCompany(int company) {
+			this.company = company;
+		}
+		public String getMonth() {
+			return month;
+		}
+		public void setMonth(String month) {
+			this.month = month;
+		}
+		public int getPerson_count() {
+			return person_count;
+		}
+		public void setPerson_count(int person_count) {
+			this.person_count = person_count;
+		}
+		
 		
 		
 }	
